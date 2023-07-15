@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebRTC Camera Streaming</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    #video-stream {
+      width: 100%;
+      height: auto;
+    }
+    .result-container {
+      margin-top: 20px;
+    }
+    .info-container {
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    var socket = io();
+    var videoStreamStarted = false;
+    var videoTrack;
+    var imageCapture;
+    var frameCaptureInterval;
+
+    // 웹 캠 비디오 스트림 표시
+    function showVideoStream(stream) {
+      var videoElement = document.getElementById('video-stream');
+      videoElement.srcObject = stream;
+    }
+
+    // 웹 소켓 메시지 전송
+    function sendMessage(message) {
+      socket.emit('message', message);
+    }
+
+    socket.on('result', function(result) {
+      var leftEyeStatus = result.left_eye;
+      var rightEyeStatus = result.right_eye;
+
+      // 결과 출력
+      var resultElement = document.getElementById('result');
+      resultElement.innerHTML = 'Left Eye: ' + leftEyeStatus + '<br>Right Eye: ' + rightEyeStatus;
+    });
+
+    socket.on('data', function(data) {
+      var timeElement = document.getElementById('time');
+      var countElement = document.getElementById('count');
+      var timerElement = document.getElementById('timer');
+      var cycleElement = document.getElementById('cycle');
+      var warning_checkElement = document.getElementById('warning_check');
+      timeElement.innerHTML = data.time;
+      countElement.innerHTML = data.count;
+      timerElement.innerHTML = data.timer;
+      cycleElement.innerHTML = data.cycle;
+      warning_checkElement.innerHTML = data.warning_check;
+    });
+
+    // 웹 캠 비디오 스트림 시작
+    function startVideoStream() {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function(stream) {
+            showVideoStream(stream);
+            videoTrack = stream.getVideoTracks()[0];
+            imageCapture = new ImageCapture(videoTrack);
+            frameCaptureInterval = setInterval(function() {
+              imageCapture.grabFrame()
+                .then(function(imageBitmap) {
+                  // 이미지 데이터 처리 로직
+                  var canvas = document.createElement('canvas');
+                  var context = canvas.getContext('2d');
+                  canvas.width = imageBitmap.width;
+                  canvas.height = imageBitmap.height;
+                  context.drawImage(imageBitmap, 0, 0, canvas.width, canvas.height);
+                  var imageData = canvas.toDataURL('image/jpeg');
+                  sendMessage(imageData);
+                })
+                .catch(function(error) {
+                  console.error('Error capturing frame: ', error);
+                });
+            }, 100); // 1초마다 프레임 캡처 및 전송
+          })
+          .catch(function(error) {
+            console.error('Error accessing webcam: ', error);
+          });
+      }
+    }
+
+    // 캠 활성화 버튼 클릭 이벤트 핸들러
+    function startCamera() {
+      if (!videoStreamStarted) {
+        startVideoStream();
+        videoStreamStarted = true;
+      }
+    }
+
+    // 캠 비활성화 버튼 클릭 이벤트 핸들러
+    function stopCamera() {
+      if (videoStreamStarted) {
+        videoTrack.stop();
+        clearInterval(frameCaptureInterval);
+        videoStreamStarted = false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>WebRTC Camera Streaming</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <video id="video-stream" autoplay></video>
+        <div class="result-container">
+          <h4>Result:</h4>
+          <div id="result"></div>
+        </div>
+        <button type="button" class="btn btn-primary mt-3" onclick="startCamera()">Start Camera</button>
+        <button type="button" class="btn btn-danger mt-3" onclick="stopCamera()">Stop Camera</button>
+      </div>
+      <div class="col-md-6">
+        <div class="info-container">
+          <p>Current time: <span id="time"></span></p>
+          <p>Current count: <span id="count"></span></p>
+          <p>Current cycle: <span id="cycle"></span></p>
+          <p>Current timer: <span id="timer"></span></p>
+          <p>Current warning_check: <span id="warning_check"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 페이지 로드 시 웹 캠 비디오 스트림 시작
+    document.addEventListener('DOMContentLoaded', function() {
+      // startVideoStream(); // 기본적으로 자동 시작하지 않음
+    });
+  </script>
+</body>
+</html>

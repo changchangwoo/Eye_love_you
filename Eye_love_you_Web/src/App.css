@@ -1,0 +1,564 @@
+.App {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.NavBar {
+  overflow: hidden;
+  width: 100%;
+  height: 7vh;
+  margin: auto;
+  position: fixed;
+  display: flex;
+  z-index: 1;
+  /* width: 100% */
+  border-bottom: 1px solid black;
+  opacity: 0;
+  transition: top 0.5s, opacity 0.5s;
+}
+
+.hover {
+  opacity: 1;
+}
+
+.non_hover {
+  opacity: 0;
+}
+
+.NavLogo {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  margin-left: 30px;
+  line-height: 60px;
+
+}
+
+.NavContents {
+  width: 60%;
+  height: 8vh;
+  display: flex;
+  margin-left: 60px;
+}
+
+.NavContents>li {
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  flex: 1;
+  font-size: 17px;
+  margin: auto;
+  line-height: 5vh;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.Nav_login {
+  width: 90px;
+  height: 40px;
+  line-height: 40px;
+  margin: auto;
+  text-align: center;
+  color: black;
+  font-size: 15px;
+  background-color: white;
+  margin-right: 30px;
+  border: solid 1px;
+  border-color: #FBE3F0 !important;
+}
+
+.Footer {
+  height: 20vh;
+}
+
+.Footer_Text {
+  text-align: center;
+  margin-top: 50px;
+  font-family: 'NEXON Lv2 Gothic bold';
+  color: gray;
+}
+
+.Footer_SubText {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.Text_Large {
+  font-size: 60px;
+}
+
+.Text_Medium {
+  font-size: 40px;
+}
+
+.Text_Title {
+  font-size: 30px;
+}
+
+.Text_small {
+  font-size: 20px;
+}
+
+/* 공통 */
+.MainContents {
+  height: 530vh;
+  overflow: hidden;
+  /* 추가 */
+}
+
+.MainContents::-webkit-scrollbar {
+  display: none;
+}
+
+
+.Main_Logo {
+  overflow: hidden;
+  /* 추가 */
+  height: 107vh;
+  background-color: #FBE3F0;
+}
+
+.Logo_Text_main {
+  margin-top: 200px;
+  text-align: center;
+  font-family: 'NEXON Lv2 Gothic Medium';
+  color: black;
+}
+
+.Logo_Text_sub {
+  text-align: center;
+  font-family: 'NEXON Lv2 Gothic bold';
+  font-weight: bold;
+  color: black;
+}
+
+.Logo_image {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  margin-top: 70px;
+  margin-bottom: 150px;
+}
+
+.Logo_image>img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Logo_button {
+  width: 90px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: black;
+  font-size: 15px;
+  background-color: white;
+  border: solid 1px;
+  border-color: #FBE3F0 !important;
+}
+
+.Main_Content_1 {
+  height: 110vh;
+  background-color: #F8F9FA;
+  overflow: hidden;
+}
+
+.Content_title {
+  text-align: center;
+  font-family: 'NEXON Lv2 Gothic bold';
+  font-weight: bold;
+  color: black;
+  margin-top: 200px;
+}
+
+.Content_subtitle {
+  text-align: center;
+  margin-top: 20px;
+  color: gray;
+}
+
+.Content_1_content {
+  margin-top: 120px;
+  height: 450px;
+}
+
+.Content_1_contentbox {
+  height: 170px;
+  display: flex;
+  background-color: #FBE3F0;
+}
+
+.Content_1_content_icon {
+  height: 140px;
+  width: 140px;
+  flex: 0.1;
+  margin-left: 450px;
+  margin-top: 10px;
+}
+
+.Content_1_content_text {
+  height: 150px;
+  flex: 0.8;
+  text-align: center;
+  padding-top: 30px;
+  margin-right: 200px;
+  font-family: 'NEXON Lv2 Gothic bold';
+}
+
+.Content_1_content_text>.Text_small {
+  color: gray;
+  margin-top: 20px;
+  font-family: 'Noto Sans KR';
+}
+
+.Content_1_more {
+  flex: 0.2;
+  margin-right: 50px;
+  text-align: center;
+  line-height: 170px;
+  font-size: 30px;
+  color: gray;
+}
+
+.Main_Content_2 {
+  height: 110vh;
+  background-color: #FBE3F0;
+  overflow: hidden;
+  display: flex;
+}
+
+.Content_2_left {
+  flex: 0.45;
+}
+
+.Content_2_right {
+  flex: 0.55;
+  margin: auto;
+}
+
+.Content_Textbox {
+  width: 800px;
+  height: 500px;
+  text-align: center;
+  margin: auto;
+  margin-top: 200px;
+}
+
+.Content_2_img {
+  margin-left: 250px;
+}
+
+.Main_Button {
+  width: 150px;
+  height: 50px;
+  border-color: #F8F9FA !important;
+  margin-top: 100px;
+}
+
+.Main_Content_3 {
+  height: 100vh;
+  background-color: #F8F9FA;
+  overflow: hidden;
+  display: flex;
+}
+
+.Content_3_left {
+  flex: 0.55;
+}
+
+.Content_3_right {
+  flex: 0.45;
+  margin: auto;
+}
+
+.Content_3_img {
+  margin-left: 250px;
+  margin-top: 200px;
+}
+
+
+.Content_3_Main_Button {
+  width: 150px;
+  height: 50px;
+  border-color: #FBE3F0 !important;
+  background-color: #FBE3F0 !important;
+  margin-top: 100px;
+}
+
+.Main_Content_4 {
+  height: 100vh;
+  background-color: #FBE3F0;
+  overflow: hidden;
+  display: flex;
+}
+
+/* 메인화면 */
+
+.Blink_Content {
+  height: 107vh;
+  background-color: #FBE3F0;
+  overflow: hidden;
+
+}
+
+.Blink_Slider {
+  background-color: orange;
+  height: 90vh;
+  text-align: center;
+}
+
+.Logo_image>.Main_Button {
+  margin-top: 20px;
+}
+
+.descript_box {
+  width: 1000px;
+  height: 500px;
+  background-color: #F8F9FA;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  border-radius: 30px;
+}
+
+.descript_box_text {
+  flex: 1;
+  text-align: center;
+  padding: 30px;
+  margin-top: 150px;
+}
+
+.descript_box_img {
+  flex: 1;
+  margin: auto;
+}
+
+.descript_img {
+  width: 250px;
+  height: 250px;
+  margin: auto;
+}
+
+/* 눈깜박임 감지 */
+.Login_Content {
+  width: 100%;
+  height: 110vh;
+  background-color: #FBE3F0;
+  margin: auto;
+  overflow: hidden;
+}
+
+.Login_Box {
+  width: 75%;
+  height: 70%;
+  background-color: #F8F9FA;
+  margin: auto;
+  margin-top: 150px;
+  display: flex;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.Login_Box_form {
+  flex: 1;
+  text-align: center;
+}
+
+.Login_Box_img {
+  flex: 1;
+  background-color: #FAD6FB;
+  height: 100%;
+}
+
+.Login_img {
+  width: 100%;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.Login_Form {
+  width: 70%;
+  height: 30%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.Login_Text {
+  height: 30%;
+  margin-top: 10px;
+}
+
+.Login_Box_form > .Logo_Text_main {
+  margin-top: 100px;
+}
+
+.Login_Form_Button {
+  height: 100px;
+  margin-top: 30px;
+}
+
+.Login_Button {
+  float: right;
+    width: 40%;
+    height: 100px;  
+    line-height: 40px;
+    text-align: center;
+    font-weight: bolder;
+    color: black;
+    font-size: 15px;
+    background-color: #FAD6FB !important;
+    border: solid 1px;
+    border-color: #FBE3F0 !important;
+}
+
+.Register_Button {
+    float: left;
+    width: 55%;
+    height: 100px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bolder;
+    color: black;
+    font-size: 15px;
+    border: solid 1px;
+    border-color: #FAD6FB !important;
+}
+/* 로그인 */
+
+.Register_Content {
+  width: 100%;
+  height: 135vh;
+  background-color: #FBE3F0;
+  margin: auto;
+  overflow: hidden;
+}
+
+.Register_Box {
+  width: 40%;
+  height: 80%;
+  background-color: #F8F9FA;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 150px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.Register_Box > .Logo_Text_sub {
+  margin-top: 50px;
+}
+
+.Input_box {
+  width: 60%;
+  height: 100px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.Input_text {
+  float: left;
+  height: 40%;
+  font-weight: bolder;
+}
+
+.Input_Form_text {
+  height: 100%
+}
+.Register_form_Button {
+  width: 300px;
+  height: 100px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.R_Register_Button{
+  width: 100%;
+  float: left;
+  height: 100px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bolder;
+  color: black;
+  font-size: 15px;
+  border: solid 1px;
+  border-color: #f4a3f7 !important;
+}
+
+.Logo_icon {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.descript_box_text2 {
+  flex: 1;
+  text-align: center;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.des_ {
+  font-weight: bolder;
+  font-size: 24px;
+  margin-top: 40px;
+}
+
+.des_img {
+  width: 200px;
+  height: 150px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.install_button {
+  border-color: #FBE3F0 !important;
+  width: 150px;
+  height: 50px;
+}
+
+
+
+.Result_Content {
+  overflow: hidden;
+  width: 100%;
+  height: 330vh;
+  background-color: #FBE3F0;
+}
+
+.Result_Box {
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  margin-top: 80px;
+  background-color: #F8F9FA;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.Chart_Box {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  margin-top: 50px;
+}
+
+.Chart_Graph {
+  width: 50%;
+}
+
+.Chart_Descript {
+  width: 50%;
+  text-align: center;
+}
+
+.Bar_1 {
+  margin: auto;
+  margin-top: 20px; 
+}
+
+.Result_image {
+  margin: auto;
+  width: 150px;
+  height: 150px;
+  display: block;
+  text-align: center;
+}
