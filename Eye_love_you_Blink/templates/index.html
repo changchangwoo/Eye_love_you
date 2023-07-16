@@ -79,7 +79,7 @@
                 .catch(function(error) {
                   console.error('Error capturing frame: ', error);
                 });
-            }, 100); // 1초마다 프레임 캡처 및 전송
+            }, 250); // 1초마다 프레임 캡처 및 전송
           })
           .catch(function(error) {
             console.error('Error accessing webcam: ', error);
@@ -129,12 +129,5 @@
       </div>
     </div>
   </div>
-
-  <script>
-    // 페이지 로드 시 웹 캠 비디오 스트림 시작
-    document.addEventListener('DOMContentLoaded', function() {
-      // startVideoStream(); // 기본적으로 자동 시작하지 않음
-    });
-  </script>
 </body>
 </html>

@@ -19,28 +19,6 @@ predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 model = load_model('models/2018_12_17_22_58_35.h5')
 model.summary()
 
-
-def initialize():
-    global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer
-    timer = 0
-    check = 0
-    close_check = 0
-    close_flag = 0
-    count_flag = 0
-    count = 0
-    delay_flag = 0
-    delay_timer = 0
-    warning_check = 0
-    cycle_timer = 0
-    cycle = []
-    text_count = ''
-    text_warning = ''
-    t_timer = ''
-    text_timer = ''
-
-@app.before_first_request
-def setup():
-    initialize()
 def crop_eye(img, eye_points):
     x1, y1 = np.amin(eye_points, axis=0)
     x2, y2 = np.amax(eye_points, axis=0)
@@ -159,4 +137,22 @@ def handle_message(image_data):
 
 
 if __name__ == '__main__':
-    socketio.run(app, allow_unsafe_werkzeug=True)
+    global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer
+    timer = 0
+    check = 0
+    close_check = 0
+    close_flag = 0
+    count_flag = 0
+    count = 0
+    delay_flag = 0
+    delay_timer = 0
+    warning_check = 0
+    cycle_timer = 0
+    cycle = []
+    text_count = ''
+    text_warning = ''
+    t_timer = ''
+    text_timer = ''
+
+    socketio = SocketIO(app, cors_allowed_origins="*")
+    socketio.run(app)
