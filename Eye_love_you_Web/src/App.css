@@ -100,15 +100,16 @@
 
 /* 공통 */
 .MainContents {
-  height: 530vh;
+  height: 100%;
   overflow: hidden;
+  scroll-snap-type: y mandatory;
   /* 추가 */
 }
 
-.MainContents::-webkit-scrollbar {
-  display: none;
+.scroll_section {
+  height: 100%;
+  scroll-snap-align: start;
 }
-
 
 .Main_Logo {
   overflow: hidden;
