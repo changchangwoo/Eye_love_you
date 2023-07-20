@@ -38,13 +38,20 @@ def crop_eye(img, eye_points):
 
     return eye_img, eye_rect
 
-# 웹 소켓 연결 이벤트 핸들러
+# 웹 소켓 연결 확인 핸들러
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
 
+# 메시지 수신 종료, 데이터베이스에 데이터 저장
+@socketio.on('datasave')
+def handle_connect():
+    ## 소켓에서 아이디 입력받아가지고 그거 전송하는 코드 작성하면 되겠다
+    print(count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check)
 
-# 웹 소켓 연결 종료 이벤트 핸들러
+
+
+# 웹 소켓 연결 종료 확인 핸들러
 @socketio.on('disconnect')
 def handle_disconnect():
     print('Client disconnected')
@@ -87,8 +94,9 @@ def handle_message(image_data):
         blink_l = blink_l % pred_l
         blink_r = blink_r % pred_r
 
-        if close_flag == 0:
-            if blink_l == '0 1.0' or blink_r == '- 0.0':
+        # blink_detect
+        if close_flag == 0: # 눈이 연속적으로 감겨져 있는것을 식별
+            if blink_l == '- 0.0' and blink_r == '- 0.0':  # 눈을 깜박이는 경우
                 check = 0
                 if count_flag == 0 and delay_flag == 0:
                     count = count + 1
@@ -117,6 +125,7 @@ def handle_message(image_data):
             cycle_timer = cycle_timer + 1.2
 
             if check >= 50:
+                emit('warningSound', True)
                 check = 0
                 warning_check = warning_check + 1
 
@@ -131,7 +140,7 @@ def handle_message(image_data):
                       'timer' : timer,
                       'warning_check' : warning_check
                       })
-
+        print(check)
 
 if __name__ == '__main__':
     global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer
@@ -151,4 +160,5 @@ if __name__ == '__main__':
     t_timer = ''
     text_timer = ''
 
-    socketio.run(app, port=5000, allow_unsafe_werkzeug=True)
+    socketio.run(app, port=5000)
+    # socketio.run(app, port=5000, allow_unsafe_werkzeug=True)
