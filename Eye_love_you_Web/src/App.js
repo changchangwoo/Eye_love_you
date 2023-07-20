@@ -116,7 +116,7 @@ function MAIN() {
         scroll.scrollTo(sections[index - 1].offsetTop, { duration: 1000 });
       }
     }
-    // setTimeout(() => setIsScrolling(false), 100); // 200ms is the duration of scroll animation
+    setTimeout(() => setIsScrolling(false), 200); // 200ms is the duration of scroll animation
   }
 
   return (

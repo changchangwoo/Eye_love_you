@@ -9,7 +9,7 @@ import base64
 import datetime
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 IMG_SIZE = (34, 26)
 
@@ -38,8 +38,6 @@ def crop_eye(img, eye_points):
 
     return eye_img, eye_rect
 
-
-# WebRTC 시그널링을 위한 홈페이지 렌더링
 # 웹 소켓 연결 이벤트 핸들러
 @socketio.on('connect')
 def handle_connect():
@@ -122,12 +120,11 @@ def handle_message(image_data):
                 check = 0
                 warning_check = warning_check + 1
 
-        result = {
+        emit('result', {
             'left_eye': blink_l,
             'right_eye': blink_r
-        }
+        })
 
-        emit('result', result)
         emit('data', {'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                       'count' : count,
                       'cycle' : cycle,
@@ -154,5 +151,4 @@ if __name__ == '__main__':
     t_timer = ''
     text_timer = ''
 
-    socketio = SocketIO(app, cors_allowed_origins="*")
-    socketio.run(app)
+    socketio.run(app, port=5000, allow_unsafe_werkzeug=True)
