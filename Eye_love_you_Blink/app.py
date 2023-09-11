@@ -161,4 +161,4 @@ if __name__ == '__main__':
     text_timer = ''
 
     socketio.run(app, port=5000)
-    # socketio.run(app, port=5000, allow_unsafe_werkzeug=True)
+    # socketio.run(app, port=5000, allow_unsafe_werkzeu g=True)
