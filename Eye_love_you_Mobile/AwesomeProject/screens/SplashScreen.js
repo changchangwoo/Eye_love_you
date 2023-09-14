@@ -1,54 +1,68 @@
-import React, { useEffect } from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './HomeScreen';
-import { styles } from '../styles/style';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import * as Font from 'expo-font';
 
-const Stack = createStackNavigator();
-
-const SplashScreen = ({ navigation }) => {
-    useEffect(() => {
-        async function loadCustomFont() {
-            await Font.loadAsync({
-                'NEXON_FONT': require('../assets/fonts/NEXON Lv2 Gothic Bold.ttf'),
-            });
-        }
-        loadCustomFont();
-        setTimeout(() => {
-            navigation.replace('Home'); // 'Home'은 다음 화면의 이름
-        }, 50000); // 로딩 화면을 보여줄 시간 (예: 2초)
-        }, []);
-
-    return (
-        <View style={styles.loading_container}>
-            <Text style={Splashstyle.medium_text}>눈이 아픈 당신을 위해</Text>
-            <Text>아이 러브 유</Text>
-            <Text style={Splashstyle.medium_text}>아이 러브 유</Text>
-            <Text style={Splashstyle.large_text}>아이 러브 유</Text>
-
-
-        </View>
-    );
-};
-export default SplashScreen;
-
-export const Splashstyle = StyleSheet.create({
+const Splashstyle = StyleSheet.create({
     loading_container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FBE3F0'
+        backgroundColor: '#FBE3F0',
     },
-    medium_text: {
-        fontSize: 40,
-        fontWeight: 'bold',
-        fontFamily: 'NEXON_FONT'
+    Logo_sub_text: {
+        fontSize: 30,
+        fontFamily: 'FONT_LIGHT',
     },
-    large_text: {
-        fontSize: 40,
-        fontWeight: 'bold',
-        fontFamily: 'NEXON_FONT'
-    }
+    Logo_text: {
+        fontSize: 45,
+        marginTop: 5,
+        fontFamily: 'FONT_BOLD', // 폰트 이름 수정
+    },
 });
+
+const SplashScreen = ({ navigation }) => {
+    const [fontLoaded, setFontLoaded] = useState(false);
+    async function loadCustomFont() {
+        await Font.loadAsync({
+            'FONT_LIGHT': require('../assets/fonts/NotoSansKR-Light.ttf'),
+            'FONT_MEDIUM': require('../assets/fonts/NotoSansKR-Medium.ttf'),
+            'FONT_BOLD': require('../assets/fonts/NotoSansKR-Bold.ttf')
+        });
+        setFontLoaded(true); // 폰트 로딩이 완료되면 상태 업데이트
+    }
+
+    useEffect(() => {
+        loadCustomFont();
+
+        const timer = setTimeout(()=> {
+            navigation.replace('Home');
+        }, 2000);
+    }, []);
+
+    // 폰트가 로딩되지 않았을 때 로딩 화면을 보여줄 수 있도록 체크
+    if (!fontLoaded) {
+        return (
+            <View style={Splashstyle.loading_container}>
+                <Text>Loading...</Text>
+            </View>
+        );
+    }
+
+    // 폰트 로딩이 완료되면 화면을 렌더링
+    return (
+        <View style={Splashstyle.loading_container}>
+            <Text style={Splashstyle.Logo_sub_text}>눈이 아픈 당신을 위해</Text>
+            <Text style={Splashstyle.Logo_text}>아이 러브 유</Text>
+            <Image
+                source={require('../assets/imgs/smile.png')}
+                style={{
+                    width: 100,
+                    height: 100,
+                    marginTop: 100,
+                }}
+                />
+        </View>
+    );
+};
+
+export default SplashScreen;
