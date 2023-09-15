@@ -38,7 +38,7 @@ const SplashScreen = ({ navigation }) => {
         loadCustomFont();
 
         const timer = setTimeout(() => {
-            navigation.replace('Login');
+            navigation.replace('Blink');
         }, 3500);
     }, []);
 
