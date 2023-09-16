@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TextInput, Button } from 'react-native';
-import * as Font from 'expo-font';
 import CustomButton from '../styles/CustomButton';
 
 const login_style = StyleSheet.create({
@@ -75,7 +74,6 @@ const login_style = StyleSheet.create({
 });
 
 const LoginScreen = ({ navigation }) => {
-    const [fontLoaded, setFontLoaded] = useState(false);
     const [id, setText] = useState('');
     const [pass, setPass] = useState('');
 
@@ -90,20 +88,8 @@ const LoginScreen = ({ navigation }) => {
     }
     const handleSubmit = () => {
         console.log(`입력된 텍스트: ${id}`);
+        navigation.replace('Main');
     }
-
-    async function loadCustomFont() {
-        await Font.loadAsync({
-            'FONT_LIGHT': require('../assets/fonts/NotoSansKR-Light.ttf'),
-            'FONT_MEDIUM': require('../assets/fonts/NotoSansKR-Medium.ttf'),
-            'FONT_BOLD': require('../assets/fonts/NotoSansKR-Bold.ttf')
-        });
-        setFontLoaded(true);
-    }
-
-    useEffect(() => {
-        loadCustomFont();
-    }, []);
 
     return (
         <View style={login_style.container}>

@@ -13,4 +13,12 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'NEXON Lv2 Gothic Medium'
     },
+    footer: {
+        width: '100%',
+        height: '10%',
+        backgroundColor: '#2F2E41',
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 14,
+    }
 });
