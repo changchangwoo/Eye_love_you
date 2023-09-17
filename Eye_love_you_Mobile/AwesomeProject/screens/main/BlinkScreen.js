@@ -30,10 +30,12 @@ const Process = () => {
 
             socket.on('result', (result) => {
                 setResult(result);
+                console.log(result)
             });
 
             socket.on('data', (data) => {
                 setData(data);
+                console.log(data)
             });
 
             socket.on('warningSound', () => {
@@ -79,6 +81,24 @@ const Process = () => {
         }
     };
 
+    const convertImageToBase64 = async (imageUri) => {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    resolve(reader.result);
+                };
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.onerror = function (error) {
+                reject(error);
+            };
+            xhr.responseType = 'blob';
+            xhr.open('GET', imageUri, true);
+            xhr.send(null);
+        });
+    };
     const captureAndSendFrame = async () => {
         if (hasCameraPermission && cameraRef.current) {
             try {
@@ -89,16 +109,12 @@ const Process = () => {
                 const data = await cameraRef.current.takePictureAsync(options);
                 const imageData = data.uri;
 
-                // 이미지 데이터를 URL에 포함시켜 GET 요청을 보냅니다.
-                const response = await fetch(`http://127.0.0.1:5000/message?frame=${encodeURIComponent(imageData)}`, {
-                    method: 'GET',
-                });
+                // 이미지 데이터를 Base64 문자열로 변환
+                const base64Data = await convertImageToBase64(imageData);
 
-                if (response.ok) {
-                    console.log('프레임 전송 성공');
-                } else {
-                    console.error('프레임 전송 실패');
-                }
+                // 소켓을 통해 서버로 이미지 데이터 전송
+                socket.emit('message', base64Data);
+                console.log('프레임 전송 성공');
             } catch (error) {
                 console.error('프레임 캡처 및 전송 중 오류:', error);
             }

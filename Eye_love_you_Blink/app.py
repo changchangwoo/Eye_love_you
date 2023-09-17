@@ -62,13 +62,13 @@ def handle_disconnect():
 # 웹 소켓 메시지 수신 이벤트 핸들러
 @socketio.on('message')
 def handle_message(image_data):
-    print('hello')
     # 이미지 데이터 디코드
     global count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check
     img_data = image_data.split(",")[1]
     img_bytes = base64.b64decode(img_data)
     nparr = np.frombuffer(img_bytes, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    print(img)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = detector(gray)
