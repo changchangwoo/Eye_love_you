@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 import cv2
 import dlib
 import numpy as np
@@ -10,6 +11,7 @@ import datetime
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
+CORS(app)
 
 IMG_SIZE = (34, 26)
 
@@ -60,6 +62,7 @@ def handle_disconnect():
 # 웹 소켓 메시지 수신 이벤트 핸들러
 @socketio.on('message')
 def handle_message(image_data):
+    print('hello')
     # 이미지 데이터 디코드
     global count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check
     img_data = image_data.split(",")[1]
