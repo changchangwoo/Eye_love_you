@@ -87,6 +87,7 @@ const ContentsScreen = ({ navigation }) => {
 
     const handleImageClick = () => {
         // 이미지 클릭 이벤트 처리
+        navigation.replace('Blink');
         setImageClicked(!isImageClicked);
 
         // 애니메이션
