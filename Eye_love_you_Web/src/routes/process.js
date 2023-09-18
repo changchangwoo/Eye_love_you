@@ -39,7 +39,7 @@ function Process() {
         if (warningSound) {
             audioRef.current.play();
             document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease'; // 애니메이션 효과 추가
-            document.querySelector('.WebBlink_Logo').style.backgroundColor = '#F15F5F';
+            document.querySelector('.WebBlink_Logo').style.backgroundColor = '##F15F5F';
             setTimeout(() => {
                 document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0'; // 원래 색상으로 돌아가도록 설정
             }, 500); // 1초 후에 원래 색상으로 돌아가도록 설정

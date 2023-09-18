@@ -9,10 +9,9 @@ const warningWAV = require('../../assets/sounds/warning.wav');
 const Process = () => {
     const [socket, setSocket] = useState(null);
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
-    const [cameraType] = useState(Camera.Constants.Type.back);
+    const [cameraType] = useState(Camera.Constants.Type.front); // 항상 셀카 모드로 설정
     const [warningSound, setWarningSound] = useState(false);
     const [result, setResult] = useState({ left_eye: '', right_eye: '' });
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false); // 버튼 활성화 여부
     const [data, setData] = useState({
         time: '',
         count: '',
@@ -25,35 +24,33 @@ const Process = () => {
 
     useEffect(() => {
         const initializeSocket = async () => {
-            const socket = io('http://192.168.25.33:5000');
+            const socket = io('http://127.0.0.1:5000');
             setSocket(socket);
 
             socket.on('result', (result) => {
                 setResult(result);
+                console.log(result)
             });
+
             socket.on('data', (data) => {
                 setData(data);
+                console.log(data)
             });
 
             socket.on('warningSound', () => {
                 setWarningSound(true);
-                console.log(warningSound)
             });
-
-            return () => {
-                socket.disconnect();
-            };
         };
 
         initializeSocket();
     }, []);
+
 
     useEffect(() => {
         if (warningSound) {
             (async () => {
                 await audioRef.current.loadAsync(warningWAV);
                 await audioRef.current.playAsync();
-                console.log('으하하' + warningSound)
                 setWarningSound(false);
             })();
         }
@@ -98,34 +95,38 @@ const Process = () => {
             xhr.send(null);
         });
     };
-    const captureAndSendFrame = async () => {
-        if (hasCameraPermission && cameraRef.current && socket) {
-            try {
-                const options = {
-                    quality: 1,
-                    format: 'jpeg',
-                };
-                const data = await cameraRef.current.takePictureAsync(options);
-                const imageData = data.uri;
 
-                // 이미지 데이터를 Base64 문자열로 변환
-                const base64Data = await convertImageToBase64(imageData);
+    // 일정한 간격으로 이미지 캡처 및 전송하는 함수
+    const captureAndSendFrameAutomatically = async () => {
 
-                // 소켓을 통해 서버로 이미지 데이터 전송
-                socket.emit('message', base64Data);
-                console.log('hello')
-            } catch (error) {
-                console.error('프레임 캡처 및 전송 중 오류:', error);
-            }
+        try {
+            const options = {
+                quality: 1,
+                format: 'jpeg',
+            };
+            const data = await cameraRef.current.takePictureAsync(options);
+            const imageData = data.uri;
+
+            // 이미지 데이터를 Base64 문자열로 변환
+            const base64Data = await convertImageToBase64(imageData);
+
+            // 소켓을 통해 서버로 이미지 데이터 전송
+            socket.emit('message', base64Data);
+            console.log('자동 프레임 전송 성공');
+        } catch (error) {
+            console.error('자동 프레임 캡처 및 전송 중 오류:', error);
         }
     };
 
-    const startRepeatedFunction = () => {
-        setIsButtonDisabled(true); // 버튼 비활성화
-        const interval = setInterval(() => {
-            captureAndSendFrame();
-        }, 300); // .3초 간격으로 실행
-    };
+    // 타이머를 사용하여 일정한 간격으로 이미지 캡처 및 전송
+    useEffect(() => {
+        const captureTimer = setInterval(() => {
+            captureAndSendFrameAutomatically();
+        }, 1000); // 5초 간격으로 이미지 캡처 및 전송
+        return () => {
+            clearInterval(captureTimer); // 컴포넌트 언마운트 시 타이머 정리
+        };
+    }, []);
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -135,16 +136,17 @@ const Process = () => {
                     <Camera style={{ flex: 1, width: '100%' }} type={cameraType} ref={cameraRef} />
                 ) : (
                     <Text>Camera permission not granted</Text>
-                )}w
+                )}
             </View>
             <Button title="Start Camera" onPress={startVideoStream} disabled={!hasCameraPermission} />
             <Button title="Stop Camera" onPress={stopVideoStream} disabled={!hasCameraPermission} />
-            <Button title="감지 기능 시작" onPress={startRepeatedFunction} disabled={isButtonDisabled} />
+            <Button title="Play Warning Sound" onPress={() => setWarningSound(true)} />
             <Text>Result:</Text>
             <Text>Left Eye: {result.left_eye}</Text>
             <Text>Right Eye: {result.right_eye}</Text>
             <Text>Current time: {data.time}</Text>
             <Text>Current count: {data.count}</Text>
+            <Text>Current cycle: {data.cycle}</Text>
             <Text>Current timer: {data.timer}</Text>
             <Text>Current warning_check: {data.warning_check}</Text>
         </View>

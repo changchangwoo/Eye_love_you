@@ -16,7 +16,7 @@ CORS(app)
 IMG_SIZE = (34, 26)
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+predictor = ('shape_predictor_68_face_landmarks.dat')
 
 model = load_model('models/2018_12_17_22_58_35.h5')
 model.summary()
@@ -161,5 +161,5 @@ if __name__ == '__main__':
     t_timer = ''
     text_timer = ''
 
-    socketio.run(app, port=5000)
+    socketio.run(app, host='0.0.0.0', port=5000)
     # socketio.run(app, port=5000, allow_unsafe_werkzeu g=True)
