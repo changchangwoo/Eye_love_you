@@ -38,6 +38,12 @@ function Process() {
     useEffect(() => {
         if (warningSound) {
             audioRef.current.play();
+            document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease'; // 애니메이션 효과 추가
+            document.querySelector('.WebBlink_Logo').style.backgroundColor = '#F15F5F';
+            setTimeout(() => {
+                document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0'; // 원래 색상으로 돌아가도록 설정
+            }, 500); // 1초 후에 원래 색상으로 돌아가도록 설정
+
             setWarning_Sound(false)
         }
     }, [warningSound]);
@@ -82,31 +88,55 @@ function Process() {
     };
 
     return (
-        <div className="container">
-            <h1>WebRTC Camera Streaming</h1>
-            <div className="row">
-                <div className="col-md-6">
-                    <video ref={videoElement} autoPlay />
-                    <div className="result-container">
-                        <h4>Result:</h4>
-                        <p>Left Eye: {result.left_eye}</p>
-                        <p>Right Eye: {result.right_eye}</p>
-                    </div>
-                    <Button variant="primary" onClick={startVideoStream}>Start Camera</Button>
-                    <Button variant="danger" onClick={stopVideoStream}>Stop Camera</Button>
+        <div className="WebBlinkContents">
+            <div className='WebBlink_Logo'>
+                <div className='WebBlink_Text_main Text_Medium'>
+                    눈 깜박임 감지
                 </div>
-                <div className="col-md-6">
-                    <div className="info-container">
-                        <p>Current time: {data.time}</p>
-                        <p>Current count: {data.count}</p>
-                        <p>Current cycle: {data.cycle}</p>
-                        <p>Current timer: {data.timer}</p>
-                        <p>Current warning_check: {data.warning_check}</p>
-                        <audio ref={audioRef} src={warningWAV} />
+                <div className='Logo_Text_sub Text_Large'>
+                    기능 테스트 페이지
+                    <br />
+                    <Button variant="primary" onClick={startVideoStream}>카메라 시작</Button>
+                    <Button variant="danger" onClick={stopVideoStream}>카메라 종료</Button>
+                </div>
+                <div className='WebBlink_Box'>
+                    <div className='WebBlink_Box_Left'>
+                        <video ref={videoElement} autoPlay
+                            style={{
+                                width: '100%', height: '100%',
+                                padding: 30,
+                                borderRadius: 50
+                            }} // 비디오 엘리먼트의 크기를 100%로 설정
+                        />
+                    </div>
+                    <div className='WebBlink_Box_Right'>
+                        <div className="info-container">
+                            <br />
+                            <br />
+                            <p>좌측 눈 : {result.left_eye}</p>
+                            <p>우측 눈: {result.right_eye}</p>
+                            <br />
+                            <br />
+                            <p>실시간 확인 : {data.time}</p>
+                            <p>눈 깜박임 횟수: {data.count}</p>
+                            <p>동작 시간: {data.timer}</p>
+                            <p>경고음 출력횟수: {data.warning_check}</p>
+                            <audio ref={audioRef} src={warningWAV} />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="result-container">
+                    </div>
+                </div>
+                <div className="col-md-6">
+
+                </div>
+            </div>
+        </div >
     );
 };
 export default Process;
