@@ -21,6 +21,10 @@ function Blink() {
         navigate("/result");
     };
 
+    const processpage = () => {
+        navigate("/process");
+    };
+
     const onClickInstaller = async () => {
         try {
             const response = await axios.get('http://localhost:8080/installer', {
@@ -58,7 +62,7 @@ function Blink() {
                     </div>
                     <div className='Logo_image'>
                         <img className='Logo_image' src={cat_smile_img} alt="" />
-                        <Button variant="light" className='Main_Button' onClick={onClickInstaller}>시작하기</Button>
+                        <Button variant="light" className='Main_Button' onClick={processpage}>시작하기</Button>
                         <Button variant="light" className='Main_Button' onClick={resultpage}>결과보기</Button>
                     </div>
                 </div>

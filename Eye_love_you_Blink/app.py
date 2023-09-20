@@ -8,6 +8,7 @@ from imutils import face_utils
 from keras.models import load_model
 import base64
 import datetime
+import pymysql
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -16,7 +17,7 @@ CORS(app)
 IMG_SIZE = (34, 26)
 
 detector = dlib.get_frontal_face_detector()
-predictor = ('shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 
 model = load_model('models/2018_12_17_22_58_35.h5')
 model.summary()
@@ -40,6 +41,32 @@ def crop_eye(img, eye_points):
 
     return eye_img, eye_rect
 
+def db_process(timer, count, warning_check, cycle, userid):
+    print(userid)
+    cycle_avg = sum(cycle)/len(cycle)
+    timer = timer/10
+    cycle_avg = cycle_avg/10
+    conn = pymysql.connect(host='localhost', user='root', password='1234!', db='eyeloveyoudb', charset='utf8')
+    insert_query = "INSERT INTO usereyeinfo VALUES (%s, %s, %s, %s, %s)"
+    update_query = "UPDATE usereyeinfo SET total_operating_time = %s, total_blink_times = %s, warning_count = %s, warning_count = %s WHERE user_id = %s"
+    check_query = "SELECT * FROM usereyeinfo WHERE user_id=%s"
+
+    try:
+        with conn.cursor() as cursor:
+            cursor = conn.cursor()
+            cursor.execute(check_query, (userid))
+            result = cursor.fetchone()
+
+            if result:
+                cursor.execute(update_query, (timer, count, warning_check, cycle_avg, userid))
+            else:
+                cursor.execute(insert_query, (userid, timer, count, warning_check, cycle_avg))
+
+    finally:
+        conn.commit()
+        conn.close()
+
+
 # 웹 소켓 연결 확인 핸들러
 @socketio.on('connect')
 def handle_connect():
@@ -47,11 +74,10 @@ def handle_connect():
 
 # 메시지 수신 종료, 데이터베이스에 데이터 저장
 @socketio.on('datasave')
-def handle_connect():
-    ## 소켓에서 아이디 입력받아가지고 그거 전송하는 코드 작성하면 되겠다
-    print(count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check)
-
-
+def handle_datasave(sessionData):
+    print(sessionData)
+    print(timer, count, warning_check, cycle, sessionData)
+    # db_process(timer, count, warning_check, cycle, sessionData)
 
 # 웹 소켓 연결 종료 확인 핸들러
 @socketio.on('disconnect')
@@ -63,7 +89,7 @@ def handle_disconnect():
 @socketio.on('message')
 def handle_message(image_data):
     # 이미지 데이터 디코드
-    global count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check
+    global count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check, close_flag
     img_data = image_data.split(",")[1]
     img_bytes = base64.b64decode(img_data)
     nparr = np.frombuffer(img_bytes, np.uint8)

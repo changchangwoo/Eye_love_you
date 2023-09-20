@@ -2,47 +2,57 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import warningWAV from '../sounds/warning.wav';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 function Process() {
     const [socket, setSocket] = useState(null);
     const [stream, setStream] = useState(null);
+    const [sessionData, setSessionData] = useState(null);
     const [warningSound, setWarning_Sound] = useState(false)
     const [result, setResult] = useState({ left_eye: '', right_eye: '' });
     const [data, setData] = useState({ time: '', count: '', cycle: '', timer: '', warning_check: '' });
     const videoElement = useRef(null);
     const frameCaptureInterval = useRef(null);
     const audioRef = useRef(null);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
-        const s = io('127.0.0.1:5000');
-        setSocket(s);
+        const sessionData = sessionStorage.getItem('userinfo');
+        if (sessionData) {
+            const s = io('127.0.0.1:5000');
+            setSocket(s);
+            setSessionData(sessionData);
 
-        s.on('result', (result) => {
-            setResult(result);
-        });
+            s.on('result', (result) => {
+                setResult(result);
+            });
 
-        s.on('data', (data) => {
-            setData(data);
-        });
+            s.on('data', (data) => {
+                setData(data);
+            });
 
-        s.on('warningSound', (warningSound) => {
-            setWarning_Sound(warningSound)
-            console.log(warningSound)
-        })
-
-        return () => {
-            s.disconnect();
-        };
+            s.on('warningSound', (warningSound) => {
+                setWarning_Sound(warningSound)
+                console.log(warningSound)
+            })
+            return () => {
+                s.disconnect();
+            };
+        } else {
+            navigate("/login");
+        }
     }, []);
 
     useEffect(() => {
         if (warningSound) {
             audioRef.current.play();
-            document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease'; // 애니메이션 효과 추가
+            document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease';
             document.querySelector('.WebBlink_Logo').style.backgroundColor = '##F15F5F';
             setTimeout(() => {
-                document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0'; // 원래 색상으로 돌아가도록 설정
-            }, 500); // 1초 후에 원래 색상으로 돌아가도록 설정
+                document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0';
+            }, 500);
 
             setWarning_Sound(false)
         }
@@ -81,7 +91,8 @@ function Process() {
         if (stream) {
             stream.getTracks().forEach(track => track.stop());
             setStream(null);
-            socket.emit('datasave')
+            console.log(sessionData)
+            socket.emit('datasave', sessionData)
             socket.disconnect();
             clearInterval(frameCaptureInterval.current);
         }

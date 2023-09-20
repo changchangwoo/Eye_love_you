@@ -5,12 +5,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 
 function Login() {
-    const [userinfo, setuserinfo] = useState('');
+    const [userinfo, setuserinfo] = useState("hello");
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
+
+    useEffect(() => {
+        sessionStorage.setItem('userinfo', JSON.stringify(userinfo));
+    }, []);
 
     const navigate = useNavigate();
     const registerPage = () => {
