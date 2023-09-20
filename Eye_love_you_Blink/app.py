@@ -146,6 +146,8 @@ def handle_message(image_data):
         if close_flag == 0: # 눈이 연속적으로 감겨져 있는것을 식별
             if blink_l == '- 0.0' and blink_r == '- 0.0':  # 눈을 깜박이는 경우
                 check = 0
+                close_check = close_check + 1.2
+                print(close_check)
                 if count_flag == 0 and delay_flag == 0:
                     count = count + 1
                     cycle.append(cycle_timer)
@@ -162,12 +164,10 @@ def handle_message(image_data):
             if blink_l == '0 1.0' or blink_r == '0 1.0':
                 count_flag = 0
 
-            if blink_l == '- 0.0' or blink_r == '- 0.0':
-                close_check = close_check + 1.2
             else:
                 close_check = 0
 
-            # timer, check = 10 == 1sec
+            # timer, check = 10 == 1sec // 의미가 없는 것 같다
             timer = timer + 1.2
             check = check + 1.2
             cycle_timer = cycle_timer + 1.2
@@ -176,6 +176,8 @@ def handle_message(image_data):
                 emit('warningSound', True)
                 check = 0
                 warning_check = warning_check + 1
+
+
 
         emit('result', {
             'left_eye': blink_l,
