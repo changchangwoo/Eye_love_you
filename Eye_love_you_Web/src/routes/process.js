@@ -9,7 +9,7 @@ function Process() {
     const [socket, setSocket] = useState(null);
     const [stream, setStream] = useState(null);
     const [sessionData, setSessionData] = useState(null);
-    const [warningSound, setWarning_Sound] = useState(false)
+    const [warningSound, setWarningSound] = useState(false)
     const [result, setResult] = useState({ left_eye: '', right_eye: '' });
     const [data, setData] = useState({ time: '', count: '', cycle: '', timer: '', warning_check: '' });
     const videoElement = useRef(null);
@@ -34,7 +34,8 @@ function Process() {
             });
 
             s.on('warningSound', (warningSound) => {
-                setWarning_Sound(warningSound)
+                setWarningSound(warningSound)
+                playsound();
                 console.log(warningSound)
             })
             return () => {
@@ -45,18 +46,17 @@ function Process() {
         }
     }, []);
 
-    useEffect(() => {
-        if (warningSound) {
-            audioRef.current.play();
-            document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease';
-            document.querySelector('.WebBlink_Logo').style.backgroundColor = '##F15F5F';
-            setTimeout(() => {
-                document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0';
-            }, 500);
+    const playsound = async () => {
+        audioRef.current.play();
+        document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease';
+        document.querySelector('.WebBlink_Logo').style.backgroundColor = '#F15F5F';
+        setTimeout(() => {
+            document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0';
+        }, 500);
+        console.log('동작이 됩니다...')
 
-            setWarning_Sound(false)
-        }
-    }, [warningSound]);
+        setWarningSound(false)
+    }
 
     const startVideoStream = async () => {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {

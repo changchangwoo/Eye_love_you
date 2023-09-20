@@ -102,13 +102,7 @@
 .MainContents {
   height: 100%;
   overflow: hidden;
-  scroll-snap-type: y mandatory;
   /* 추가 */
-}
-
-.scroll_section {
-  height: 100%;
-  scroll-snap-align: start;
 }
 
 .Main_Logo {
@@ -576,7 +570,6 @@
 .WebBlinkContents {
   height: 100%;
   overflow: hidden;
-  scroll-snap-type: y mandatory;
   /* 추가 */
 }
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
 import cv2
@@ -41,8 +41,25 @@ def crop_eye(img, eye_points):
 
     return eye_img, eye_rect
 
+def clear_data() :
+    global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer
+    timer = 0
+    check = 0
+    close_check = 0
+    close_flag = 0
+    count_flag = 0
+    count = 0
+    delay_flag = 0
+    delay_timer = 0
+    warning_check = 0
+    cycle_timer = 0
+    cycle = []
+    text_count = ''
+    text_warning = ''
+    t_timer = ''
+    text_timer = ''
+
 def db_process(timer, count, warning_check, cycle, userid):
-    print(userid)
     cycle_avg = sum(cycle)/len(cycle)
     timer = timer/10
     cycle_avg = cycle_avg/10
@@ -65,6 +82,7 @@ def db_process(timer, count, warning_check, cycle, userid):
     finally:
         conn.commit()
         conn.close()
+        print('동작완료')
 
 
 # 웹 소켓 연결 확인 핸들러
@@ -75,14 +93,17 @@ def handle_connect():
 # 메시지 수신 종료, 데이터베이스에 데이터 저장
 @socketio.on('datasave')
 def handle_datasave(sessionData):
-    print(sessionData)
-    print(timer, count, warning_check, cycle, sessionData)
-    # db_process(timer, count, warning_check, cycle, sessionData)
+    userid = sessionData
+    userid = userid.replace('"', '')
+    db_process(timer, count, warning_check, cycle, userid)
 
 # 웹 소켓 연결 종료 확인 핸들러
 @socketio.on('disconnect')
 def handle_disconnect():
     print('Client disconnected')
+    clear_data();
+
+
 
 
 # 웹 소켓 메시지 수신 이벤트 핸들러
@@ -167,25 +188,10 @@ def handle_message(image_data):
                       'timer' : timer,
                       'warning_check' : warning_check
                       })
-        print(check)
 
 if __name__ == '__main__':
     global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer
-    timer = 0
-    check = 0
-    close_check = 0
-    close_flag = 0
-    count_flag = 0
-    count = 0
-    delay_flag = 0
-    delay_timer = 0
-    warning_check = 0
-    cycle_timer = 0
-    cycle = []
-    text_count = ''
-    text_warning = ''
-    t_timer = ''
-    text_timer = ''
+    clear_data();
 
-    socketio.run(app, host='0.0.0.0', port=5000)
-    # socketio.run(app, port=5000, allow_unsafe_werkzeu g=True)
+    # socketio.run(app, host='0.0.0.0', port=5000)
+    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)

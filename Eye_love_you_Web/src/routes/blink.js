@@ -55,7 +55,7 @@ function Blink() {
             <Slider {...settings} className='Blink_Slider'>
                 <div className='Main_Logo'>
                     <div className='Logo_Text_main Text_Medium'>
-                        눈이 아픈 당신을 위해
+                        아이 러브 유
                     </div>
                     <div className='Logo_Text_sub Text_Large'>
                         눈 깜박임 감지 프로그램
