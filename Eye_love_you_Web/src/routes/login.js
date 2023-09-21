@@ -9,13 +9,9 @@ import { useEffect } from 'react';
 
 
 function Login() {
-    const [userinfo, setuserinfo] = useState("hello");
+    const [userinfo, setuserinfo] = useState("");
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
-
-    useEffect(() => {
-        sessionStorage.setItem('userinfo', JSON.stringify(userinfo));
-    }, [userinfo]);
 
     const navigate = useNavigate();
     const registerPage = () => {
@@ -40,7 +36,9 @@ function Login() {
             if (response.data === '') {
                 alert('로그인 실패');
             }
-            else {
+            else { // 로그인 성공
+                console.log(response.data.userId)
+                sessionStorage.setItem('userinfo', JSON.stringify(response.data.userId));
                 navigate("/")
             }
 
