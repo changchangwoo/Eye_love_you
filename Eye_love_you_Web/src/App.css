@@ -609,3 +609,9 @@
   margin: auto;
   padding: 20px;
 }
+
+.Status_text {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}

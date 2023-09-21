@@ -9,14 +9,12 @@ function Process() {
     const [socket, setSocket] = useState(null);
     const [stream, setStream] = useState(null);
     const [sessionData, setSessionData] = useState(null);
-    const [warningSound, setWarningSound] = useState(false)
     const [result, setResult] = useState({ left_eye: '', right_eye: '' });
     const [data, setData] = useState({ time: '', count: '', cycle: '', timer: '', warning_check: '' });
     const videoElement = useRef(null);
     const frameCaptureInterval = useRef(null);
     const audioRef = useRef(null);
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const sessionData = sessionStorage.getItem('userinfo');
@@ -34,9 +32,19 @@ function Process() {
             });
 
             s.on('warningSound', (warningSound) => {
-                setWarningSound(warningSound)
                 playsound();
                 console.log(warningSound)
+            })
+
+            s.on('status', (status) => {
+                console.log(status.status)
+                if (status.status === 1) { // 정상 동작
+                    document.querySelector(".Status_text").textContent = "현재 프로그램이 정상적으로 동작하고 있어요"
+                } else if (status.status === 2) { // 얼굴 인식
+                    document.querySelector(".Status_text").textContent = "얼굴이 인식 되어지지 않고 있어요"
+                } else if (status.status === 3) { // 눈 감은거 인식
+                    document.querySelector(".Status_text").textContent = "장시간 눈의 인식이 되어지지 않고 있어요"
+                }
             })
             return () => {
                 s.disconnect();
@@ -44,7 +52,7 @@ function Process() {
         } else {
             navigate("/login");
         }
-    }, []);
+    }, [navigate]);
 
     const playsound = async () => {
         audioRef.current.play();
@@ -54,8 +62,6 @@ function Process() {
             document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0';
         }, 500);
         console.log('동작이 됩니다...')
-
-        setWarningSound(false)
     }
 
     const startVideoStream = async () => {
@@ -83,7 +89,7 @@ function Process() {
                 } catch (error) {
                     console.error('Error capturing frame: ', error);
                 }
-            }, 200);
+            }, 300);
         }
     };
 
@@ -110,6 +116,7 @@ function Process() {
                     <Button variant="primary" onClick={startVideoStream}>카메라 시작</Button>
                     <Button variant="danger" onClick={stopVideoStream}>카메라 종료</Button>
                 </div>
+                <div className='Status_text'> 상태값 입력 테스트</div>
                 <div className='WebBlink_Box'>
                     <div className='WebBlink_Box_Left'>
                         <video ref={videoElement} autoPlay

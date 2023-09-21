@@ -22,6 +22,7 @@ predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 model = load_model('models/2018_12_17_22_58_35.h5')
 model.summary()
 
+
 def crop_eye(img, eye_points):
     x1, y1 = np.amin(eye_points, axis=0)
     x2, y2 = np.amax(eye_points, axis=0)
@@ -41,8 +42,9 @@ def crop_eye(img, eye_points):
 
     return eye_img, eye_rect
 
-def clear_data() :
-    global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer
+
+def clear_data():
+    global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer, status, face_count
     timer = 0
     check = 0
     close_check = 0
@@ -58,11 +60,14 @@ def clear_data() :
     text_warning = ''
     t_timer = ''
     text_timer = ''
+    status = 1
+    face_count = 0
+
 
 def db_process(timer, count, warning_check, cycle, userid):
-    cycle_avg = sum(cycle)/len(cycle)
-    timer = timer/10
-    cycle_avg = cycle_avg/10
+    cycle_avg = sum(cycle) / len(cycle)
+    timer = timer / 10
+    cycle_avg = cycle_avg / 10
     conn = pymysql.connect(host='localhost', user='root', password='1234!', db='eyeloveyoudb', charset='utf8')
     insert_query = "INSERT INTO usereyeinfo VALUES (%s, %s, %s, %s, %s)"
     update_query = "UPDATE usereyeinfo SET total_operating_time = %s, total_blink_times = %s, warning_count = %s, warning_count = %s WHERE user_id = %s"
@@ -90,12 +95,14 @@ def db_process(timer, count, warning_check, cycle, userid):
 def handle_connect():
     print('Client connected')
 
+
 # 메시지 수신 종료, 데이터베이스에 데이터 저장
 @socketio.on('datasave')
 def handle_datasave(sessionData):
     userid = sessionData
     userid = userid.replace('"', '')
     db_process(timer, count, warning_check, cycle, userid)
+
 
 # 웹 소켓 연결 종료 확인 핸들러
 @socketio.on('disconnect')
@@ -104,19 +111,18 @@ def handle_disconnect():
     clear_data();
 
 
-
-
 # 웹 소켓 메시지 수신 이벤트 핸들러
 @socketio.on('message')
 def handle_message(image_data):
     # 이미지 데이터 디코드
-    global count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check, close_flag
+    global count, count_flag, delay_flag, cycle_timer, delay_timer, close_check, timer, check, warning_check, close_flag, status
     img_data = image_data.split(",")[1]
     img_bytes = base64.b64decode(img_data)
     nparr = np.frombuffer(img_bytes, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = detector(gray)
+    status = 1
 
     for face in faces:
         shapes = predictor(gray, face)
@@ -143,57 +149,68 @@ def handle_message(image_data):
         blink_r = blink_r % pred_r
 
         # blink_detect
-        if close_flag == 0: # 눈이 연속적으로 감겨져 있는것을 식별
-            if blink_l == '- 0.0' and blink_r == '- 0.0':  # 눈을 깜박이는 경우
-                check = 0
-                close_check = close_check + 1.2
-                print(close_check)
-                if count_flag == 0 and delay_flag == 0:
-                    count = count + 1
-                    cycle.append(cycle_timer)
-                    cycle_timer = 0
-                    delay_flag = 1
-                count_flag == 1
+        if blink_l == '- 0.0' and blink_r == '- 0.0':  # 눈을 깜박이는 경우
+            check = 0
+            close_check = close_check + 1.2
+            print(close_check)
+            if count_flag == 0 and delay_flag == 0:
+                count = count + 1
+                cycle.append(cycle_timer)
+                cycle_timer = 0
+                delay_flag = 1
+            count_flag == 1
 
-            if delay_flag == 1:
-                delay_timer = delay_timer + 1
-                if delay_timer == 10:
-                    delay_flag = 0
-                    delay_timer = 0
+        elif blink_l == '0 1.0' or blink_r == '0 1.0':
+            count_flag = 0
 
-            if blink_l == '0 1.0' or blink_r == '0 1.0':
-                count_flag = 0
+        else:
+            print('else가 동작해용')
+            close_check = 0
+            status = 1
 
-            else:
-                close_check = 0
+        if delay_flag == 1:
+            delay_timer = delay_timer + 1
+            if delay_timer == 10:
+                delay_flag = 0
+                delay_timer = 0
 
-            # timer, check = 10 == 1sec // 의미가 없는 것 같다
-            timer = timer + 1.2
-            check = check + 1.2
-            cycle_timer = cycle_timer + 1.2
+        # timer, check = 10 == 1sec // 의미가 없는 것 같다
+        timer = timer + 1.2
+        check = check + 1.2
+        cycle_timer = cycle_timer + 1.2
 
-            if check >= 50:
-                emit('warningSound', True)
-                check = 0
-                warning_check = warning_check + 1
+        if close_check >= 25:
+            print('눈을 감았다고 식별')
+            status = 3
+            emit('status', {
+                'status': status
+            })
 
+        if check >= 50:
+            emit('warningSound', True)
+            check = 0
+            warning_check = warning_check + 1
 
+    emit('result', {
+        'left_eye': blink_l,
+        'right_eye': blink_r
+    })
 
-        emit('result', {
-            'left_eye': blink_l,
-            'right_eye': blink_r
-        })
+    emit('data', {'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                  'count': count,
+                  'cycle': cycle,
+                  'timer': timer,
+                  'warning_check': warning_check
+                  })
 
-        emit('data', {'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                      'count' : count,
-                      'cycle' : cycle,
-                      'timer' : timer,
-                      'warning_check' : warning_check
-                      })
+    emit('status', {
+        'status': status
+    })
+
 
 if __name__ == '__main__':
-    global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer
+    global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer, status, face_count
     clear_data();
 
-    # socketio.run(app, host='0.0.0.0', port=5000)
-    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
+    socketio.run(app, host='0.0.0.0', port=5000)
+    # socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)

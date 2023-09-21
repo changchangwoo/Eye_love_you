@@ -15,7 +15,7 @@ function Login() {
 
     useEffect(() => {
         sessionStorage.setItem('userinfo', JSON.stringify(userinfo));
-    }, []);
+    }, [userinfo]);
 
     const navigate = useNavigate();
     const registerPage = () => {

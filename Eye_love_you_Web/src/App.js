@@ -2,7 +2,7 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // 이미지 리소스
 import smile_img from './imgs/smile.png';
@@ -64,7 +64,7 @@ function App() {
         <Button variant="light" className='Nav_login' onClick={loginPage}>로그인</Button>
       </div>
       <Routes>
-        <Route path="/" element={<MAIN loginPage={loginPage}/>} />
+        <Route path="/" element={<MAIN loginPage={loginPage} />} />
         <Route path="/blink" element={<BLINK />} />
         <Route path="/login" element={<LOGIN />} />
         <Route path='/register' element={<REGISTER />} />
