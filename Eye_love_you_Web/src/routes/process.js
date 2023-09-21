@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import warningWAV from '../sounds/warning.wav';
+import resumeWAV from '../sounds/resume.wav';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +14,8 @@ function Process() {
     const [data, setData] = useState({ time: '', count: '', cycle: '', timer: '', warning_check: '' });
     const videoElement = useRef(null);
     const frameCaptureInterval = useRef(null);
-    const audioRef = useRef(null);
+    const audioRef_warning = useRef(null);
+    const audioRef_resume = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,7 +34,7 @@ function Process() {
             });
 
             s.on('warningSound', (warningSound) => {
-                playsound();
+                play_warningsound();
                 console.log(warningSound)
             })
 
@@ -40,10 +42,15 @@ function Process() {
                 console.log(status.status)
                 if (status.status === 1) { // 정상 동작
                     document.querySelector(".Status_text").textContent = "현재 프로그램이 정상적으로 동작하고 있어요"
+                    document.querySelector(".Status_text").style.color = "green";
                 } else if (status.status === 2) { // 얼굴 인식
-                    document.querySelector(".Status_text").textContent = "얼굴이 인식 되어지지 않고 있어요"
+                    document.querySelector(".Status_text").textContent = "현재 얼굴이 인식 되어지지 않고 있어요"
+                    document.querySelector(".Status_text").style.color = "red";
+                    play_resumesound();
                 } else if (status.status === 3) { // 눈 감은거 인식
                     document.querySelector(".Status_text").textContent = "장시간 눈의 인식이 되어지지 않고 있어요"
+                    document.querySelector(".Status_text").style.color = "red";
+                    play_resumesound();
                 }
             })
             return () => {
@@ -54,14 +61,22 @@ function Process() {
         }
     }, [navigate]);
 
-    const playsound = async () => {
-        audioRef.current.play();
+    const play_warningsound = async () => {
+        audioRef_warning.current.play();
         document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease';
         document.querySelector('.WebBlink_Logo').style.backgroundColor = '#F15F5F';
         setTimeout(() => {
             document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0';
         }, 500);
-        console.log('동작이 됩니다...')
+    }
+
+    const play_resumesound = async () => {
+        audioRef_resume.current.play();
+        document.querySelector('.WebBlink_Logo').style.transition = 'background-color 0.5s ease';
+        document.querySelector('.WebBlink_Logo').style.backgroundColor = '#2F2E41';
+        setTimeout(() => {
+            document.querySelector('.WebBlink_Logo').style.backgroundColor = '#FBE3F0';
+        }, 500);
     }
 
     const startVideoStream = async () => {
@@ -113,8 +128,8 @@ function Process() {
                 <div className='Logo_Text_sub Text_Large'>
                     기능 테스트 페이지
                     <br />
-                    <Button variant="primary" onClick={startVideoStream}>카메라 시작</Button>
-                    <Button variant="danger" onClick={stopVideoStream}>카메라 종료</Button>
+                    <Button variant="primary" onClick={startVideoStream}>프로그램 시작</Button>
+                    <Button variant="danger" onClick={stopVideoStream}>프로그램 종료</Button>
                 </div>
                 <div className='Status_text'> 상태값 입력 테스트</div>
                 <div className='WebBlink_Box'>
@@ -124,7 +139,7 @@ function Process() {
                                 width: '100%', height: '100%',
                                 padding: 30,
                                 borderRadius: 50
-                            }} // 비디오 엘리먼트의 크기를 100%로 설정
+                            }}
                         />
                     </div>
                     <div className='WebBlink_Box_Right'>
@@ -139,7 +154,8 @@ function Process() {
                             <p>눈 깜박임 횟수: {data.count}</p>
                             <p>동작 시간: {data.timer}</p>
                             <p>경고음 출력횟수: {data.warning_check}</p>
-                            <audio ref={audioRef} src={warningWAV} />
+                            <audio ref={audioRef_warning} src={warningWAV} />
+                            <audio ref={audioRef_resume} src={resumeWAV} />
                         </div>
                     </div>
                 </div>
