@@ -22,7 +22,6 @@ import REGISTER from './routes/register.js';
 import RESULT from './routes/result.js';
 import PROCESS from './routes/process.js';
 import MAP from './routes/map.js'
-import TEMP from './routes/temp.js'
 
 function App() {
   const navigate = useNavigate();
@@ -71,8 +70,6 @@ function App() {
         <Route path='/result' element={<RESULT />} />
         <Route path='/process' element={<PROCESS />} />
         <Route path='/map' element={<MAP />} />
-        <Route path='/temp' element={<TEMP />} />
-
 
       </Routes>
       <div className='Footer'>
