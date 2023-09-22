@@ -11,6 +11,48 @@ function Register() {
     const [inputNName, setInputNName] = useState("");
     const [inputEmail, setInputEmail] = useState("");
     const [inputAddr, setInputAddr] = useState("");
+    const [postcode, setPostcode] = useState('');
+    const [address, setAddress] = useState('');
+
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+        script.async = true;
+        script.onload = handleScriptLoad;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+
+    const handleScriptLoad = () => {
+    };
+
+    const handleComplete = (data) => {
+        let addr = '';
+        if (data.userSelectedType === 'R') {
+            addr = data.roadAddress;
+        } else {
+            addr = data.jibunAddress;
+        }
+
+        setPostcode(data.zonecode);
+        setAddress(addr);
+        setInputAddr(addr)
+        document.getElementById('sample6_postcode').value = data.zonecode;
+        document.getElementById('sample6_address').value = addr;
+    };
+
+    const execDaumPostcode = () => {
+        if (window.daum && window.daum.Postcode) {
+            new window.daum.Postcode({
+                oncomplete: handleComplete,
+            }).open();
+        } else {
+            console.error('Daum Postcode script not loaded.');
+        }
+    };
 
     const handleInputId = (e) => {
         setInputId(e.target.value);
@@ -29,11 +71,13 @@ function Register() {
     };
 
     const handleInputAddr = (e) => {
+        console.log('동작')
         setInputAddr(e.target.value);
     };
 
 
     const onClickRegistser = async () => {
+        console.log(inputId, inputPw, inputNName, inputEmail, inputAddr)
         try {
             const response = await axios.post('http://localhost:8080/signup', {
                 userId: inputId,
@@ -68,7 +112,7 @@ function Register() {
                         아이디
                     </div>
                     <div className="Input_Form">
-                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="아이디 입력 (6~15자)"
+                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="아이디 입력"
                             value={inputId}
                             onChange={handleInputId} />
                     </div>
@@ -78,7 +122,7 @@ function Register() {
                         비밀번호
                     </div>
                     <div className="Input_Form">
-                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="비밀번호 입력 (문자,숫자 포함 8~20자)"
+                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="비밀번호 입력"
                             value={inputPw}
                             onChange={handleInputPw} />
                     </div>
@@ -115,10 +159,20 @@ function Register() {
                     <div className="Input_text Text_small">
                         주소
                     </div>
+                    <p>　</p>
+                    <Button variant="light" className='Nav_login' onClick={execDaumPostcode}
+                        style={{ backgroundColor: '#2F2E41', color: 'white', marginBottom: '10px' }}>주소찾기</Button>
                     <div className="Input_Form">
-                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="사용자 주소 입력"
-                            value={inputAddr}
+                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="우편 번호" id="sample6_postcode"
+                            value={postcode} />
+                    </div>
+                    <div className="Input_Form">
+                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="주소" id="sample6_address"
+                            value={address}
                             onChange={handleInputAddr} />
+                    </div>
+                    <div className="Input_Form">
+                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="상세주소" />
                     </div>
                 </div>
                 <div className='Register_form_Button'>

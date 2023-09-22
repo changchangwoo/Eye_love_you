@@ -1,8 +1,8 @@
-import React, { PureComponent, useEffect, useState } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useEffect, useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
 import sad_smile_img from '../imgs/sad_smile.png'
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Result() {
     const [userdata, setuserData] = useState('');
@@ -15,28 +15,28 @@ function Result() {
     const user_wc = userdata.userWc;
     const userid = userdata.userId;
     const user_userTbts = userdata.userTbts;
-    let a = useSelector((state) => state.user);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
+        const userid = sessionStorage.getItem('userinfo');
+        const update_userid = userid.replace(/"/g, '');
+
         const infoData = async () => {
             try {
                 const response = await axios.post('http://localhost:8080/info', {
-                    userId: 'changwoo'
+                    userId: update_userid
                 })
                 setuserData(response.data);
-                // console.log(response.data);
-                console.log('리덕스 예제로 튀어나오는 문장');
-
             } catch (error) {
-                console.error('데이터 요청 중 오류 발생:', error);
             }
         }
-        infoData();
-    }, []);
-
-
-
+        if (userid) {
+            infoData();
+        } else {
+            navigate("/login");
+        }
+    }, [navigate]);
 
     const data_time = [
         {

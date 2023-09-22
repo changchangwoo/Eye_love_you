@@ -5,11 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect } from 'react';
-
 
 function Login() {
-    const [userinfo, setuserinfo] = useState("");
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
 
@@ -32,7 +29,6 @@ function Login() {
                 userId: inputId,
                 password: inputPw,
             })
-            setuserinfo(response.data);
             if (response.data === '') {
                 alert('로그인 실패');
             }
