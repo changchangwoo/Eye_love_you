@@ -164,7 +164,6 @@ function Blink() {
                             <div className='des_'>내 눈은 어제보다 얼마나 더 나아졌을까요?</div>
                             <Button variant="light" className='install_button'
                                 style={{ marginTop: '50px' }} onClick={resultpage}>확인하기</Button>
-
                         </div>
 
                     </div>
