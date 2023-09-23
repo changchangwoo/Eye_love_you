@@ -96,7 +96,6 @@ function MyMap() {
                 position: position,
                 image: markerImage,
             });
-
             marker.setMap(map);
 
             // 마커 클릭 이벤트 핸들러 추가
@@ -106,6 +105,7 @@ function MyMap() {
                 // 마커에 대한 상세 정보를 인포윈도우로 표시
                 const content = `<div style="padding:5px;z-index:1;">${place.place_name}</div>`;
                 setPlaceurl(place.place_url)
+                console.log(place)
 
                 infowindow.setContent(content);
                 infowindow.open(map, marker);
