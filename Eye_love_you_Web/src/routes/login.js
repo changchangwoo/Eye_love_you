@@ -33,8 +33,9 @@ function Login() {
                 alert('로그인 실패');
             }
             else { // 로그인 성공
-                console.log(response.data.userId)
+                console.log(response.data)
                 sessionStorage.setItem('userinfo', JSON.stringify(response.data.userId));
+                sessionStorage.setItem('usermap', JSON.stringify(response.data.homeAddress));
                 navigate("/")
             }
 
