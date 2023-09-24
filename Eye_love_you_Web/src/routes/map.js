@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './temp.css';
+import { Button } from 'react-bootstrap';
 
 function MyMap() {
     const [markers, setMarkers] = useState([]);
@@ -99,7 +100,7 @@ function MyMap() {
             marker.setMap(map);
 
             // 마커 클릭 이벤트 핸들러 추가
-            window.kakao.maps.event.addListener(marker, 'click', function () {
+            window.kakao.maps.event.addListener(marker, 'click', function (index) {
                 // 마커 클릭 시, 지도 중심을 마커로 이동
                 map.setCenter(position);
                 // 마커에 대한 상세 정보를 인포윈도우로 표시
@@ -133,37 +134,55 @@ function MyMap() {
     };
 
     return (
-        <div>
-            <div id="map" style={{ width: '50%', height: '450px' }}></div>
-            <div className="map_wrap">
-                <div id="menu_wrap" className="bg_white">
-                    <ul id="placesList" style={{ listStyle: 'none', padding: 0 }}>
-                        {markers.map((marker, index) => (
-                            <li
-                                key={index}
-                                style={{ padding: '10px 0', borderBottom: '1px solid #e0e0e0', cursor: 'pointer' }}
-                                onClick={() => handleMarkerClick(index)} // 목록 클릭 이벤트 핸들러 추가
-                            >
-                                <span className={`markerbg marker_${index + 1}`}></span>
-                                <div className="info">
-                                    <h5>{marker.place_name}</h5>
-                                    <span>{marker.road_address_name || marker.address_name}</span>
-                                    <span className="tel">{marker.phone}</span>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                    <div id="pagination"></div>
+        <div className='MapContents'>
+            <div className='Mapstyle'>
+                <div className='WebBlink_Text_main Text_Medium'>
+                    아이 러브 유
                 </div>
-            </div>
-            <div>
-                <h1>상세 정보</h1>
-                <iframe
-                    src={place_url}
-                    width="100%"
-                    height="800px"
-                    title="Example iframe"
-                ></iframe>
+                <div className='Logo_Text_sub Text_Large'>
+                    주변 안과/안경원 검색
+                    <br />
+                </div>
+                <div className='WebBlink_Box'>
+                    <div className='Map_Box_Left'>
+                        <div id="map"></div>
+                        <div className="map_wrap">
+                            <div id="menu_wrap" style={{ marginTop: '20px', height: '120%' }}>
+                                <Button variant="light" className='Nav_login'
+                                    style={{ backgroundColor: '#2F2E41', color: 'white', marginBottom: '10px' }}>내 위치</Button>
+                                    <ul id="placesList" style={{ listStyle: 'none', padding: 0, }}>
+                                    {markers.map((marker, index) => (
+                                        <li
+                                            key={index}
+                                            style={{ padding: '20px 0', borderBottom: '1px solid #e0e0e0', cursor: 'pointer' }}
+                                            onClick={() => handleMarkerClick(index)} // 목록 클릭 이벤트 핸들러 추가
+                                        >
+                                            <span className={`markerbg marker_${index + 1}`}></span>
+                                            <div className="info">
+                                                <h5 style={{ fontSize: '20px' }}>{marker.place_name}</h5>
+                                                <span>{marker.road_address_name || marker.address_name}</span>
+                                                <br />
+                                                <span className="tel">{marker.phone}</span>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div id="pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='Map_Box_Right'>
+                        <div className='currentMap_info'> {homeAddress} </div>
+                        <iframe
+                            className='detailMap'
+                            src={place_url}
+                            width="100%"
+                            height="80%"
+                            title="Example iframe"
+                        ></iframe>
+                    </div>
+                </div>
+
             </div>
         </div>
     );

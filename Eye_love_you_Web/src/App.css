@@ -573,6 +573,11 @@
   /* 추가 */
 }
 
+.MapContents {
+  height: 100%;
+  overflow: hidden;
+}
+
 .WebBlink_Logo {
   overflow: hidden;
   /* 추가 */
@@ -614,4 +619,64 @@
   text-align: center;
   font-size: 40px;
   font-weight: bold;
+}
+
+.Mapstyle {
+  overflow: hidden;
+  /* 추가 */
+  height: 107vh;
+  background-color: #FBE3F0;
+}
+
+.Map_Box_Left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  margin: auto;
+  flex:6
+}
+
+.Map_Box_Right {
+  width: 50%;
+  height: 100%;
+  font-size: 25px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  flex: 4;
+}
+
+.currentMap_info {
+  font-size: 50px;
+  font-family: 'NEXON Lv2 Gothic Medium';
+
+}
+
+.detailMap {
+  margin-top: 40px;
+  border-radius: 50px
+}
+
+#placesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto; /* 키워드 목록이 넘칠 경우 스크롤 표시 */
+  flex: 1; /* 키워드 목록이 부모 높이를 채우도록 설정 */
+}
+
+#map {
+  width: 80%;
+  height: 100%;
+  flex: 7;
+  padding: 10px;
+  border: 0px solid black;
+  border-radius: 50px;
+}
+
+.map_wrap {
+  width: 100%;
+
+  flex: 3;
+  margin-top: 50px;
 }
