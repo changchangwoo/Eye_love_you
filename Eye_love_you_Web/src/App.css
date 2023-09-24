@@ -573,6 +573,11 @@
   /* 추가 */
 }
 
+.MapContents {
+  height: 100%;
+  overflow: hidden;
+}
+
 .WebBlink_Logo {
   overflow: hidden;
   /* 추가 */

@@ -20,9 +20,8 @@ function Result() {
 
     useEffect(() => {
         const userid = sessionStorage.getItem('userinfo');
-        const update_userid = userid.replace(/"/g, '');
-
         const infoData = async () => {
+            const update_userid = userid.replace(/"/g, '');
             try {
                 const response = await axios.post('http://localhost:8080/info', {
                     userId: update_userid
@@ -35,6 +34,7 @@ function Result() {
             infoData();
         } else {
             navigate("/login");
+            alert('로그인이 필요한 서비스입니다.');
         }
     }, [navigate]);
 
