@@ -23,7 +23,7 @@ public class UserController {
 	private UserEyeDAO userEyeDAO;
 	
 	@PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
     public UserProVO login(@RequestBody UserProVO requestData){
         UserProVO user = userProDAO.getUserData(requestData);
         if (user != null) {
@@ -35,7 +35,7 @@ public class UserController {
     }
 	
 	@PostMapping("/signup")
-    @CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
 	public String signup(@RequestBody UserProVO requestData) {
     	if (requestData.getUserId() == null || requestData.getUserId().isEmpty()) {
     		return "아이디 없음";
@@ -59,7 +59,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/info")
-    @CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
     public JSONObject qwasd(@RequestBody UserProVO requestData) {
         UserEyeVO user = new UserEyeVO();
         user.setUserId(requestData.getUserId());;
@@ -80,7 +80,7 @@ public class UserController {
     }
 	
 	@PostMapping("/map")
-    @CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "*")
     public JSONObject map(@RequestBody UserProVO requestData) {
         UserProVO vo = new UserProVO();
         vo.setUserId(requestData.getUserId());

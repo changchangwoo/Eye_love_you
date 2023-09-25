@@ -1,77 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, TextInput, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TextInput, Alert } from 'react-native';
 import CustomButton from '../styles/CustomButton';
-
-const login_style = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    top_content: {
-        width: '100%',
-        height: '40%',
-        backgroundColor: '#FBE3F0',
-        borderBottomLeftRadius: 50,
-        borderBottomRightRadius: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    detail_content: {
-        width: '100%',
-        height: '60%',
-        alignItems: 'center',
-    },
-    image: {
-        width: '90%',
-        height: '60%',
-        resizeMode: 'contain',
-    },
-    login_text: {
-        fontSize: 40,
-        fontFamily: 'FONT_BOLD',
-        marginVertical: 10, // 수직 여백 조절
-    },
-    input: {
-        width: '70%',
-        height: 40,
-        fontSize: 15,
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        marginVertical: 10, // 수직 여백 조절
-        textAlign: 'center'
-    },
-    custom_marginTop: {
-        marginTop: 15
-    },
-    button: {
-        fontSize: 20,
-        marginTop: 10,
-        width: '70%',
-        height: 50,
-        borderRadius: 10
-    },
-    registerbutton: {
-        marginTop: 30,
-        backgroundColor: '#2F2E41',
-        width: '70%',
-        height: 40,
-        borderRadius: 10
-    },
-    button_text: {
-        fontFamily: 'FONT_BOLD',
-        fontSize: 15
-    },
-    registerbutton_text: {
-        color: 'white',
-        fontSize: 13,
-        fontFamily: 'FONT_LIGHT'
-    }
-});
+import { login_style } from '../styles/Css.js';
 
 const LoginScreen = ({ navigation }) => {
     const [id, setText] = useState('');
@@ -86,10 +16,39 @@ const LoginScreen = ({ navigation }) => {
     const handleRegister = () => {
         navigation.replace('Register');
     }
-    const handleSubmit = () => {
-        console.log(`입력된 텍스트: ${id}`);
-        navigation.replace('Main');
-    }
+    const handleSubmit = async () => {
+        if (id == '' || pass == '') {
+            console.log('알럿')
+            Alert.alert('아이디 또는 비밀번호를 입력해주세요');
+        } else {
+            try {
+                // 네트워크 요청 보내는 부분 (fetch API 사용)
+                const response = await fetch('http://localhost:8080/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: id,
+                        password: pass
+                    }),
+                });
+
+                const responseData = await response.json();
+                console.log(responseData)
+
+                if (!responseData || responseData === '') {
+                    Alert.alert('로그인 실패');
+                } else {
+                    console.log(responseData);
+                    navigation.replace('Main');
+                }
+            } catch (error) {
+                console.error('알럿');
+                Alert.alert('로그인 실패');
+            }
+        }
+    };
 
     return (
         <View style={login_style.container}>
@@ -131,3 +90,4 @@ const LoginScreen = ({ navigation }) => {
 };
 
 export default LoginScreen;
+    

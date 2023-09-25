@@ -3,57 +3,8 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Animated } from 'react
 import BlinkScreen from './main/BlinkScreen';
 import MapScreen from './main/MapScreen';
 import MypageScreen from './main/MypageScreen';
-import LoadingScreen from './LoadingScreen';
 import { createStackNavigator } from '@react-navigation/stack';
-import { styles } from '../styles/style';
-
-const main_style = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    content_box_1: {
-        width: '100%',
-        height: '30%',
-        alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
-        justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
-        backgroundColor: '#FBE3F0',
-    },
-    content_box_2: {
-        width: '100%',
-        height: '30%',
-        alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
-        justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
-    },
-    content_box_3: {
-        width: '100%',
-        height: '30%',
-        alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
-        justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가.
-        backgroundColor: '#FBE3F0',
-    },
-    image: {
-        margin: 'auto',
-        width: '100%',
-        height: '80%',
-        resizeMode: 'contain'
-    },
-    textContainer: {
-        position: 'absolute',
-        top: 10, // 텍스트의 위치를 조절합니다. 원하는 위치로 수정 가능
-        left: 0,
-        right: 0,
-        alignItems: 'center', // 가로 중앙 정렬
-    },
-    text: {
-        fontSize: 20,
-        fontFamily: 'FONT_MEDIUM',
-
-    },
-});
+import { main_style, styles } from '../styles/Css';
 
 const Stack = createStackNavigator();
 
