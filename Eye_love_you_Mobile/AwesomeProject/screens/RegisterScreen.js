@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, ScrollView, Image } from 'react-native';
 import { register_style, styles } from '../styles/Css.js';
 import CustomButton from '../styles/CustomButton';
+import Postcode from '@actbase/react-daum-postcode';
 
 const RegisterScreen = ({ navigation }) => {
   const [inputId, setInputId] = useState('');
@@ -9,8 +10,35 @@ const RegisterScreen = ({ navigation }) => {
   const [inputNName, setInputNName] = useState('');
   const [inputEmail, setInputEmail] = useState('');
   const [inputAddr, setInputAddr] = useState('');
-  const [postcode, setPostcode] = useState('');
-  const [address, setAddress] = useState('');
+  
+    const onClickRegistser = async () => {
+      console.log(inputId, inputPw, inputNName, inputEmail, inputAddr)
+      try {
+        const response = await fetch('http://localhost:8080/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+        },
+          body: JSON.stringify({
+            userId: inputId,
+            password: inputPw,
+            name: inputNName,
+            email: inputEmail,
+            homeAddress: inputAddr
+          }),
+        });
+        const data = await response.text(); // 서버에서 반환된 텍스트 데이터를 가져옴
+        console.log(data)
+        if (data === '성공') {
+          console.log('회원가입 성공')
+          navigation.replace('Main');
+        } else {
+          alert();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
   const handleInputId = (text) => {
     setInputId(text);
@@ -104,11 +132,11 @@ const RegisterScreen = ({ navigation }) => {
               placeholder="우편번호"
             />
           </View>
-          <View style= {{marginTop: 100,}}/>
+          <View style={{ marginTop: 100, }} />
           <CustomButton title="회원가입"
-                    style={register_style.button}
-                    textStyle={register_style.button_text}
-                    onPress={register_style} />
+            style={register_style.button}
+            textStyle={register_style.button_text}
+            onPress={onClickRegistser}/>
         </View>
       </ScrollView>
     </View>

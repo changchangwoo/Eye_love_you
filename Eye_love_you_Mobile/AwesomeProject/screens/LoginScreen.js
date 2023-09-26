@@ -22,7 +22,6 @@ const LoginScreen = ({ navigation }) => {
             Alert.alert('아이디 또는 비밀번호를 입력해주세요');
         } else {
             try {
-                // 네트워크 요청 보내는 부분 (fetch API 사용)
                 const response = await fetch('http://localhost:8080/login', {
                     method: 'POST',
                     headers: {
@@ -35,8 +34,6 @@ const LoginScreen = ({ navigation }) => {
                 });
 
                 const responseData = await response.json();
-                console.log(responseData)
-
                 if (!responseData || responseData === '') {
                     Alert.alert('로그인 실패');
                 } else {
