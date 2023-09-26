@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontSize: 14,
+        marginTop: 30
     }
 });
 
@@ -149,12 +150,19 @@ export const register_style = StyleSheet.create({
     login_text: {
         fontSize: 40,
         fontFamily: 'FONT_BOLD',
-        marginVertical: 10, // 수직 여백 조절
+        marginVertical: 0, // 수직 여백 조절
     },
     input_Box: {
         width: '100%',
         alignItems: 'center',
-        height: 100
+        height: 100,
+        marginBottom: 10
+
+    },
+    address_Box: {
+        width: '100%',
+        alignItems: 'center',
+        height: 250,
     },
     input_text : {
         fontFamily: 'FONT_BOLD',
@@ -162,78 +170,107 @@ export const register_style = StyleSheet.create({
         fontSize: 15,
         width: '70%',
     },
+    input_text_sub : {
+        fontFamily: 'FONT_MEDIUM',
+        textAlign: 'left',
+        fontSize: 13,
+        width: '70%',
+        color: 'grey',
+        marginVertical: -15, // 수직 여백 조절
+        marginBottom: 0
+
+    },
     input: {
         width: '70%',
         height: 40,
         fontSize: 12,
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 10,
-        paddingHorizontal: 10,
-        marginVertical: 2, // 수직 여백 조절
-        textAlign: 'left'
+        borderRadius: 10,// 수직 여백 조절
+        textAlign: 'center',
+        marginBottom: 10
     },
     custom_marginTop: {
         marginTop: 15
     },
     button: {
         fontSize: 20,
-        marginTop: 10,
+        marginTop: 100,
         width: '70%',
         height: 50,
-        borderRadius: 10
-    },
-    registerbutton: {
-        marginTop: 30,
-        backgroundColor: '#2F2E41',
-        width: '70%',
-        height: 40,
-        borderRadius: 10
+        borderRadius: 10,
+
     },
     button_text: {
         fontFamily: 'FONT_BOLD',
-        fontSize: 15
+        fontSize: 15,
     },
-    registerbutton_text: {
+    address_button: {
+        width: '70%',
+        height: 50,
+        borderRadius: 10,
+        marginVertical: 10,
+        backgroundColor: '#2F2E41',
+        marginBottom: 30
+
+    },
+    address_button_text : {
         color: 'white',
-        fontSize: 13,
-        fontFamily: 'FONT_LIGHT'
+        fontFamily: 'FONT_LIGHT',
+        lineHeight: 50,
+        textAlign: 'center',
+        fontSize: 15,
+
+    },
+    modal : {
+        width: '100%',
+        height: '100%',
     }
 });
 
 export const main_style = StyleSheet.create({
     container: {
-        flex: 1,
+        backgroundColor: '#F8F9FA',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        flexGrow: 1,
     },
     content_box_1: {
         width: '100%',
-        height: '30%',
+        height: 150,
+        margin: 'auto',
         alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         backgroundColor: '#FBE3F0',
+        borderRadius: 40,
+        marginBottom: 20
     },
     content_box_2: {
         width: '100%',
-        height: '30%',
+        height: 150,
+        backgroundColor: 'white',
+        borderRadius: 40,
         alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
+        marginBottom: 20,
+        border: '1px solid'
+
     },
     content_box_3: {
         width: '100%',
-        height: '30%',
-        alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
-        justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가.
+        height: 150,
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#FBE3F0',
+        borderRadius: 40,
+        marginBottom: 20,
     },
     image: {
         margin: 'auto',
-        width: '100%',
-        height: '80%',
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        width: '40%',
+        height: 200
     },
     textContainer: {
         position: 'absolute',
@@ -245,5 +282,30 @@ export const main_style = StyleSheet.create({
     text: {
         fontSize: 20,
         fontFamily: 'FONT_MEDIUM',
+    },
+    scroll_view: {
+        width: '100%',
+        flex: 1,
+    },
+    main_logo: {
+        width: '100%',
+        height: 300,
+        backgroundColor: '#FFB3D2',
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        marginBottom: 20,
+        alignItems: 'center',
+    },
+    logoSubText: {
+        marginTop: 50,
+        fontSize: 20,
+        fontFamily: 'FONT_LIGHT',
+        lineHeight: 30,
+    },
+    logoText: {
+        fontSize: 35,
+        textAlign: 'center',
+        fontFamily: 'FONT_BOLD',
+        lineHeight: 50
     },
 });

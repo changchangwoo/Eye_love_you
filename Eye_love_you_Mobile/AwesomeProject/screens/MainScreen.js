@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, ScrollView, Image } from 'react-native';
 import BlinkScreen from './main/BlinkScreen';
 import MapScreen from './main/MapScreen';
 import MypageScreen from './main/MypageScreen';
@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 const MainScreen = ({ navigation }) => {
     useEffect(() => {
         navigation.setOptions({
-            title: '아이 러브 유',
+            title: '메인화면',
             headerTitleStyle: {
                 fontFamily: 'FONT_LIGHT',
                 fontSize: 20,
@@ -56,44 +56,71 @@ const ContentsScreen = ({ navigation }) => {
 
     return (
         <View style={main_style.container}>
-            <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_1}>
-                <Animated.Image
-                    source={require('../assets/imgs/eye_il.png')}
-                    style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
-                />
-                <View style={main_style.textContainer}>
-                    {isImageClicked && (
-                        <Text style={main_style.text}>눈 깜박임 감지</Text>
-                    )}
+            <ScrollView style={main_style.scroll_view}>
+                <View style={main_style.main_logo}>
+                    <Text style={main_style.logoSubText}>오늘도 눈이 좋아지는</Text>
+                    <Text style={main_style.logoText}>닉네임님</Text>
+                    <Image 
+                        source={require('../assets/imgs/cat_smile.png')}
+                        style={{
+                            width: 100,
+                            height: 100,
+                            marginTop: 50,
+                        }}
+                    />
                 </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_2}>
-                <Animated.Image
-                    source={require('../assets/imgs/checking_il.png')}
-                    style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
-                />
-                <View style={main_style.textContainer}>
-                    {isImageClicked && (
-                        <Text style={main_style.text}>눈 깜박임 감지</Text>
-                    )}
+                <View style={main_style.detail_content}>
+                    <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_1}>
+                        <Animated.Image
+                            source={require('../assets/imgs/eye_il.png')}
+                            style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
+                        />
+                        <View style={main_style.textContainer}>
+                            {isImageClicked && (
+                                <Text style={main_style.text}>눈 깜박임 감지</Text>
+                            )}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_2}>
+                        <Animated.Image
+                            source={require('../assets/imgs/checking_il.png')}
+                            style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
+                        />
+                        <View style={main_style.textContainer}>
+                            {isImageClicked && (
+                                <Text style={main_style.text}>눈 깜박임 감지</Text>
+                            )}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_3}>
+                        <Animated.Image
+                            source={require('../assets/imgs/location_il.png')}
+                            style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
+                        />
+                        <View style={main_style.textContainer}>
+                            {isImageClicked && (
+                                <Text style={main_style.text}>눈 깜박임 감지</Text>
+                            )}
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_2}>
+                        <Animated.Image
+                            source={require('../assets/imgs/checking_il.png')}
+                            style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
+                        />
+                        <View style={main_style.textContainer}>
+                            {isImageClicked && (
+                                <Text style={main_style.text}>눈 깜박임 감지</Text>
+                            )}
+                        </View>
+                    </TouchableOpacity>
+                    <Text style={styles.footer}>
+                        {'\n'}
+                        동양미래대학교 컴퓨터소프트웨어 공학과{'\n'}
+                        아이 좋아
+                    </Text>
                 </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_3}>
-                <Animated.Image
-                    source={require('../assets/imgs/location_il.png')}
-                    style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
-                />
-                <View style={main_style.textContainer}>
-                    {isImageClicked && (
-                        <Text style={main_style.text}>눈 깜박임 감지</Text>
-                    )}
-                </View>
-            </TouchableOpacity>
-            <Text style={styles.footer}>
-                {'\n'}
-                동양미래대학교 컴퓨터소프트웨어 공학과{'\n'}
-                아이 좋아
-            </Text>
+            </ScrollView>
         </View>
 
     );
