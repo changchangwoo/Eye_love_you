@@ -245,6 +245,7 @@ export const main_style = StyleSheet.create({
         backgroundColor: '#FBE3F0',
         borderRadius: 40,
         marginBottom: 20
+        
     },
     content_box_2: {
         width: '100%',

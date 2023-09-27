@@ -22,7 +22,7 @@ const LoginScreen = ({ navigation }) => {
             Alert.alert('아이디 또는 비밀번호를 입력해주세요');
         } else {
             try {
-                const response = await fetch('http://localhost:8080/login', {
+                const response = await fetch('172.16.100.232:8080/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const LoginScreen = ({ navigation }) => {
                     navigation.replace('Main');
                 }
             } catch (error) {
-                console.error('알럿');
+                console.error(error);
                 Alert.alert('로그인 실패');
             }
         }

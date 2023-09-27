@@ -135,7 +135,7 @@ const Process = () => {
                     <Camera style={{ flex: 1, width: '100%' }} type={cameraType} ref={cameraRef} />
                 ) : (
                     <Text>Camera permission not granted</Text>
-                )}w
+                )}
             </View>
             <Button title="Start Camera" onPress={startVideoStream} disabled={!hasCameraPermission} />
             <Button title="Stop Camera" onPress={stopVideoStream} disabled={!hasCameraPermission} />

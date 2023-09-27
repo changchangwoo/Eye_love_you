@@ -35,11 +35,17 @@ const MainScreen = ({ navigation }) => {
 const ContentsScreen = ({ navigation }) => {
     const [isImageClicked, setImageClicked] = useState(false);
     const animatedValue = new Animated.Value(0);
+    const [isOpacity, setisOpacity] = useState(1.0);
 
     const handleImageClick = () => {
         // 이미지 클릭 이벤트 처리
-        navigation.replace('Blink');
+
         setImageClicked(!isImageClicked);
+        if(!isImageClicked) {
+            setisOpacity(0.2)
+        } else {
+            setisOpacity(1.0)
+        }
 
         // 애니메이션
         Animated.timing(animatedValue, {
@@ -59,7 +65,7 @@ const ContentsScreen = ({ navigation }) => {
             <ScrollView style={main_style.scroll_view}>
                 <View style={main_style.main_logo}>
                     <Text style={main_style.logoSubText}>오늘도 눈이 좋아지는</Text>
-                    <Text style={main_style.logoText}>닉네임님</Text>
+                    <Text style={main_style.logoText}>임성민님</Text>
                     <Image 
                         source={require('../assets/imgs/cat_smile.png')}
                         style={{
@@ -73,7 +79,8 @@ const ContentsScreen = ({ navigation }) => {
                     <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_1}>
                         <Animated.Image
                             source={require('../assets/imgs/eye_il.png')}
-                            style={{ ...main_style.image, transform: [{ scale: interpolatedValue }] }}
+                            style={{ ...main_style.image, transform: [{ scale: interpolatedValue }],
+                        opacity: isOpacity }}
                         />
                         <View style={main_style.textContainer}>
                             {isImageClicked && (
