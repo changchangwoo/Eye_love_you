@@ -122,7 +122,7 @@ function Register() {
                         비밀번호
                     </div>
                     <div className="Input_Form">
-                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="비밀번호 입력"
+                        <Form.Control className='Input_Form_text' size="lg" type="password" placeholder="비밀번호 입력"
                             value={inputPw}
                             onChange={handleInputPw} />
                     </div>
@@ -132,7 +132,7 @@ function Register() {
                         비밀번호 확인
                     </div>
                     <div className="Input_Form">
-                        <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="비밀번호 재입력" />
+                        <Form.Control className='Input_Form_text' size="lg" type="password" placeholder="비밀번호 재입력" />
                     </div>
                 </div>
                 <div className="Input_box">

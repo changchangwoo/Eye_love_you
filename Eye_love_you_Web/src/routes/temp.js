@@ -1,30 +1,30 @@
-useEffect(() => {
-    const userid = sessionStorage.getItem('userinfo');
-    const mapData = async () => {
-        try {
-            const response = await axios.post('http://localhost:8080/map', {
-                userId: update_userid
-            })
-            setmapdata(response.data);
+import React, { useState } from 'react';
 
-        } catch (error) {
-        }
+function App() {
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
     }
-    if (userid) {
-        const temp = userid.replace(/"/g, '');
-        setUpdate_userid(temp)
-        mapData();
-    } else {
-        navigate("/login");
+
+    const closeModal = () => {
+        setModalOpen(false);
     }
-}, [navigate, update_userid]);
 
-return (
-    <div>{userha} <br />{tag1}<br />{tag2}</div>
-)
-} // 서버에서 데이터를 받는 코드
+    return (
+        <div><br /><br /><br /><br /><br /><br /><br />
+            <button onClick={openModal}>모달 열기</button>
+            {isModalOpen && (
+                <div className="warning_modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <h2>모달 내용</h2>
+                        <p>모달 내용을 여기에 추가하세요.</p>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
 
-
-const [homeAddress, sethomeAddress] = useState(sessionStorage.getItem('usermap'));
-const [search1, setSearch1] = useState(sessionStorage.getItem('usermap') + ' 안과');
-const [search2, setSearch2] = useState(sessionStorage.getItem('usermap') + ' 안경원');
+export default App;

@@ -4,6 +4,7 @@ import warningWAV from '../sounds/warning.wav';
 import resumeWAV from '../sounds/resume.wav';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import notify_img from '../imgs/notify_il.png';
 
 
 function Process() {
@@ -17,6 +18,7 @@ function Process() {
     const audioRef_warning = useRef(null);
     const audioRef_resume = useRef(null);
     const navigate = useNavigate();
+    const [isModalOpen, setModalOpen] = useState(true);
 
     useEffect(() => {
         const sessionData = sessionStorage.getItem('userinfo');
@@ -81,6 +83,8 @@ function Process() {
     }
 
     const startVideoStream = async () => {
+        setModalOpen(false);
+
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
             videoElement.current.srcObject = mediaStream;
@@ -122,6 +126,41 @@ function Process() {
 
     return (
         <div className="WebBlinkContents">
+            <div>
+                {isModalOpen && (
+                    <div className='modal_container'>
+                        <div className="warning_modal">
+                            <div className="modal_content">
+                                <h2>잠깐!!</h2>
+                                <h3>웹 눈 깜박임 감지 기능의 사용은 다음을 유의해주세요</h3>
+                                <div className='modal_line'></div>
+                                <div className='modal_detail'>
+                                    <div className='modal_left'>
+                                        <br />
+                                        카메라 디바이스 및 <br />오디오 출력장치의 연결을 확인하세요
+                                        <br />
+                                        <br />
+                                        프로그램이 동작하면,
+                                        <br />
+                                        카메라에 얼굴이 전부 인식되도록 확인하세요
+                                        <br />
+                                        <br />
+                                        정확한 데이터 측정을 위해서
+                                        <br />
+                                        미사용시 정지버튼을 클릭해주세요
+
+                                    </div>
+                                    <div className='modal_right'>
+                                        <img className='modal_img' src={notify_img} alt="" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <Button variant="light" className='Modal_start_Button' onClick={startVideoStream}>시작하기</Button>
+                        </div>
+                    </div>
+                )}
+            </div>
             <div className='WebBlink_Logo'>
                 <div className='WebBlink_Text_main Text_Medium'>
                     눈 깜박임 감지
@@ -129,10 +168,10 @@ function Process() {
                 <div className='Logo_Text_sub Text_Large'>
                     기능 테스트 페이지
                     <br />
-                    <Button variant="primary" onClick={startVideoStream}>프로그램 시작</Button>
                     <Button variant="danger" onClick={stopVideoStream}>프로그램 종료</Button>
                 </div>
                 <div className='Status_text'> 상태값 입력 테스트</div>
+
                 <div className='WebBlink_Box'>
                     <div className='WebBlink_Box_Left'>
                         <video ref={videoElement} autoPlay
