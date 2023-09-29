@@ -248,6 +248,7 @@ export const main_style = StyleSheet.create({
         justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         backgroundColor: '#FBE3F0',
         marginBottom: 20
+        
     },
     content_box_2: {
         width: '100%',
