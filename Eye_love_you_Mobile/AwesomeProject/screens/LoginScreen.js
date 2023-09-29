@@ -14,15 +14,14 @@ const LoginScreen = ({ navigation }) => {
         setPass(inputText);
     }
     const handleRegister = () => {
-        navigation.replace('Register');
+        navigation.navigate('Register');
     }
     const handleSubmit = async () => {
         if (id == '' || pass == '') {
-            console.log('알럿')
             Alert.alert('아이디 또는 비밀번호를 입력해주세요');
         } else {
             try {
-                const response = await fetch('http://localhost:8080/login', {
+                const response = await fetch('http://192.168.25.33:8080/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -37,11 +36,9 @@ const LoginScreen = ({ navigation }) => {
                 if (!responseData || responseData === '') {
                     Alert.alert('로그인 실패');
                 } else {
-                    console.log(responseData);
-                    navigation.replace('Main');
+                    navigation.navigate('Main', { name: responseData.name, address: responseData.homeAddress })
                 }
             } catch (error) {
-                console.error('알럿');
                 Alert.alert('로그인 실패');
             }
         }
@@ -87,4 +84,3 @@ const LoginScreen = ({ navigation }) => {
 };
 
 export default LoginScreen;
-    

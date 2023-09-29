@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 
 const warningWAV = require('../../assets/sounds/warning.wav');
 
-const Process = () => {
+const Process = (navigation) => {
     const [socket, setSocket] = useState(null);
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [cameraType] = useState(Camera.Constants.Type.back);
@@ -53,7 +53,6 @@ const Process = () => {
             (async () => {
                 await audioRef.current.loadAsync(warningWAV);
                 await audioRef.current.playAsync();
-                console.log('으하하' + warningSound)
                 setWarningSound(false);
             })();
         }
@@ -135,7 +134,7 @@ const Process = () => {
                     <Camera style={{ flex: 1, width: '100%' }} type={cameraType} ref={cameraRef} />
                 ) : (
                     <Text>Camera permission not granted</Text>
-                )}w
+                )}
             </View>
             <Button title="Start Camera" onPress={startVideoStream} disabled={!hasCameraPermission} />
             <Button title="Stop Camera" onPress={stopVideoStream} disabled={!hasCameraPermission} />

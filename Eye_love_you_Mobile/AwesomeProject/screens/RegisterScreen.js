@@ -28,7 +28,7 @@ const RegisterScreen = ({ navigation }) => {
   const onClickRegistser = async () => {
     console.log(inputId, inputPw, inputNName, inputEmail, inputAddr)
     try {
-      const response = await fetch('http://localhost:8080/signup', {
+      const response = await fetch('http://192.168.25.33:8080/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,12 +45,11 @@ const RegisterScreen = ({ navigation }) => {
       console.log(data)
       if (data === '성공') {
         console.log('회원가입 성공')
-        navigation.replace('Main');
+        navigation.replace('Login');
       } else {
         alert();
       }
     } catch (error) {
-      navigation.replace('Main'); // 모바일 서버 통신안되니 임시
       console.error(error);
     }
   };
@@ -79,21 +78,23 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <View style={register_style.container}>
       <Modal style={register_style.modal}
-        transparent={true} 
+        transparent={true}
         visible={isModalVisible}
         onRequestClose={toggleModal}
       >
         <Postcode
-          style={{ flex: 1,
-          width: '100%',
-          margin: 'auto'}}
+          style={{
+            flex: 1,
+            width: '100%',
+            margin: 'auto'
+          }}
           onSelected={(data) => handleAddressSelect(data)}
         />
       </Modal>
       <ScrollView style={register_style.scroll_view}>
         <View style={register_style.top_content}>
           <Image
-            source={require('../assets/imgs/checking_il.png')}
+            source={require('../assets/imgs/register_il.png')}
             style={register_style.image}
           />
         </View>

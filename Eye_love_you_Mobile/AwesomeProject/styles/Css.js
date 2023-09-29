@@ -1,4 +1,5 @@
-import { StyleSheet,   StatusBar,
+import {
+    StyleSheet, StatusBar,
 } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -15,12 +16,15 @@ export const styles = StyleSheet.create({
     },
     footer: {
         width: '100%',
-        height: '10%',
+        height: 100,
         backgroundColor: '#2F2E41',
         color: 'white',
+        lineHeight: 30,
         textAlign: 'center',
         fontSize: 14,
-        marginTop: 30
+        marginTop: 30,
+        borderTopLeftRadius: 35,
+        borderTopRightRadius: 35
     }
 });
 
@@ -164,13 +168,13 @@ export const register_style = StyleSheet.create({
         alignItems: 'center',
         height: 250,
     },
-    input_text : {
+    input_text: {
         fontFamily: 'FONT_BOLD',
         textAlign: 'left',
         fontSize: 15,
         width: '70%',
     },
-    input_text_sub : {
+    input_text_sub: {
         fontFamily: 'FONT_MEDIUM',
         textAlign: 'left',
         fontSize: 13,
@@ -214,7 +218,7 @@ export const register_style = StyleSheet.create({
         marginBottom: 30
 
     },
-    address_button_text : {
+    address_button_text: {
         color: 'white',
         fontFamily: 'FONT_LIGHT',
         lineHeight: 50,
@@ -222,7 +226,7 @@ export const register_style = StyleSheet.create({
         fontSize: 15,
 
     },
-    modal : {
+    modal: {
         width: '100%',
         height: '100%',
     }
@@ -243,14 +247,12 @@ export const main_style = StyleSheet.create({
         alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         backgroundColor: '#FBE3F0',
-        borderRadius: 40,
         marginBottom: 20
     },
     content_box_2: {
         width: '100%',
         height: 150,
         backgroundColor: 'white',
-        borderRadius: 40,
         alignItems: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         marginBottom: 20,
@@ -263,7 +265,6 @@ export const main_style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#FBE3F0',
-        borderRadius: 40,
         marginBottom: 20,
     },
     image: {
@@ -281,7 +282,12 @@ export const main_style = StyleSheet.create({
     },
     text: {
         fontSize: 20,
-        fontFamily: 'FONT_MEDIUM',
+        fontFamily: 'FONT_BOLD',
+    },
+    sub_text: {
+        fontSize: 14,
+        fontFamily: 'FONT_LIGHT',
+        textAlign: 'center'
     },
     scroll_view: {
         width: '100%',
@@ -308,4 +314,26 @@ export const main_style = StyleSheet.create({
         fontFamily: 'FONT_BOLD',
         lineHeight: 50
     },
+    address_button: {
+        width: '40%',
+        height: 50,
+        borderRadius: 10,
+        marginVertical: 10,
+        backgroundColor: '#2F2E41',
+        marginBottom: 30
+    },
+    address_button_text: {
+        color: 'white',
+        fontFamily: 'FONT_LIGHT',
+        lineHeight: 50,
+        textAlign: 'center',
+        fontSize: 15,
+    },
+    description_text: {
+        color: 'grey',
+        textAlign: 'center',
+        marginBottom: 15,
+        fontFamily: 'FONT_MEDIUM'
+
+    }
 });
