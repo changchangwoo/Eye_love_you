@@ -19,6 +19,8 @@ function Process() {
     const audioRef_resume = useRef(null);
     const navigate = useNavigate();
     const [isModalOpen, setModalOpen] = useState(true);
+    const [isResultModal, setResultModal] = useState(false);
+    const [pauseCheck, setPausecheck] = useState(true);
 
     useEffect(() => {
         const sessionData = sessionStorage.getItem('userinfo');
@@ -47,12 +49,16 @@ function Process() {
                     document.querySelector(".Status_text").style.color = "green";
                 } else if (status.status === 2) { // 얼굴 인식
                     document.querySelector(".Status_text").textContent = "현재 얼굴이 인식 되어지지 않고 있어요"
-                    document.querySelector(".Status_text").style.color = "red";
+                    document.querySelector(".Status_text").style.color = "blue";
                     play_resumesound();
+                    s.emit('pause');
+                    setPausecheck(false)
                 } else if (status.status === 3) { // 눈 감은거 인식
                     document.querySelector(".Status_text").textContent = "장시간 눈의 인식이 되어지지 않고 있어요"
                     document.querySelector(".Status_text").style.color = "red";
                     play_resumesound();
+                    s.emit('pause');
+                    setPausecheck(false)
                 }
             })
             return () => {
@@ -121,13 +127,61 @@ function Process() {
             socket.emit('datasave', sessionData)
             socket.disconnect();
             clearInterval(frameCaptureInterval.current);
+            setResultModal(true)
         }
     };
+
+    const pauseVideoStream = () => {
+        if (stream) {
+            socket.emit('pause');
+            setPausecheck(false)
+        }
+    }
+
+    const resumeVideoStream = () => {
+        if (stream) {
+            socket.emit('resume');
+            setPausecheck(true)
+        }
+    }
 
     return (
         <div className="WebBlinkContents">
             <div>
                 {isModalOpen && (
+                    <div className='modal_container'>
+                        <div className="warning_modal">
+                            <div className="modal_content">
+                                <h2>잠깐!!</h2>
+                                <h3>웹 눈 깜박임 감지 기능의 사용은 다음을 유의해주세요</h3>
+                                <div className='modal_line'></div>
+                                <div className='modal_detail'>
+                                    <div className='modal_left'>
+                                        <br />
+                                        카메라 디바이스 및 <br />오디오 출력장치의 연결을 확인하세요
+                                        <br />
+                                        <br />
+                                        프로그램이 동작하면,
+                                        <br />
+                                        카메라에 얼굴이 전부 인식되도록 확인하세요
+                                        <br />
+                                        <br />
+                                        정확한 데이터 측정을 위해서
+                                        <br />
+                                        미사용시 정지버튼을 클릭해주세요
+
+                                    </div>
+                                    <div className='modal_right'>
+                                        <img className='modal_img' src={notify_img} alt="" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <Button variant="light" className='Modal_start_Button' onClick={startVideoStream}>시작하기</Button>
+                        </div>
+                    </div>
+                )}
+                {isResultModal && (
                     <div className='modal_container'>
                         <div className="warning_modal">
                             <div className="modal_content">
@@ -168,7 +222,6 @@ function Process() {
                 <div className='Logo_Text_sub Text_Large'>
                     기능 테스트 페이지
                     <br />
-                    <Button variant="danger" onClick={stopVideoStream}>프로그램 종료</Button>
                 </div>
                 <div className='Status_text'> 상태값 입력 테스트</div>
 
@@ -196,6 +249,12 @@ function Process() {
                             <p>경고음 출력횟수: {data.warning_check}</p>
                             <audio ref={audioRef_warning} src={warningWAV} />
                             <audio ref={audioRef_resume} src={resumeWAV} />
+                            {pauseCheck ? (
+                                <Button variant="light" className='pause_Button' onClick={pauseVideoStream}>일시 정지</Button>
+                            ) : (
+                                <Button variant="light" className='resume_Button' onClick={resumeVideoStream}>감지 재개</Button>
+                            )}
+                            <Button variant="light" className='stop_Button' onClick={stopVideoStream}>감지 종료</Button>
                         </div>
                     </div>
                 </div>

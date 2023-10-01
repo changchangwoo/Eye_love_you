@@ -44,7 +44,6 @@ const ContentsScreen = ({ navigation, route }) => {
     const [isImage3Clicked, setImage3Clicked] = useState(false);
     const [isImage4Clicked, setImage4Clicked] = useState(false);
     const animatedValue = new Animated.Value(0);
-<<<<<<< HEAD
     const [isOpacity1, setisOpacity1] = useState(1.0);
     const [isOpacity2, setisOpacity2] = useState(1.0);
     const [isOpacity3, setisOpacity3] = useState(1.0);
@@ -52,19 +51,6 @@ const ContentsScreen = ({ navigation, route }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const windowWidth = Dimensions.get('window').width;
 
-=======
-    const [isOpacity, setisOpacity] = useState(1.0);
-
-    const handleImageClick = () => {
-        // 이미지 클릭 이벤트 처리
-
-        setImageClicked(!isImageClicked);
-        if(!isImageClicked) {
-            setisOpacity(0.2)
-        } else {
-            setisOpacity(1.0)
-        }
->>>>>>> 3b633c800775b02a89d3bc4e44e6a02f97ce9b92
 
 
     const handleScroll = (event) => {
@@ -143,13 +129,8 @@ const ContentsScreen = ({ navigation, route }) => {
             <ScrollView style={main_style.scroll_view}>
                 <View style={main_style.main_logo}>
                     <Text style={main_style.logoSubText}>오늘도 눈이 좋아지는</Text>
-<<<<<<< HEAD
                     <Text style={main_style.logoText}> {name} 님</Text>
                     <Image
-=======
-                    <Text style={main_style.logoText}>임성민님</Text>
-                    <Image 
->>>>>>> 3b633c800775b02a89d3bc4e44e6a02f97ce9b92
                         source={require('../assets/imgs/cat_smile.png')}
                         style={{
                             width: 100,
@@ -161,7 +142,6 @@ const ContentsScreen = ({ navigation, route }) => {
                 <Text style={main_style.description_text}> 터치를 통해 컨텐츠를 확인하시고{'\n'}
                     우측 슬라이드를 통해 바로 이용하세요 </Text>
                 <View style={main_style.detail_content}>
-<<<<<<< HEAD
                     {/* 1번항목 */}
                     <View style={{ flex: 1 }}>
                         <ScrollView
@@ -190,16 +170,6 @@ const ContentsScreen = ({ navigation, route }) => {
                                 </View>
                             </TouchableOpacity>
                             <View style={[main_style.content_box_1, { width: windowWidth }]}>
-=======
-                    <TouchableOpacity onPress={handleImageClick} style={main_style.content_box_1}>
-                        <Animated.Image
-                            source={require('../assets/imgs/eye_il.png')}
-                            style={{ ...main_style.image, transform: [{ scale: interpolatedValue }],
-                        opacity: isOpacity }}
-                        />
-                        <View style={main_style.textContainer}>
-                            {isImageClicked && (
->>>>>>> 3b633c800775b02a89d3bc4e44e6a02f97ce9b92
                                 <Text style={main_style.text}>눈 깜박임 감지</Text>
                                 <CustomButton
                                     title="지금 시작하기"
