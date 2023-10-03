@@ -41,7 +41,7 @@
 }
 
 .NavContents>li {
-  width: 100%;
+  width: 80%;
   height: 6vh;
   display: flex;
   flex: 1;
@@ -50,6 +50,12 @@
   line-height: 5vh;
   margin-left: 10px;
   text-align: center;
+  transition: transform 0.5s ease; 
+
+}
+
+.NavContents>li:hover {
+  transform: scale(1.15);
 }
 
 .Nav_login {
@@ -695,8 +701,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
   position: fixed;
-  padding: 200px
-
+  padding: 200px;
 
 }
 .warning_modal {
@@ -813,4 +818,11 @@
 .stop_Button:hover {
   transform: scale(1.05);
   background-color: #493A44 !important;
+}
+
+.result_icon {
+  width: 20%;
+  height: 10%;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }

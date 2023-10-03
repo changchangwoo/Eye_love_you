@@ -22,17 +22,18 @@ import REGISTER from './routes/register.js';
 import RESULT from './routes/result.js';
 import PROCESS from './routes/process.js';
 import MAP from './routes/map.js';
-// import TEMP from './routes/temp.js';
 
 function App() {
   const navigate = useNavigate();
-  const loginPage = () => {
-    navigate("/login");
-  };
+  const [loginCheck, setLogincheck] = useState(true);
 
   useEffect(() => {
-    setStyle('')
-  }, [])
+    setStyle('');
+    const isLoggedIn = sessionStorage.getItem('userinfo');
+    if (isLoggedIn) {
+      setLogincheck(false);
+    }
+  }, []);
 
   const [style, setStyle] = useState(false);
 
@@ -42,6 +43,10 @@ function App() {
 
   const handleMouseLeave = () => {
     setStyle('non_hover');
+  };
+
+  const loginPage = () => {
+    navigate("/login");
   };
 
   return (
@@ -61,10 +66,15 @@ function App() {
           <li>간편진단</li>
           <li>커뮤니티</li>
         </ul>
-        <Button variant="light" className='Nav_login' onClick={loginPage}>로그인</Button>
+        {
+          loginCheck ? (<Button variant="light" className='Nav_login' onClick={loginPage}>로그인</Button>) : (
+            <Button variant="light" className='Nav_login' onClick={loginPage}>로그아웃</Button>
+          )
+        }
+
       </div>
       <Routes>
-        <Route path="/" element={<MAIN loginPage={loginPage} />} />
+        <Route path="/" element={<MAIN />} />
         <Route path="/blink" element={<BLINK />} />
         <Route path="/login" element={<LOGIN />} />
         <Route path='/register' element={<REGISTER />} />
@@ -121,7 +131,7 @@ function MAIN(props) {
               <div className='Text_small'>사용자의 눈 깜빡임을 측정하여
                 시각화 자료로 제공합니다</div>
             </div>
-            <div className='Content_1_more'> 자세히 >></div>
+            <div className='Content_1_more'> 자세히 :</div>
           </div>
           <div className='Content_1_contentbox' style={{ backgroundColor: '#F8F9FA' }}>
             <img className='Content_1_content_icon' src={location_img} alt="" />
@@ -129,7 +139,7 @@ function MAIN(props) {
               주변 안과/안경원 탐색
               <div className='Text_small'>사용자의 위치를 기반으로한 안과 및 안경원의 위치를 제공합니다</div>
             </div>
-            <div className='Content_1_more'> 자세히 >></div>
+            <div className='Content_1_more'> 자세히 : </div>
           </div>
           <div className='Content_1_contentbox'>
             <img className='Content_1_content_icon' src={survey_img} alt="" />
@@ -137,7 +147,7 @@ function MAIN(props) {
               간편 6대 안질환 측정
               <div className='Text_small'>간단한 설문조사를 통해 사용자의 6대 안질환 상태진단을 제공합니다</div>
             </div>
-            <div className='Content_1_more'> 자세히 >></div>
+            <div className='Content_1_more'> 자세히 : </div>
           </div>
         </div>
       </div>

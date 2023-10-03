@@ -5,12 +5,15 @@ import resumeWAV from '../sounds/resume.wav';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import notify_img from '../imgs/notify_il.png';
+import hip_img from '../imgs/hip_smile.png';
+
 
 
 function Process() {
     const [socket, setSocket] = useState(null);
     const [stream, setStream] = useState(null);
     const [sessionData, setSessionData] = useState(null);
+    const [username, setUsername] = useState(null);
     const [result, setResult] = useState({ left_eye: '', right_eye: '' });
     const [data, setData] = useState({ time: '', count: '', cycle: '', timer: '', warning_check: '' });
     const videoElement = useRef(null);
@@ -24,10 +27,12 @@ function Process() {
 
     useEffect(() => {
         const sessionData = sessionStorage.getItem('userinfo');
+        const nameData = sessionStorage.getItem('username');
         if (sessionData) {
             const s = io('127.0.0.1:5000');
             setSocket(s);
             setSessionData(sessionData);
+            setUsername(nameData);
 
             s.on('result', (result) => {
                 setResult(result);
@@ -69,6 +74,10 @@ function Process() {
             alert('로그인이 필요한 서비스입니다.');
         }
     }, [navigate]);
+
+    const resultpage = () => {
+        navigate("/result");
+    };
 
     const play_warningsound = async () => {
         audioRef_warning.current.play();
@@ -185,32 +194,17 @@ function Process() {
                     <div className='modal_container'>
                         <div className="warning_modal">
                             <div className="modal_content">
-                                <h2>잠깐!!</h2>
-                                <h3>웹 눈 깜박임 감지 기능의 사용은 다음을 유의해주세요</h3>
+                                <h2>{username} 눈 깜박임 감지 종료</h2>
                                 <div className='modal_line'></div>
-                                <div className='modal_detail'>
-                                    <div className='modal_left'>
-                                        <br />
-                                        카메라 디바이스 및 <br />오디오 출력장치의 연결을 확인하세요
-                                        <br />
-                                        <br />
-                                        프로그램이 동작하면,
-                                        <br />
-                                        카메라에 얼굴이 전부 인식되도록 확인하세요
-                                        <br />
-                                        <br />
-                                        정확한 데이터 측정을 위해서
-                                        <br />
-                                        미사용시 정지버튼을 클릭해주세요
+                                <br></br>
+                                <br></br>
+                                <h3>{username} 님의 눈 깜박임 감지 동작이 정상적으로 끝났어요<br />
+                                    결과창으로 이동해 시각화 자료와 함께 확인하세요
+                                </h3>
+                                <img className='result_icon' src={hip_img} alt="" />
 
-                                    </div>
-                                    <div className='modal_right'>
-                                        <img className='modal_img' src={notify_img} alt="" />
-                                    </div>
-
-                                </div>
                             </div>
-                            <Button variant="light" className='Modal_start_Button' onClick={startVideoStream}>시작하기</Button>
+                            <Button variant="light" className='Modal_start_Button' onClick={resultpage}>결과창 이동</Button>
                         </div>
                     </div>
                 )}

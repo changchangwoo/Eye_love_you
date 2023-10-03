@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Result() {
     const [userdata, setuserData] = useState('');
+    const [username, setUsername] = useState('');
     const time = userdata.timeAvg;
     const blink_count = userdata.count;
     const warning_count = userdata.warningAvg;
@@ -20,13 +21,16 @@ function Result() {
 
     useEffect(() => {
         const userid = sessionStorage.getItem('userinfo');
+        const username = sessionStorage.getItem('username');
         const infoData = async () => {
             const update_userid = userid.replace(/"/g, '');
+            const update_username = username.replace(/"/g, '');
             try {
                 const response = await axios.post('http://localhost:8080/info', {
                     userId: update_userid
                 })
                 setuserData(response.data);
+                setUsername(update_username);
             } catch (error) {
             }
         }
@@ -126,7 +130,7 @@ function Result() {
     return (
         <div className='Result_Content'>
             <div className='Logo_Text_main Text_Medium'>
-                {userid} 님의
+                {username} 님의
             </div>
             <div className='Logo_Text_sub Text_Large'>
                 눈 깜박임 프로그램 결과

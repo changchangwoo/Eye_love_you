@@ -36,7 +36,8 @@ function Login() {
                 console.log(response.data)
                 sessionStorage.setItem('userinfo', JSON.stringify(response.data.userId));
                 sessionStorage.setItem('usermap', JSON.stringify(response.data.homeAddress));
-                navigate("/")
+                sessionStorage.setItem('username', JSON.stringify(response.data.name));
+                navigate("/");
             }
 
         } catch (error) {
