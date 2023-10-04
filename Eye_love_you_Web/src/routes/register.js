@@ -97,27 +97,49 @@ function Register() {
         }
     };
 
-
+    const onClickCheckID = async () => {
+        try {
+            const response = await axios.post('http://localhost:8080/signup/check', {
+                userId: inputId,
+            })
+            console.log(response.data)
+            if (response.data === true) {
+                document.querySelector(".check_text").textContent = "이미 사용중인 아이디에요"
+                document.querySelector(".check_text").style.color = "red";
+            } else {
+                document.querySelector(".check_text").textContent = "사용 가능한 아이디에요"
+                document.querySelector(".check_text").style.color = "green";
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <div className='Register_Content'>
             <div className="Register_Box">
+                <p style={{ marginTop: "40px" }}></p>
                 <div className='Logo_Text_sub Text_Medium'>
                     회원 가입
                     <br /><br />
                 </div>
-                <p style={{ marginTop: "100px;" }}></p>
                 <div className="Input_box">
                     <div className="Input_text Text_small">
                         아이디
-                    </div>
-                    <div className="Input_Form">
+                    </div>                    <p>　</p>
+                    <div className="Input_Form" style={{ marginBottom: "10px" }}>
                         <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="아이디 입력"
                             value={inputId}
                             onChange={handleInputId} />
                     </div>
+                    <div style={{ display: 'flex', float: 'left' }}>
+                        <Button variant="light" className='Nav_login' onClick={onClickCheckID}
+                            style={{ backgroundColor: '#2F2E41', color: 'white', marginBottom: '10px' }}> 중복 확인 </Button>
+                        <div className='check_text'> 아이디 중복 확인을 해주세요 </div>
+
+                    </div>
                 </div>
-                <div className="Input_box">
+                <div className="Input_box" style={{ marginTop: '60px' }}>
                     <div className="Input_text Text_small">
                         비밀번호
                     </div>
@@ -161,7 +183,7 @@ function Register() {
                     </div>
                     <p>　</p>
                     <Button variant="light" className='Nav_login' onClick={execDaumPostcode}
-                        style={{ backgroundColor: '#2F2E41', color: 'white', marginBottom: '10px' }}>주소찾기</Button>
+                        style={{ backgroundColor: '#2F2E41', color: 'white', marginBottom: '10px' }}> 주소 검색 </Button>
                     <div className="Input_Form">
                         <Form.Control className='Input_Form_text' size="lg" type="text" placeholder="우편 번호" id="sample6_postcode"
                             value={postcode} />

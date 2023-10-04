@@ -32,7 +32,8 @@ function Process() {
             const s = io('127.0.0.1:5000');
             setSocket(s);
             setSessionData(sessionData);
-            setUsername(nameData);
+            const update_username = nameData.replace(/"/g, '');
+            setUsername(update_username);
 
             s.on('result', (result) => {
                 setResult(result);
@@ -194,7 +195,7 @@ function Process() {
                     <div className='modal_container'>
                         <div className="warning_modal">
                             <div className="modal_content">
-                                <h2>{username} 눈 깜박임 감지 종료</h2>
+                                <h2>눈 깜박임 감지 종료</h2>
                                 <div className='modal_line'></div>
                                 <br></br>
                                 <br></br>

@@ -26,14 +26,19 @@ import MAP from './routes/map.js';
 function App() {
   const navigate = useNavigate();
   const [loginCheck, setLogincheck] = useState(true);
+  const [username, setUsername] = useState(null);
+
 
   useEffect(() => {
     setStyle('');
     const isLoggedIn = sessionStorage.getItem('userinfo');
+    const nameData = sessionStorage.getItem('username');
     if (isLoggedIn) {
+      const update_username = nameData.replace(/"/g, '');
+      setUsername(update_username);
       setLogincheck(false);
     }
-  }, []);
+  }, [navigate]);
 
   const [style, setStyle] = useState(false);
 
@@ -48,6 +53,12 @@ function App() {
   const loginPage = () => {
     navigate("/login");
   };
+
+  const logoutPage = () => {
+    sessionStorage.clear();
+    setLogincheck(true);
+    navigate("/");
+  }
 
   return (
     <div className='App'>
@@ -67,8 +78,13 @@ function App() {
           <li>커뮤니티</li>
         </ul>
         {
-          loginCheck ? (<Button variant="light" className='Nav_login' onClick={loginPage}>로그인</Button>) : (
-            <Button variant="light" className='Nav_login' onClick={loginPage}>로그아웃</Button>
+          loginCheck ? (
+            <Button variant="light" className='Nav_login' onClick={loginPage}>로그인</Button>
+          ) : (
+            <>
+              <div className='welcome_text'>{username}님 환영합니다</div>
+              <Button variant="light" className='Nav_login' onClick={logoutPage}>로그아웃</Button>
+            </>
           )
         }
 
@@ -131,7 +147,7 @@ function MAIN(props) {
               <div className='Text_small'>사용자의 눈 깜빡임을 측정하여
                 시각화 자료로 제공합니다</div>
             </div>
-            <div className='Content_1_more'> 자세히 :</div>
+            <div className='Content_1_more'></div>
           </div>
           <div className='Content_1_contentbox' style={{ backgroundColor: '#F8F9FA' }}>
             <img className='Content_1_content_icon' src={location_img} alt="" />
@@ -139,7 +155,7 @@ function MAIN(props) {
               주변 안과/안경원 탐색
               <div className='Text_small'>사용자의 위치를 기반으로한 안과 및 안경원의 위치를 제공합니다</div>
             </div>
-            <div className='Content_1_more'> 자세히 : </div>
+            <div className='Content_1_more'>  </div>
           </div>
           <div className='Content_1_contentbox'>
             <img className='Content_1_content_icon' src={survey_img} alt="" />
@@ -147,7 +163,7 @@ function MAIN(props) {
               간편 6대 안질환 측정
               <div className='Text_small'>간단한 설문조사를 통해 사용자의 6대 안질환 상태진단을 제공합니다</div>
             </div>
-            <div className='Content_1_more'> 자세히 : </div>
+            <div className='Content_1_more'></div>
           </div>
         </div>
       </div>

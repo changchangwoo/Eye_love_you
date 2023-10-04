@@ -72,6 +72,12 @@
   border-color: #FBE3F0 !important;
 }
 
+.welcome_text {
+  line-height: 40px;
+  margin: auto;
+  font-size: 20px;
+}
+
 .Footer {
   height: 20vh;
 }
@@ -435,16 +441,17 @@
 
 .Register_Box {
   width: 40%;
-  height: 80%;
+  height: 85%;
   background-color: #F8F9FA;
   overflow: hidden;
   margin: auto;
   margin-top: 150px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 50px;
 }
 
 .Register_Box > .Logo_Text_sub {
-  margin-top: 50px;
+  margin-top: px;
 }
 
 .Input_box {
@@ -462,6 +469,11 @@
 
 .Input_Form_text {
   height: 100%
+}
+
+.check_text {
+  line-height: 40px;
+
 }
 .Register_form_Button {
   width: 300px;

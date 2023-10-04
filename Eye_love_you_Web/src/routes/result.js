@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
-import sad_smile_img from '../imgs/sad_smile.png'
+import low_result_smile from '../imgs/low_result_smile.png'
+import normal_result_smile from '../imgs/normal_result_smile.png'
+import high_result_smile from '../imgs/high_result_smile.png'
+
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Result() {
     const [userdata, setuserData] = useState('');
     const [username, setUsername] = useState('');
+    const [percent, setPercent] = useState(0);
     const time = userdata.timeAvg;
     const blink_count = userdata.count;
     const warning_count = userdata.warningAvg;
@@ -14,10 +18,10 @@ function Result() {
     const user_time = userdata.userTot;
     const user_bc = userdata.userBc;
     const user_wc = userdata.userWc;
-    const userid = userdata.userId;
     const user_userTbts = userdata.userTbts;
+    const user_count = userdata.count;
+    const user_rank = userdata.userRank;
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const userid = sessionStorage.getItem('userinfo');
@@ -41,6 +45,13 @@ function Result() {
             alert('로그인이 필요한 서비스입니다.');
         }
     }, [navigate]);
+
+    useEffect(() => {
+        const calc_data = (user_rank / user_count) * 100;
+        setPercent(calc_data)
+        console.log(percent)
+
+    }, [percent, user_count, user_rank])
 
     const data_time = [
         {
@@ -126,6 +137,23 @@ function Result() {
         },
     ];
 
+    let message = '';
+    let imageSrc = '';
+    let altText = '';
+
+    if (percent > 70) {
+        message = '다른 아이 러브 유 회원들 보다 다소 아쉬운 결과에요';
+        altText = '30 Points';
+        imageSrc = low_result_smile;
+    } else if (percent > 30 && percent < 70) {
+        message = '보통 결과에요';
+        altText = '60 Points';
+        imageSrc = normal_result_smile;
+    } else if (percent < 30) {
+        message = '멋져요! 최고의 결과에요';
+        altText = '90 Points';
+        imageSrc = high_result_smile;
+    }
 
     return (
         <div className='Result_Content'>
@@ -264,16 +292,18 @@ function Result() {
                 </div>
                 {/* 차트4 */}
                 <div className='Logo_Text_main Text_Medium'>
-                    닉네임님은 아이 러브 유 회원
+                    {username} 님은 아이 러브 유 회원
                 </div>
                 <div className='Logo_Text_sub Text_Large'>
-                    20명중 17등
+                    총 {user_count}명 중 {user_rank}등 입니다!
                 </div>
                 <div className='Text_Medium' style={{ textAlign: 'center' }}></div>
-                <img className='Result_image' src={sad_smile_img} alt="" />
-                <div className='Text_small' style={{ textAlign: 'center', marginTop: '40px' }}>
-                    다른 아이 러브 유 회원들 보다 다소 아쉬운 결과에요
-                    <br /> 안구 건강을 위해서 조금만 더 힘내봐요
+                <div>
+                    <img className='Result_image' src={imageSrc} alt={altText} />
+                    <div className='Text_small' style={{ textAlign: 'center', marginTop: '40px' }}>
+                        {message}
+                        <br /> 안구 건강을 위해서 조금만 더 힘내봐요
+                    </div>
                 </div>
             </div>
         </div>
