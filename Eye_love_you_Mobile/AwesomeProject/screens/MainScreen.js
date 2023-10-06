@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const MainScreen = ({ navigation, route }) => {
     const name = route.params.name
     const address = route.params.address
-    console.log(name, address)
+    // console.log(name, address)
     useEffect(() => {
         navigation.setOptions({
             title: '메인화면',
@@ -66,6 +66,8 @@ const ContentsScreen = ({ navigation, route }) => {
 
     const handleImage1Click = () => {
         setImage1Clicked(!isImage1Clicked);
+        navigation.navigate('Blink');
+
         if (!isImage1Clicked) {
             setisOpacity1(0.2)
         } else {

@@ -36,6 +36,8 @@ function Result() {
                 setuserData(response.data);
                 setUsername(update_username);
             } catch (error) {
+                alert('눈 깜박임 측정 데이터가 있어야 결과화면을 확인 할 수 있습니다');
+                navigate('/')
             }
         }
         if (userid) {
@@ -65,13 +67,6 @@ function Result() {
             fill: '#f4a3f7'
 
         },
-        {
-            name: '이상적인 눈 깜박임 데이터',
-            count: 3,
-            fill: '#FAD6FB'
-
-
-        },
     ];
 
     const data_count = [
@@ -81,13 +76,13 @@ function Result() {
             fill: "#FBE3F0"
         },
         {
-            name: '전체 사용자 평균 데이터',
+            name: '평균 눈 깜박임 횟수 데이터',
             count: blink_count,
             fill: '#f4a3f7'
 
         },
         {
-            name: '이상적인 눈 깜박임 데이터',
+            name: '이상적인 눈 깜박임 횟수 데이터',
             count: 3,
             fill: '#FAD6FB'
 
@@ -102,13 +97,13 @@ function Result() {
             fill: "#FBE3F0"
         },
         {
-            name: '전체 사용자 평균 데이터',
+            name: '평균 경고음 출력 데이터',
             count: warning_count,
             fill: '#f4a3f7'
 
         },
         {
-            name: '이상적인 눈 깜박임 데이터',
+            name: '이상적인 경고음 출력 데이터',
             count: 3,
             fill: '#FAD6FB'
 
@@ -123,13 +118,13 @@ function Result() {
             fill: "#FBE3F0"
         },
         {
-            name: '전체 사용자 평균 데이터',
+            name: '평균 눈 깜박임 주기 데이터',
             count: blink_cycle,
             fill: '#f4a3f7'
 
         },
         {
-            name: '이상적인 눈 깜박임 데이터',
+            name: '이상적인 눈 깜박임 주기 데이터',
             count: 3,
             fill: '#FAD6FB'
 
@@ -138,20 +133,23 @@ function Result() {
     ];
 
     let message = '';
+    let message2 = '';
     let imageSrc = '';
     let altText = '';
 
     if (percent > 70) {
-        message = '다른 아이 러브 유 회원들 보다 다소 아쉬운 결과에요';
+        message = '다른 아이 러브 유 회원들 보다 다소 아쉬운 데이터에요';
+        message2 = '안구 건강을 위해고 조금만 더 힘내봐요ㅜ'
         altText = '30 Points';
         imageSrc = low_result_smile;
     } else if (percent > 30 && percent < 70) {
-        message = '보통 결과에요';
+        message = '다른 아이 러브 유 회원들과 비슷한 데이터에요';
+        message2 = '오늘도 계속해서 나아지고 있어요!';
         altText = '60 Points';
         imageSrc = normal_result_smile;
     } else if (percent < 30) {
-        message = '멋져요! 최고의 결과에요';
-        altText = '90 Points';
+        message = '다른 아이 러브 유 회원들 보다 훨씬 좋은 데이터에요'
+        message2 = '멋져요! 최고의 결과에요'
         imageSrc = high_result_smile;
     }
 
@@ -191,8 +189,7 @@ function Result() {
                         </div>
                         <div className='Text_small'>아이 러브 유 프로그램을 총 {user_time}초 동작하셨어요
                             <br /> 아이러브유의 다른 사용자는 평균적으로 {time}초만큼 동작하였어요
-                            <br /> 평균보다 더 많이 작동하시네요</div>
-                        <br /> 감사해요
+                        </div>
                     </div>
                 </div>
                 {/* 차트1 */}
@@ -204,7 +201,7 @@ function Result() {
                         <div className='Text_small'>프로그램을 실행하면서 총 {user_userTbts}번 눈을 깜박이셨어요
                             <br /> 아이러브유의 다른 사용자는 평균적으로 {blink_count}번 깜박였네요
                             <br /> 이상적인 눈 깜박임은 몇번이에요
-                            <br /> 아주 잘하고 계세요</div>
+                        </div>
                     </div>
                     <div className='Chart_Graph'>
                         <BarChart className='Bar_1'
@@ -267,7 +264,7 @@ function Result() {
                         <div className='Text_small'>프로그램을 실행하면서 보통 {user_wc} 주기로 눈을 깜박이셨어요
                             <br /> 아이러브유의 다른 사용자는 평균적으로 {blink_cycle} 주기로 눈을 깜박여요
                             <br /> 이상적인 눈 깜박임은 몇번이에요
-                            <br /> 아주 잘하고 계세요</div>
+                        </div>
                     </div>
                     <div className='Chart_Graph'>
                         <BarChart className='Bar_1'
@@ -302,7 +299,8 @@ function Result() {
                     <img className='Result_image' src={imageSrc} alt={altText} />
                     <div className='Text_small' style={{ textAlign: 'center', marginTop: '40px' }}>
                         {message}
-                        <br /> 안구 건강을 위해서 조금만 더 힘내봐요
+                        <br />
+                        {message2}
                     </div>
                 </div>
             </div>

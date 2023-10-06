@@ -13,6 +13,7 @@ function Register() {
     const [inputAddr, setInputAddr] = useState("");
     const [postcode, setPostcode] = useState('');
     const [address, setAddress] = useState('');
+    const [idcheck, setIdcheck] = useState(false);
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -78,22 +79,26 @@ function Register() {
 
     const onClickRegistser = async () => {
         console.log(inputId, inputPw, inputNName, inputEmail, inputAddr)
-        try {
-            const response = await axios.post('http://localhost:8080/signup', {
-                userId: inputId,
-                password: inputPw,
-                name: inputNName,
-                email: inputEmail,
-                homeAddress: inputAddr
-            })
-            if (response.data === '성공') {
-                alert('회원가입 성공');
-                navigate("/login");
-            } else {
-                alert(response.data);
+        if (idcheck) {
+            try {
+                const response = await axios.post('http://localhost:8080/signup', {
+                    userId: inputId,
+                    password: inputPw,
+                    name: inputNName,
+                    email: inputEmail,
+                    homeAddress: inputAddr
+                })
+                if (response.data === '성공') {
+                    alert('아이러브유 회원이 된 것을 환영합니다');
+                    navigate("/login");
+                } else {
+                    alert(response.data);
+                }
+            } catch (error) {
+                console.error(error);
             }
-        } catch (error) {
-            console.error(error);
+        } else {
+            alert('아이디 중복확인을 체크해주세요');
         }
     };
 
@@ -106,9 +111,11 @@ function Register() {
             if (response.data === true) {
                 document.querySelector(".check_text").textContent = "이미 사용중인 아이디에요"
                 document.querySelector(".check_text").style.color = "red";
+                setIdcheck(false)
             } else {
                 document.querySelector(".check_text").textContent = "사용 가능한 아이디에요"
                 document.querySelector(".check_text").style.color = "green";
+                setIdcheck(true)
             }
         } catch (error) {
             console.error(error);
