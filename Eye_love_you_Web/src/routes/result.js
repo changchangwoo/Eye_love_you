@@ -6,11 +6,16 @@ import high_result_smile from '../imgs/high_result_smile.png'
 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 function Result() {
     const [userdata, setuserData] = useState('');
     const [username, setUsername] = useState('');
     const [percent, setPercent] = useState(0);
+    const [imgSrc, setImgSrc] = useState('');
+    const [message, setMessage] = useState('');
+    const [message2, setMessage2] = useState('');
+    const [altText, setAltText] = useState('');
     const time = userdata.timeAvg;
     const blink_count = userdata.count;
     const warning_count = userdata.warningAvg;
@@ -22,6 +27,7 @@ function Result() {
     const user_count = userdata.count;
     const user_rank = userdata.userRank;
     const navigate = useNavigate();
+    const { Kakao } = window;
 
     useEffect(() => {
         const userid = sessionStorage.getItem('userinfo');
@@ -49,11 +55,49 @@ function Result() {
     }, [navigate]);
 
     useEffect(() => {
+        Kakao.cleanup();
+        Kakao.init('70a48bb65a66f0db8c8179e585892d00');
+        // 카카오 공유하기 init
         const calc_data = (user_rank / user_count) * 100;
         setPercent(calc_data)
-        console.log(percent)
+        // 내 데이터 퍼센트 측정 변수
 
-    }, [percent, user_count, user_rank])
+    }, [percent, user_count, user_rank, Kakao])
+
+    useEffect(() => {
+        if (percent > 70) {
+            setMessage('다른 아이 러브 유 회원들 보다 다소 아쉬운 데이터에요');
+            setMessage2('안구 건강을 위해고 조금만 더 힘내봐요ㅜ');
+            setAltText('30 Points');
+            setImgSrc(low_result_smile);
+        } else if (percent > 30 && percent < 70) {
+            setMessage('다른 아이 러브 유 회원들과 비슷한 데이터에요');
+            setMessage2('오늘도 계속해서 나아지고 있어요!');
+            setAltText('60 Points');
+            setImgSrc(normal_result_smile);
+        } else if (percent < 30) {
+            setMessage('다른 아이 러브 유 회원들 보다 훨씬 좋은 데이터에요');
+            setMessage2('멋져요! 최고의 결과에요');
+            setAltText('90 Points');
+            setImgSrc(high_result_smile);
+        }
+    }, [percent]);
+
+
+    const kakaoShare = () => {
+        Kakao.Share.sendCustom({
+            templateId: 99204,
+            templateArgs: {
+                username: `${username}`,
+                data1: `${user_time}`,
+                data2: `${user_bc}`,
+                data3: `${user_wc}`,
+                data4: `${user_userTbts}`,
+                count: `${user_count}`,
+                rank: `${user_rank}`
+            },
+        });
+    };
 
     const data_time = [
         {
@@ -132,26 +176,6 @@ function Result() {
         },
     ];
 
-    let message = '';
-    let message2 = '';
-    let imageSrc = '';
-    let altText = '';
-
-    if (percent > 70) {
-        message = '다른 아이 러브 유 회원들 보다 다소 아쉬운 데이터에요';
-        message2 = '안구 건강을 위해고 조금만 더 힘내봐요ㅜ'
-        altText = '30 Points';
-        imageSrc = low_result_smile;
-    } else if (percent > 30 && percent < 70) {
-        message = '다른 아이 러브 유 회원들과 비슷한 데이터에요';
-        message2 = '오늘도 계속해서 나아지고 있어요!';
-        altText = '60 Points';
-        imageSrc = normal_result_smile;
-    } else if (percent < 30) {
-        message = '다른 아이 러브 유 회원들 보다 훨씬 좋은 데이터에요'
-        message2 = '멋져요! 최고의 결과에요'
-        imageSrc = high_result_smile;
-    }
 
     return (
         <div className='Result_Content'>
@@ -296,12 +320,19 @@ function Result() {
                 </div>
                 <div className='Text_Medium' style={{ textAlign: 'center' }}></div>
                 <div>
-                    <img className='Result_image' src={imageSrc} alt={altText} />
+                    <img className='Result_image' src={imgSrc} alt={altText} />
                     <div className='Text_small' style={{ textAlign: 'center', marginTop: '40px' }}>
                         {message}
                         <br />
                         {message2}
                     </div>
+                </div>
+                <div className='share_box'>
+                    <div className='share_text'>
+                        내 측정 결과를 다른사람에게 공유해보세요
+                    </div>
+                    <Button id="kakaotalk-sharing-btn" variant="light" className='share_Button' onClick={kakaoShare}>카카오톡 공유하기</Button>
+
                 </div>
             </div>
         </div>

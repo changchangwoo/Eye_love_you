@@ -8,6 +8,7 @@ function Register() {
     const navigate = useNavigate();
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
+    const [inputPwcheck, setInputPwcheck] = useState("");
     const [inputNName, setInputNName] = useState("");
     const [inputEmail, setInputEmail] = useState("");
     const [inputAddr, setInputAddr] = useState("");
@@ -63,6 +64,11 @@ function Register() {
         setInputPw(e.target.value);
     };
 
+    const handleInputPwCheck = (e) => {
+        setInputPwcheck(e.target.value);
+    };
+
+
     const handleInputNName = (e) => {
         setInputNName(e.target.value);
     };
@@ -77,9 +83,10 @@ function Register() {
     };
 
 
+
     const onClickRegistser = async () => {
-        console.log(inputId, inputPw, inputNName, inputEmail, inputAddr)
         if (idcheck) {
+            if(inputPw === inputPwcheck) {
             try {
                 const response = await axios.post('http://localhost:8080/signup', {
                     userId: inputId,
@@ -97,6 +104,9 @@ function Register() {
             } catch (error) {
                 console.error(error);
             }
+        } else {
+            alert('비밀번호와 비밀번호 재입력을 일치시켜주세요')
+        }
         } else {
             alert('아이디 중복확인을 체크해주세요');
         }
@@ -161,7 +171,9 @@ function Register() {
                         비밀번호 확인
                     </div>
                     <div className="Input_Form">
-                        <Form.Control className='Input_Form_text' size="lg" type="password" placeholder="비밀번호 재입력" />
+                        <Form.Control className='Input_Form_text' size="lg" type="password" placeholder="비밀번호 재입력"
+                        value={inputPwcheck}
+                        onChange={handleInputPwCheck} />
                     </div>
                 </div>
                 <div className="Input_box">

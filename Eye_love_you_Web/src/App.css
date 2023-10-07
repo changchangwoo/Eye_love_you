@@ -838,3 +838,31 @@
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
+.share_box {
+  margin: auto;
+  text-align: center;
+  margin-top: 100px;
+}
+/* 공유하기 */
+.share_text {
+  font-family: 'NEXON Lv2 Gothic Light';
+  font-size: 35px;
+}
+
+.share_Button {
+  width: 20%;
+  height: 100px;
+  text-align: center;
+  background-color: #53424C !important;
+  font-size: 20px !important;
+  margin-top: 40px;
+  color: white !important;
+  transition: transform 0.5s ease; 
+
+}
+
+.share_Button:hover {
+  transform: scale(1.05);
+  background-color: #493A44 !important;
+}

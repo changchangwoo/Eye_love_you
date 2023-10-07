@@ -234,5 +234,5 @@ if __name__ == '__main__':
     global timer, check, close_check, close_flag, count_flag, count, delay_flag, delay_timer, warning_check, cycle_timer, cycle, text_count, text_warning, t_timer, text_timer, status, face_count, pause_check
     clear_data();
 
-    socketio.run(app, host='0.0.0.0', port=5000)
-    # socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
+    # socketio.run(app, host='0.0.0.0', port=5000)
+    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
