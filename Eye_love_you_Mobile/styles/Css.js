@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     loading_text: {
         fontSize: 30,
         fontWeight: 'bold',
-        fontFamily: 'NEXON Lv2 Gothic Medium'
+        fontFamily: 'FONT_LIGHT'
     },
     footer: {
         width: '100%',
@@ -248,7 +248,7 @@ export const main_style = StyleSheet.create({
         justifyContent: 'center', // 텍스트를 가운데 정렬하기 위해 추가
         backgroundColor: '#FBE3F0',
         marginBottom: 20
-        
+
     },
     content_box_2: {
         width: '100%',
@@ -335,6 +335,90 @@ export const main_style = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 15,
         fontFamily: 'FONT_MEDIUM'
-
     }
+});
+
+export const blink_style = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FBE3F0',
+        height: '100%'
+
+    },
+    camera: {
+        width: '100%',
+        height: '50%',
+    },
+    processcheck: {
+        fontSize: 20,
+        fontFamily: 'FONT_LIGHT',
+        textAlign: 'center',
+        marginVertical: 20,
+        color: 'green'
+    },
+    button: {
+        backgroundColor: 'blue',
+        padding: 10,
+        marginTop: 10,
+        borderRadius: 5,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    notify_view: {
+        width: '80%',
+        height: '100%',
+    },
+    main_logo: {
+        marginTop: 20,
+        width: '100%',
+        height: '30%',
+        alignItems: 'center',
+    },
+    logoText: {
+        fontSize: 45,
+        textAlign: 'center',
+        fontFamily: 'FONT_BOLD',
+    },
+    logoSubText: {
+        fontSize: 20,
+        fontFamily: 'FONT_MEDIUM',
+        lineHeight: 25,
+        textAlign: 'center'
+    },
+    textBox: {
+        width: '100%',
+        height: '40%',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        alignItems: 'center',
+        padding: 10,
+        marginTop: 20
+
+    },
+    notify_text: {
+        fontFamily: 'FONT_LIGHT',
+        fontSize: 18,
+        textAlign: 'center',
+
+    },
+    address_button: {
+        width: '100%',
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: '#2F2E41',
+        marginVertical: 40, // 수직 여백 조절
+
+
+    },
+    address_button_text: {
+        color: 'white',
+        fontFamily: 'FONT_LIGHT',
+        lineHeight: 50,
+        textAlign: 'center',
+        fontSize: 15,
+
+    },
 });

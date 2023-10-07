@@ -16,14 +16,12 @@ export default function App() {
   return (
     <NavigationContainer independent={true}>
       <FontLoader>
-        <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Blink" component={BlinkScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Main" component={MainScreen} />
-
-
         </Stack.Navigator>
       </FontLoader>
     </NavigationContainer>

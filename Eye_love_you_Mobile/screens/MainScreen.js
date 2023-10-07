@@ -187,7 +187,7 @@ const MainScreen = ({ navigation, route }) => {
                                 </View>
                             </TouchableOpacity>
                             <View style={[main_style.content_box_2, { width: windowWidth }]}>
-                                <Text style={main_style.text}>눈 깜박임 감지</Text>
+                                <Text style={main_style.text}>식별 데이터 시각화</Text>
                                 <CustomButton
                                     title="지금 시작하기"
                                     style={main_style.address_button}
@@ -224,7 +224,7 @@ const MainScreen = ({ navigation, route }) => {
                                 </View>
                             </TouchableOpacity>
                             <View style={[main_style.content_box_3, { width: windowWidth }]}>
-                                <Text style={main_style.text}>눈 깜박임 감지</Text>
+                                <Text style={main_style.text}>주변 안과 검색</Text>
                                 <CustomButton
                                     title="지금 시작하기"
                                     style={main_style.address_button}
@@ -261,7 +261,7 @@ const MainScreen = ({ navigation, route }) => {
                                 </View>
                             </TouchableOpacity>
                             <View style={[main_style.content_box_1, { width: windowWidth }]}>
-                                <Text style={main_style.text}>눈 깜박임 감지</Text>
+                                <Text style={main_style.text}>공란</Text>
                                 <CustomButton
                                     title="지금 시작하기"
                                     style={main_style.address_button}
