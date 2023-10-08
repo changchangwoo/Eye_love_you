@@ -29,6 +29,8 @@ const RegisterScreen = ({ navigation }) => {
     console.log(inputId, inputPw, inputNName, inputEmail, inputAddr)
     try {
       const response = await fetch('http://192.168.25.33:8080/signup', {
+                    // PC작업 http://192.168.25.33:8080/signup
+                    // 노트북작업 http://192.168.0.7:8080/signup
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

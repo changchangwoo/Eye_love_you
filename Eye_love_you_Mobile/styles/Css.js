@@ -354,7 +354,7 @@ export const blink_style = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'FONT_LIGHT',
         textAlign: 'center',
-        marginVertical: 20,
+        marginTop: 20,
         color: 'green'
     },
     button: {
@@ -395,30 +395,127 @@ export const blink_style = StyleSheet.create({
         borderRadius: 20,
         alignItems: 'center',
         padding: 10,
-        marginTop: 20
-
+        marginTop: 20,
+        justifyContent: 'center',
     },
     notify_text: {
         fontFamily: 'FONT_LIGHT',
-        fontSize: 18,
+        fontSize: 15,
         textAlign: 'center',
 
     },
-    address_button: {
+    start_button: {
         width: '100%',
         height: 50,
         borderRadius: 10,
         backgroundColor: '#2F2E41',
         marginVertical: 40, // 수직 여백 조절
-
-
     },
-    address_button_text: {
+    start_button_text: {
         color: 'white',
         fontFamily: 'FONT_LIGHT',
         lineHeight: 50,
         textAlign: 'center',
         fontSize: 15,
-
     },
+    button_container: {
+        width: '90%',
+        height: 100,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 25
+    },
+    stop_button: {
+        width: '48%',
+        height: 80,
+        borderRadius: 10,
+        backgroundColor: '#FFB3D2',
+    },
+    stop_button_text: {
+        fontFamily: 'FONT_MEDIUM',
+        lineHeight: 50,
+        textAlign: 'center',
+        fontSize: 15,
+    },
+    pause_button: {
+        width: '48%',
+        height: 80,
+        borderRadius: 10,
+        backgroundColor: '#C5D3A3',
+    },
+    pause_button_text: {
+        fontFamily: 'FONT_MEDIUM',
+        lineHeight: 50,
+        textAlign: 'center',
+        fontSize: 15,
+    },
+    resume_button: {
+        width: '48%',
+        height: 80,
+        borderRadius: 10,
+        backgroundColor: '#AFDEFF',
+    },
+    description_text: {
+        color: 'grey',
+        textAlign: 'center',
+        marginBottom: 10,
+        fontFamily: 'FONT_MEDIUM'
+    },
+    pause_container: {
+        width: '80%',
+        height: '50%',
+        alignItems: 'center'
+    },
+    message : {
+        fontSize: 20,
+        fontFamily: 'FONT_BOLD'
+    },
+    data_container : {
+        marginVertical: 20,
+        width: '90%',
+        height: '15%',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    data_container_1 : {
+        width: '20%',
+        height: '100%',
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20
+    },
+    data_container_2 : {
+        flexDirection: 'column',
+        width: '60%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 15
+    },
+    data_container_3 : {
+        width: '20%',
+        height: '100%',
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20
+    },
+    data_text : {
+        fontFamily: 'FONT_LIGHT',
+        flexDirection: 'column',
+        height: 30,
+    },
+    end_container: {
+        width: '80%',
+        height: '90%',
+        alignItems: 'center'
+    },
+    end_logo : {
+        fontSize: 30,
+        fontFamily: 'FONT_BOLD'
+    }, 
+    end_text : {
+        fontFamily: 'FONT_LIGHT',
+        fontSize: 17,
+        textAlign: 'center'
+    }
 });
