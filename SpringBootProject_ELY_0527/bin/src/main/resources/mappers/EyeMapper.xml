@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eyeloveyou.biz.user.UserEyeDAO">
 <!-- 유저 눈 정보 -->
+    <!-- user_id의 데이터 저장 -->
+	<insert id="setUserEyeData">
+    	INSERT INTO userprofile(user_id, total_operating_time, total_blink_times, warning_count, blink_cycle)
+    	VALUES(#{userId}, #{totalOperatingTime}, #{totalBlinkTimes}, #{warningCount}, #{blinkCycle})
+    </insert>
     <!-- user_id의 데이터 -->
     <select id="getUserEyeAllData" resultType="com.eyeloveyou.biz.user.UserEyeVO">
     	SELECT *
@@ -61,5 +66,30 @@
     <select id="getAllUserCycleAvg" resultType="float">
     	SELECT avg(blink_cycle)
     	FROM usereyeinfo
+    </select>
+    
+    <!-- 내 순위 보기 -->
+    <select id="getUserRank" resultType="int">
+    	SELECT ranking
+    	FROM (
+    		SELECT
+    			user_id,
+    			total_operating_time,
+    			total_blink_times,
+    			warning_count,
+    			blink_cycle,
+				CASE 
+    			    WHEN warning_count = 0 THEN total_operating_time
+    			    ELSE total_operating_time DIV warning_count
+  				END AS 'modified_warning_count',
+  				RANK() OVER (ORDER BY 
+        			CASE 
+         				WHEN warning_count = 0 THEN total_operating_time
+            			ELSE total_operating_time DIV warning_count
+        			END DESC
+    			) AS 'ranking'
+			FROM eyeloveyoudb.usereyeinfo
+		) ranked
+		WHERE user_id = #{userId}
     </select>
 </mapper>

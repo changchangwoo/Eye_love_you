@@ -86,6 +86,7 @@ public class UserController {
 	@CrossOrigin(origins = "*")
 	public boolean insertEyeData(@RequestBody UserEyeVO requestData) {
 		if (requestData.getTotalOperatingTime() >= 0) {
+			System.out.println(requestData);
 			userEyeDAO.setUserEyeData(requestData);
 			return true;
 		}

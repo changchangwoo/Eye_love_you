@@ -5,9 +5,13 @@
     <select id="getUserData" resultType="com.eyeloveyou.biz.user.UserProVO">
 		SELECT *
 		FROM userprofile
-		WHERE user_id = #{userId} AND password = #{password}
+		WHERE user_id = #{userId}
 	</select>
-    
+    <select id="getUserPassword" resultType="String">
+		SELECT password
+		FROM userprofile
+		WHERE user_id = #{userId}
+	</select>
     <select id="getUserList" resultType="com.eyeloveyou.biz.user.UserProVO">
         SELECT *
         FROM userprofile
@@ -18,8 +22,8 @@
     	VALUES(#{userId}, #{password}, #{name}, #{email}, #{homeAddress}, 1)
     </insert>
     
-    <select id="getUserAddress" resultType="String">
-        SELECT home_address
+    <select id="idCheck" resultType="int">
+        SELECT COUNT(*)
         FROM userprofile
         WHERE user_id = #{userId}
     </select>

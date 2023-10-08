@@ -4,7 +4,7 @@
 <!-- 유저 눈 정보 -->
     <!-- user_id의 데이터 저장 -->
 	<insert id="setUserEyeData">
-    	INSERT INTO userprofile(user_id, total_operating_time, total_blink_times, warning_count, blink_cycle)
+    	INSERT INTO usereyeinfo(user_id, total_operating_time, total_blink_times, warning_count, blink_cycle)
     	VALUES(#{userId}, #{totalOperatingTime}, #{totalBlinkTimes}, #{warningCount}, #{blinkCycle})
     </insert>
     <!-- user_id의 데이터 -->
