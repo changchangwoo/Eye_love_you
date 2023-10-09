@@ -73,13 +73,25 @@ public class UserController {
 	
 	@PostMapping("/signup/check")
 	@CrossOrigin(origins = "*")
-	public Boolean idCheck(@RequestBody UserProVO requestData) {
+	public boolean idCheck(@RequestBody UserProVO requestData) {
 		int isDuplicate = userProDAO.idCheck(requestData);
 		if (isDuplicate > 0) {
     		return true;
     	} else {
             return false;
         }
+	}
+	
+	@PostMapping("/save")
+	@CrossOrigin(origins = "*")
+	public boolean insertEyeData(@RequestBody UserEyeVO requestData) {
+		if (requestData.getTotalOperatingTime() >= 0) {
+			userEyeDAO.setUserEyeData(requestData);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	@PostMapping("/info")

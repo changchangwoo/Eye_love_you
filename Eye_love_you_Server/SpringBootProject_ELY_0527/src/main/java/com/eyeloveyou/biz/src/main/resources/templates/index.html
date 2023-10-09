@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>HOME</title>
+</head>
+<body>
+	<div style="text-align:center">
+		<h1>메인화면</h1>
+		
+		<div th:if="${userValue == null}">
+			<button type="button" onclick="location.href='/login';">로그인</button>
+			<button type="button" onclick="location.href='/signup';">회원가입</button>
+		</div> 
+		
+		<div th:if="${userValue != null}">
+			<button type="button" onclick="location.href='/eyeinfo';">눈 데이터 보기</button>
+			<button type="button" onclick="location.href='/mapsearch';">회원 주소 보기</button><br><br>
+			<button type="button" onclick="location.href='/logout';">로그아웃</button>
+		</div>
+
+		
+		<br><br><br><br><br>
+		파일 다운로드<br>
+		MySQL 8.0.31 설치파일 -> <button type="button" onclick="location.href='/downMysql';">Click</button>
+		<br><br>
+		05_MVC.pdf 강의자료 -> <button type="button" onclick="location.href='/downPdf';">Click</button>
+		<br><br>
+		lombok.jar 설치파일 -> <button type="button" onclick="location.href='/downJar';">Click</button>
+		<br><br><br><br><br>
+	</div>
+</body>
+</html>

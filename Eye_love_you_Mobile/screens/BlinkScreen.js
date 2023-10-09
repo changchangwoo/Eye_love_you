@@ -7,8 +7,7 @@ import CustomButton from '../styles/CustomButton.js';
 import { Audio } from 'expo-av';
 
 const BlinkScreen = ({ navigation, route }) => {
-  const name = route.params.name
-  const address = route.params.address
+  const userdata = route.params.userdata
 
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [isLeftEyeClosed, setIsLeftEyeClosed] = useState(false);
@@ -45,8 +44,8 @@ const BlinkScreen = ({ navigation, route }) => {
       headerTitleAlign: 'center', // 가운데 정렬 추가
     });
     setWarningCount(0),
-    setTimer(0),
-    setBlinkCount(0)
+      setTimer(0),
+      setBlinkCount(0)
   }, [navigation]);
 
   function handleFaceDetection({ faces }) {
@@ -139,14 +138,37 @@ const BlinkScreen = ({ navigation, route }) => {
   };
 
   const navMainButton = () => {
-    navigation.navigate('Main', { name: name })
+    navigation.navigate('Main', { userdata: userdata })
 
   };
 
-  const stopCamera = () => {
+  const stopCamera = async () => {
     setIsCameraActive(false);
     setIsEndActive(true);
-    console.log(warningCount, blinkCount, timer / 10) // 추출 변수
+    const update_timer = timer / 10
+    console.log(userdata.userId, warningCount, blinkCount, update_timer) // 추출 변수
+    // 눈 깜박임 데이터 서버로 전송
+    try {
+      const response = await fetch('http://192.168.25.33:8080/save', {
+        // PC작업 http://192.168.25.33:8080/signup
+        // 노트북작업 http://192.168.0.7:8080/signup
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userdata.userId,
+          totalOperatingTime: update_timer,
+          totalBlinkTimes: blinkCount,
+          warningCount: warningCount,
+          blinkCycle: 1
+        }),
+      });
+      const data = await response.text();
+      console.log(data + '성공')
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -206,21 +228,21 @@ const BlinkScreen = ({ navigation, route }) => {
           )
           }
           <View style={blink_style.data_container}>
-          { isLeftEyeClosed ?
-          (<View style={[blink_style.data_container_1, { backgroundColor: '#A9DFBF' }]}></View>)
-          :
-          (<View style={[blink_style.data_container_1, { backgroundColor: '#FFB6C1' }]}></View>)
-          }
+            {isLeftEyeClosed ?
+              (<View style={[blink_style.data_container_1, { backgroundColor: '#A9DFBF' }]}></View>)
+              :
+              (<View style={[blink_style.data_container_1, { backgroundColor: '#FFB6C1' }]}></View>)
+            }
             <View style={blink_style.data_container_2}>
-            <Text style={blink_style.data_text}>동작 시간: {timer / 10}초</Text>
-            <Text style={blink_style.data_text}>경고음 출력 횟수: {warningCount}</Text>
-            <Text style={blink_style.data_text}>눈 깜박임 횟수: {blinkCount}</Text>
+              <Text style={blink_style.data_text}>동작 시간: {timer / 10}초</Text>
+              <Text style={blink_style.data_text}>경고음 출력 횟수: {warningCount}</Text>
+              <Text style={blink_style.data_text}>눈 깜박임 횟수: {blinkCount}</Text>
             </View>
-            { isRightEyeClosed ?
-          (<View style={[blink_style.data_container_3, { backgroundColor: '#A9DFBF' }]}></View>)
-          :
-          (<View style={[blink_style.data_container_3, { backgroundColor: '#FFB6C1' }]}></View>)
-          }
+            {isRightEyeClosed ?
+              (<View style={[blink_style.data_container_3, { backgroundColor: '#A9DFBF' }]}></View>)
+              :
+              (<View style={[blink_style.data_container_3, { backgroundColor: '#FFB6C1' }]}></View>)
+            }
           </View>
           <View style={blink_style.button_container}>
             {isPauseActive ? (
@@ -249,56 +271,56 @@ const BlinkScreen = ({ navigation, route }) => {
       ) : (<>
         {isEndActive ? (
           <>
-              <View style={blink_style.end_container}>
-                <Text style={blink_style.end_logo}>눈 깜박임 감지 종료</Text>
-                <Image
-                  source={require('../assets/imgs/hip_smile.png')}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    marginVertical: 50,
-                  }}
-                />
-                <Text style={[blink_style.end_text]}>  { name }  님의 눈 깜박임 감지 동작이
-                  정상적으로 종료 됐어요{'\n'}{'\n'}
-                  식별 데이터 시각화 항목에서 그래프와 함께 확인하세요
-                  </Text>
-                  <CustomButton
-              title="메인화면으로"
-              style={blink_style.start_button}
-              textStyle={blink_style.start_button_text}
-              onPress={navMainButton}
-            />
-              </View>
+            <View style={blink_style.end_container}>
+              <Text style={blink_style.end_logo}>눈 깜박임 감지 종료</Text>
+              <Image
+                source={require('../assets/imgs/hip_smile.png')}
+                style={{
+                  width: 100,
+                  height: 100,
+                  marginVertical: 50,
+                }}
+              />
+              <Text style={[blink_style.end_text]}>  {userdata.name}  님의 눈 깜박임 감지 동작이
+                정상적으로 종료 됐어요{'\n'}{'\n'}
+                식별 데이터 시각화 항목에서 그래프와 함께 확인하세요
+              </Text>
+              <CustomButton
+                title="메인화면으로"
+                style={blink_style.start_button}
+                textStyle={blink_style.start_button_text}
+                onPress={navMainButton}
+              />
+            </View>
           </>
         ) : (
           <>
-          <View style={blink_style.notify_view}>
-            <View style={blink_style.main_logo}>
-              <Text style={blink_style.logoText}> 잠깐!</Text>
-              <Text style={blink_style.logoSubText}> 모바일 눈 깜박임 감지 기능 사용은 다음을 유의해주세요 </Text>
+            <View style={blink_style.notify_view}>
+              <View style={blink_style.main_logo}>
+                <Text style={blink_style.logoText}> 잠깐!</Text>
+                <Text style={blink_style.logoSubText}> 모바일 눈 깜박임 감지 기능 사용은 다음을 유의해주세요 </Text>
+              </View>
+              <View style={blink_style.textBox}>
+                <Text style={blink_style.notify_text}>
+                  카메라 권한의 허용을 확인하세요
+                </Text>
+                <Text style={blink_style.notify_text}>
+                  기능 동작시 카메라에 사용자의 얼굴이 전부 나오도록 확인하세요
+                </Text>
+                <Text style={blink_style.notify_text}>
+                  정확한 눈 깜박임 데이터 측정을 위하여 미 측정시 정지버튼을 클릭하세요
+                </Text>
+              </View>
+              <CustomButton
+                title="기능 시작"
+                style={blink_style.start_button}
+                textStyle={blink_style.start_button_text}
+                onPress={startCamera}
+              />
             </View>
-            <View style={blink_style.textBox}>
-              <Text style={blink_style.notify_text}>
-                카메라 권한의 허용을 확인하세요
-              </Text>
-              <Text style={blink_style.notify_text}>
-                기능 동작시 카메라에 사용자의 얼굴이 전부 나오도록 확인하세요
-              </Text>
-              <Text style={blink_style.notify_text}>
-                정확한 눈 깜박임 데이터 측정을 위하여 미 측정시 정지버튼을 클릭하세요
-              </Text>
-            </View>
-            <CustomButton
-              title="기능 시작"
-              style={blink_style.start_button}
-              textStyle={blink_style.start_button_text}
-              onPress={startCamera}
-            />
-          </View>
-        </>
+          </>
         )}
-        </>
+      </>
       )}
     </Animated.View>
   );

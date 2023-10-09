@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eyeloveyou.biz.user.UserEyeDAO">
+<!-- 유저 눈 정보 -->
+    <!-- user_id의 데이터 저장 -->
+	<insert id="setUserEyeData">
+    	INSERT INTO userprofile(user_id, total_operating_time, total_blink_times, warning_count, blink_cycle)
+    	VALUES(#{userId}, #{totalOperatingTime}, #{totalBlinkTimes}, #{warningCount}, #{blinkCycle})
+    </insert>
+    <!-- user_id의 데이터 -->
+    <select id="getUserEyeAllData" resultType="com.eyeloveyou.biz.user.UserEyeVO">
+    	SELECT *
+		FROM usereyeinfo
+		WHERE user_id = #{userId}
+    </select>
+    
+    <!-- 전체 사용자 데이터 수 -->
+    <select id="getDataCount" resultType="int">
+    	SELECT count(*)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 사용 시간 합 -->
+    <select id="getAllUserTimeSum" resultType="float">
+    	SELECT sum(total_operating_time)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 깜박임 수 합 -->
+    <select id="getAllUserBlinkSum" resultType="float">
+    	SELECT sum(total_blink_times)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 경고음 출력 수 합 -->
+    <select id="getAllUserWarningSum" resultType="int">
+    	SELECT sum(warning_count)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 깜박임 주기 합 -->
+    <select id="getAllUserCycleSum" resultType="float">
+    	SELECT sum(blink_cycle)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 사용 시간 평균 -->
+    <select id="getAllUserTimeAvg" resultType="float">
+    	SELECT avg(total_operating_time)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 깜박임 수 평균 -->
+    <select id="getAllUserBlinkAvg" resultType="float">
+    	SELECT avg(total_blink_times)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 경고음 출력 수 평균 -->
+    <select id="getAllUserWarningAvg" resultType="float">
+    	SELECT avg(warning_count)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 전체 사용자 깜박임 주기 평균 -->
+    <select id="getAllUserCycleAvg" resultType="float">
+    	SELECT avg(blink_cycle)
+    	FROM usereyeinfo
+    </select>
+    
+    <!-- 내 순위 보기 -->
+    <select id="getUserRank" resultType="int">
+    	SELECT ranking
+    	FROM (
+    		SELECT
+    			user_id,
+    			total_operating_time,
+    			total_blink_times,
+    			warning_count,
+    			blink_cycle,
+				CASE 
+    			    WHEN warning_count = 0 THEN total_operating_time
+    			    ELSE total_operating_time DIV warning_count
+  				END AS 'modified_warning_count',
+  				RANK() OVER (ORDER BY 
+        			CASE 
+         				WHEN warning_count = 0 THEN total_operating_time
+            			ELSE total_operating_time DIV warning_count
+        			END DESC
+    			) AS 'ranking'
+			FROM eyeloveyoudb.usereyeinfo
+		) ranked
+		WHERE user_id = #{userId}
+    </select>
+</mapper>

@@ -4,8 +4,8 @@ import { main_style, styles } from '../styles/Css';
 import CustomButton from '../styles/CustomButton';
 
 const MainScreen = ({ navigation, route }) => {
-    const name = route.params.name
-    const address = route.params.address
+    const userdata = route.params.userdata
+
     const [isImage1Clicked, setImage1Clicked] = useState(false);
     const [isImage2Clicked, setImage2Clicked] = useState(false);
     const [isImage3Clicked, setImage3Clicked] = useState(false);
@@ -38,8 +38,8 @@ const MainScreen = ({ navigation, route }) => {
     };
 
     const NavBlink = () => {
-        console.log(name , address)
-        navigation.navigate('Blink', { name: name })
+        console.log(userdata)
+        navigation.navigate('Blink', { userdata: userdata })
     }
 
 
@@ -108,7 +108,7 @@ const MainScreen = ({ navigation, route }) => {
             <ScrollView style={main_style.scroll_view}>
                 <View style={main_style.main_logo}>
                     <Text style={main_style.logoSubText}>오늘도 눈이 좋아지는</Text>
-                    <Text style={main_style.logoText}> {name} 님</Text>
+                    <Text style={main_style.logoText}> {userdata.name} 님</Text>
                     <Image
                         source={require('../assets/imgs/cat_smile.png')}
                         style={{

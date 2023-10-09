@@ -1,6 +1,8 @@
 package com.eyeloveyou.biz.user;
 
 public interface UserEyeDAO {
+	
+	void setUserEyeData(UserEyeVO vo);
 
 	UserEyeVO getUserEyeAllData(UserEyeVO vo);
 	
