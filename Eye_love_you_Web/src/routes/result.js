@@ -285,7 +285,7 @@ function Result() {
                         <div className='Logo_Text_main Text_Medium' style={{ marginTop: '150px' }}>
                             눈 깜박임 주기
                         </div>
-                        <div className='Text_small'>프로그램을 실행하면서 보통 {user_wc} 주기로 눈을 깜박이셨어요
+                        <div className='Text_small'>프로그램을 실행하면서 보통 {user_bc}초 주기로 눈을 깜박이셨어요
                             <br /> 아이러브유의 다른 사용자는 평균적으로 {blink_cycle} 주기로 눈을 깜박여요
                             <br /> 이상적인 눈 깜박임은 몇번이에요
                         </div>

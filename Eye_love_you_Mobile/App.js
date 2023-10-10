@@ -7,6 +7,7 @@ import BlinkScreen from './screens/BlinkScreen';
 import SplashScreen from './screens/SplashScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
+import ResultScreen from './screens/ResultScreen';
 
 
 
@@ -22,6 +23,8 @@ export default function App() {
           <Stack.Screen name="Blink" component={BlinkScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Main" component={MainScreen} />
+          <Stack.Screen name="Result" component={ResultScreen} />
+
         </Stack.Navigator>
       </FontLoader>
     </NavigationContainer>

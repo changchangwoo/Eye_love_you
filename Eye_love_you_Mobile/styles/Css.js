@@ -519,3 +519,92 @@ export const blink_style = StyleSheet.create({
         textAlign: 'center'
     }
 });
+
+export const result_style = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FBE3F0',
+        height: '100%'
+
+    },
+    chart_container: {
+        alignItems: 'center',
+        width: '100%',
+        height: '75%',
+    },
+    end_logo : {
+        fontSize: 25,
+        fontFamily: 'FONT_BOLD',
+        textAlign: 'center'
+    },
+    description_text: {
+        color: 'grey',
+        textAlign: 'center',
+        fontFamily: 'FONT_MEDIUM'
+    } ,
+    data_chart : {
+        width: '100%',
+        fontSize: 20,
+        alignItems: 'center',
+        flex: 1,
+        borderRadius: 30,
+        margin: 20,
+        backgroundColor: 'white',
+        padding: 10
+    },
+    chart_name: {
+        width: '100%',
+        height: '15%',
+    },
+    chart_name_text : {
+        fontFamily: 'FONT_MEDIUM',
+        fontSize: 25,
+        textAlign: 'center',
+        alignItems: 'center',
+        
+    },
+    chart_data : {
+        width: '100%',
+        height: '60%',
+        alignItems: 'center',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    chart_descript : {
+        width: '100%',
+        height: '25%',
+        textAlign: 'center',
+    },
+    chart_descript_text : {
+        fontFamily: 'FONT_LIGHT',
+        fontSize: 15,
+        textAlign: 'center'
+    },
+    rank_chart : {
+        width: '100%',
+        fontSize: 20,
+        alignItems: 'center',
+        flex: 1,
+        borderRadius: 30,
+        margin: 20,
+        backgroundColor: 'white',
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    rank_Text_sub : {
+        fontSize: 20,
+        fontFamily: 'FONT_LIGHT',
+        lineHeight: 30
+
+    },
+    rank_Text : {
+        textAlign: 'center',
+        width: '100%',
+        height: '30%',
+        fontSize: 30,
+        fontFamily: 'FONT_BOLD'    
+    }
+});

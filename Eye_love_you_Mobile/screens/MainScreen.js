@@ -42,6 +42,11 @@ const MainScreen = ({ navigation, route }) => {
         navigation.navigate('Blink', { userdata: userdata })
     }
 
+    const NavResult = () => {
+        console.log(userdata)
+        navigation.navigate('Result', { userdata: userdata })
+    }
+
 
     const handleImage1Click = () => {
         setImage1Clicked(!isImage1Clicked);
@@ -193,6 +198,7 @@ const MainScreen = ({ navigation, route }) => {
                                     title="시작하기"
                                     style={main_style.address_button}
                                     textStyle={main_style.address_button_text}
+                                    onPress={NavResult}
                                 />
                             </View>
                         </ScrollView>

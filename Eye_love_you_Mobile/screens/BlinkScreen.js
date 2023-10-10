@@ -160,7 +160,7 @@
       console.log(userdata.userId, warningCount, blinkCount, update_timer) // 추출 변수
       // 눈 깜박임 데이터 서버로 전송
       try {
-        const response = await fetch('http://172.29.49.228:8080/save', {
+        const response = await fetch('http://172.30.1.71:8080/save', {
           // PC작업 http://192.168.25.33:8080/save
           method: 'POST',
           headers: {
