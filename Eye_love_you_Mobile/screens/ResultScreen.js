@@ -8,14 +8,19 @@ import {
     ContributionGraph,
     StackedBarChart
 } from "react-native-chart-kit";
-import { Alert, Dimensions, ScrollView, Text, View } from 'react-native';
+import { Alert, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import { result_style } from '../styles/Css';
-
+import CustomButton from "../styles/CustomButton";
 
 
 const ResultScreen = ({ navigation, route }) => {
     const [userdata, setUserData] = useState('');
     const [infodata, setInfodata] = useState('');
+    const [percent, setPercent] = useState(0);
+    const [imgSrc, setImgSrc] = useState('');
+    const [message, setMessage] = useState('');
+    const [message2, setMessage2] = useState('');
+    const [altText, setAltText] = useState('');
     const scrollViewRef = useRef(null);
     const windowWidth = Dimensions.get('window').width;
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,7 +41,7 @@ const ResultScreen = ({ navigation, route }) => {
             const userdata = route.params.userdata
             setUserData(userdata)
             const userid = userdata.userId
-            fetch('http://172.30.1.98:8080/info', {
+            fetch('http://192.168.25.33:8080/info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,7 +52,6 @@ const ResultScreen = ({ navigation, route }) => {
             })
                 .then(response => response.json())
                 .then(responseData => {
-                    console.log('안녕', responseData);
                     setInfodata(responseData)
                 })
                 .catch(error => {
@@ -69,6 +73,30 @@ const ResultScreen = ({ navigation, route }) => {
         });
     }, [navigation]);
 
+    useEffect(() => {
+        const calc_data = (user_rank / user_count) * 100;
+        setPercent(calc_data)
+    }, [percent, user_count, user_rank])
+
+    useEffect(() => {
+        if (percent > 70) {
+            setMessage('다른 아이 러브 유 회원들 보다 다소 아쉬운 데이터에요');
+            setMessage2('안구 건강을 위해서 조금만 더 힘내봐요ㅜ');
+            setAltText('30 Points');
+            setImgSrc(require('../assets/imgs/low_result_smile.png'));
+        } else if (percent > 30 && percent < 70) {
+            setMessage('다른 아이 러브 유 회원들과 비슷한 데이터에요');
+            setMessage2('오늘도 계속해서 나아지고 있어요!');
+            setAltText('60 Points');
+            setImgSrc(require('../assets/imgs/normal_result_smile.png'));
+        } else if (percent < 30) {
+            setMessage('다른 아이 러브 유 회원들 보다 훨씬 좋은 데이터에요');
+            setMessage2('멋져요! 최고의 결과에요');
+            setAltText('90 Points');
+            setImgSrc(require('../assets/imgs/high_result_smile.png'));
+        }
+    }, [percent]);
+
     const chartConfig = {
         backgroundGradientFrom: 'white', // 배경색을 하얀색으로 설정
         backgroundGradientTo: 'white',   // 배경색을 하얀색으로 설정
@@ -83,7 +111,7 @@ const ResultScreen = ({ navigation, route }) => {
         labels: [userdata.name + '님', '전체 회원 평균'],
         datasets: [
             {
-                data: [time, user_time],
+                data: [user_time, time],
             },
         ],
     };
@@ -121,9 +149,14 @@ const ResultScreen = ({ navigation, route }) => {
         setCurrentIndex(index);
     };
 
+    const handleKakaoShare = () => {
+        console.log(hello)
+
+    }
+
     return (
         <View style={result_style.container}>
-            <Text style={result_style.end_logo}>{userdata.name}님의 눈 깜박임 데이터</Text>
+            <Text style={result_style.end_logo}> 눈 깜박임 데이터 그래프</Text>
             <Text style={result_style.description_text}>좌우 슬라이드를 통해 결과를 확인하세요{'\n'}</Text>
             <View style={result_style.chart_container}>
                 <ScrollView
@@ -150,8 +183,8 @@ const ResultScreen = ({ navigation, route }) => {
                         </View>
                         <View style={result_style.chart_descript}>
                             <Text style={result_style.chart_descript_text}>
-                                {userdata.name}님은 프로그램을 총 {time}초 동작하셨어요
-                                {'\n'}아이러브유의 다른 사용자들은 평균적으로 {user_time}초만큼 동작하였어요
+                                {userdata.name}님은 프로그램을 총 {user_time}초 동작하셨어요
+                                {'\n'}아이러브유의 다른 사용자들은 평균적으로 {time}초만큼 동작하였어요
                             </Text>
                         </View>
                     </View>
@@ -221,8 +254,19 @@ const ResultScreen = ({ navigation, route }) => {
                             {userdata.name} 님은 아이러브유 회원
                         </Text>
                         <Text style={result_style.rank_Text}>
-                            총 몇명중 몇명입니다
+                            총 {user_count}명 중 {user_rank}등 입니다
                         </Text>
+                        <View style={result_style.rank_content}>
+                            <Image source={imgSrc} style={{ width: 100, height: 100, marginBottom: 30 }} />
+                            <Text style={result_style.rank_descript2}>{message2}</Text>
+                            <Text style={result_style.rank_descript}>{message}</Text>
+                        </View>
+                        <CustomButton
+                            title="카카오톡으로 공유하기"
+                            style={result_style.address_button}
+                            textStyle={result_style.address_button_text}
+                            onPress={handleKakaoShare}
+                        />
                     </View>
                 </ScrollView>
             </View>

@@ -467,11 +467,11 @@ export const blink_style = StyleSheet.create({
         height: '50%',
         alignItems: 'center'
     },
-    message : {
+    message: {
         fontSize: 20,
         fontFamily: 'FONT_BOLD'
     },
-    data_container : {
+    data_container: {
         marginVertical: 20,
         width: '90%',
         height: '15%',
@@ -480,26 +480,26 @@ export const blink_style = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
     },
-    data_container_1 : {
+    data_container_1: {
         width: '20%',
         height: '100%',
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 20
     },
-    data_container_2 : {
+    data_container_2: {
         flexDirection: 'column',
         width: '60%',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 15
     },
-    data_container_3 : {
+    data_container_3: {
         width: '20%',
         height: '100%',
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20
     },
-    data_text : {
+    data_text: {
         fontFamily: 'FONT_LIGHT',
         flexDirection: 'column',
         height: 30,
@@ -509,11 +509,11 @@ export const blink_style = StyleSheet.create({
         height: '90%',
         alignItems: 'center'
     },
-    end_logo : {
+    end_logo: {
         fontSize: 30,
         fontFamily: 'FONT_BOLD'
-    }, 
-    end_text : {
+    },
+    end_text: {
         fontFamily: 'FONT_LIGHT',
         fontSize: 17,
         textAlign: 'center'
@@ -533,7 +533,7 @@ export const result_style = StyleSheet.create({
         width: '100%',
         height: '75%',
     },
-    end_logo : {
+    end_logo: {
         fontSize: 25,
         fontFamily: 'FONT_BOLD',
         textAlign: 'center'
@@ -542,8 +542,8 @@ export const result_style = StyleSheet.create({
         color: 'grey',
         textAlign: 'center',
         fontFamily: 'FONT_MEDIUM'
-    } ,
-    data_chart : {
+    },
+    data_chart: {
         width: '100%',
         fontSize: 20,
         alignItems: 'center',
@@ -557,14 +557,14 @@ export const result_style = StyleSheet.create({
         width: '100%',
         height: '15%',
     },
-    chart_name_text : {
+    chart_name_text: {
         fontFamily: 'FONT_MEDIUM',
         fontSize: 25,
         textAlign: 'center',
         alignItems: 'center',
-        
+
     },
-    chart_data : {
+    chart_data: {
         width: '100%',
         height: '60%',
         alignItems: 'center',
@@ -572,17 +572,17 @@ export const result_style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    chart_descript : {
+    chart_descript: {
         width: '100%',
         height: '25%',
         textAlign: 'center',
     },
-    chart_descript_text : {
+    chart_descript_text: {
         fontFamily: 'FONT_LIGHT',
         fontSize: 15,
         textAlign: 'center'
     },
-    rank_chart : {
+    rank_chart: {
         width: '100%',
         fontSize: 20,
         alignItems: 'center',
@@ -594,17 +594,51 @@ export const result_style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    rank_Text_sub : {
+    rank_Text_sub: {
         fontSize: 20,
         fontFamily: 'FONT_LIGHT',
-        lineHeight: 30
+        textAlign: 'center',
+        lineHeight: 30,
+        marginTop: 40
 
     },
-    rank_Text : {
+    rank_Text: {
         textAlign: 'center',
-        width: '100%',
-        height: '30%',
         fontSize: 30,
-        fontFamily: 'FONT_BOLD'    
+        fontFamily: 'FONT_BOLD',
+        lineHeight: 40
+    },
+    rank_content: {
+        alignItems: 'center',
+        width: '100%',
+        marginVertical: 20
+    },
+    rank_descript: {
+        fontFamily: 'FONT_LIGHT',
+        fontSize: 15,
+        textAlign: 'center'
+
+    },
+    rank_descript2: {
+        fontFamily: 'FONT_MEDIUM',
+        fontSize: 17,
+        textAlign: 'center',
     }
+    ,
+    address_button: {
+        width: '70%',
+        height: 50,
+        borderRadius: 10,
+        backgroundColor: '#2F2E41',
+        marginBottom: 40
+    },
+    address_button_text: {
+        color: 'white',
+        fontFamily: 'FONT_LIGHT',
+        lineHeight: 50,
+        textAlign: 'center',
+        fontSize: 15,
+
+    },
+
 });
