@@ -25,7 +25,7 @@ function Login() {
 
     const onClickLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/login', {
+            const response = await axios.post('https://3d20-218-51-29-138.ngrok-free.app/login', {
                 userId: inputId,
                 password: inputPw,
             })

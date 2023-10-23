@@ -8,6 +8,7 @@ import SplashScreen from './screens/SplashScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 import ResultScreen from './screens/ResultScreen';
+import TempScreen from './screens/Temp';
 
 
 
@@ -18,13 +19,14 @@ export default function App() {
   return (
     <NavigationContainer independent={true}>
       <FontLoader>
-        <Stack.Navigator initialRouteName="Temp">
+        <Stack.Navigator initialRouteName="Splash">
           <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Blink" component={BlinkScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Result" component={ResultScreen} />
+          <Stack.Screen name="Temp" component={TempScreen} options={{ headerShown: false }} />
 
         </Stack.Navigator>
       </FontLoader>

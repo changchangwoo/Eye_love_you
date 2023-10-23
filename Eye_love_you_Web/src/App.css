@@ -731,7 +731,7 @@
 }
 
 .modal_content {
-  padding: 5%;
+  padding: 2%;
   text-align: center;
 }
 
@@ -772,6 +772,13 @@
 }
 
 .Modal_start_Button {
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  border-color: #F8F9FA !important;
+}
+
+.Modal_end_Button {
   width: 150px;
   height: 50px;
   text-align: center;

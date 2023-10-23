@@ -86,27 +86,27 @@ function Register() {
 
     const onClickRegistser = async () => {
         if (idcheck) {
-            if(inputPw === inputPwcheck) {
-            try {
-                const response = await axios.post('http://localhost:8080/signup', {
-                    userId: inputId,
-                    password: inputPw,
-                    name: inputNName,
-                    email: inputEmail,
-                    homeAddress: inputAddr
-                })
-                if (response.data === '성공') {
-                    alert('아이러브유 회원이 된 것을 환영합니다');
-                    navigate("/login");
-                } else {
-                    alert(response.data);
+            if (inputPw === inputPwcheck) {
+                try {
+                    const response = await axios.post('https://3d20-218-51-29-138.ngrok-free.app/signup', {
+                        userId: inputId,
+                        password: inputPw,
+                        name: inputNName,
+                        email: inputEmail,
+                        homeAddress: inputAddr
+                    })
+                    if (response.data === '성공') {
+                        alert('아이러브유 회원이 된 것을 환영합니다');
+                        navigate("/login");
+                    } else {
+                        alert(response.data);
+                    }
+                } catch (error) {
+                    console.error(error);
                 }
-            } catch (error) {
-                console.error(error);
+            } else {
+                alert('비밀번호와 비밀번호 재입력을 일치시켜주세요')
             }
-        } else {
-            alert('비밀번호와 비밀번호 재입력을 일치시켜주세요')
-        }
         } else {
             alert('아이디 중복확인을 체크해주세요');
         }
@@ -114,7 +114,7 @@ function Register() {
 
     const onClickCheckID = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/signup/check', {
+            const response = await axios.post('https://3d20-218-51-29-138.ngrok-free.app/signup/check', {
                 userId: inputId,
             })
             console.log(response.data)
@@ -172,8 +172,8 @@ function Register() {
                     </div>
                     <div className="Input_Form">
                         <Form.Control className='Input_Form_text' size="lg" type="password" placeholder="비밀번호 재입력"
-                        value={inputPwcheck}
-                        onChange={handleInputPwCheck} />
+                            value={inputPwcheck}
+                            onChange={handleInputPwCheck} />
                     </div>
                 </div>
                 <div className="Input_box">

@@ -205,7 +205,8 @@ function Process() {
                                 <img className='result_icon' src={hip_img} alt="" />
 
                             </div>
-                            <Button variant="light" className='Modal_start_Button' onClick={resultpage}>결과창 이동</Button>
+                            <Button variant="light" className='Modal_end_Button' onClick={resultpage}>결과창 이동</Button>
+
                         </div>
                     </div>
                 )}

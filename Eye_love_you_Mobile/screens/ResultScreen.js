@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: Failed prop type']);
 import React from 'react';
 import {
     LineChart,
@@ -11,6 +13,9 @@ import {
 import { Alert, Dimensions, Image, ScrollView, Text, View } from 'react-native';
 import { result_style } from '../styles/Css';
 import CustomButton from "../styles/CustomButton";
+import * as Sharing from 'expo-sharing';
+import { Asset } from 'expo-asset';
+
 
 
 const ResultScreen = ({ navigation, route }) => {
@@ -41,7 +46,7 @@ const ResultScreen = ({ navigation, route }) => {
             const userdata = route.params.userdata
             setUserData(userdata)
             const userid = userdata.userId
-            fetch('http://192.168.25.33:8080/info', {
+            fetch('http://192.168.25.17:8080/info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,6 +112,18 @@ const ResultScreen = ({ navigation, route }) => {
         },
     };
 
+    const handleShare = async () => {
+        const image = Asset.fromModule(imgSrc);
+        await image.downloadAsync();
+        const localImagePath = image.localUri;
+
+        try {
+            const result = await Sharing.shareAsync(localImagePath);
+        } catch (error) {
+            console.error('이미지 공유 중 오류 발생:', error);
+        }
+    };
+
     const data = {
         labels: [userdata.name + '님', '전체 회원 평균'],
         datasets: [
@@ -156,7 +173,7 @@ const ResultScreen = ({ navigation, route }) => {
 
     return (
         <View style={result_style.container}>
-            <Text style={result_style.end_logo}> 눈 깜박임 데이터 그래프</Text>
+            <Text style={result_style.end_logo}> 눈 깜박임 데이터 </Text>
             <Text style={result_style.description_text}>좌우 슬라이드를 통해 결과를 확인하세요{'\n'}</Text>
             <View style={result_style.chart_container}>
                 <ScrollView
@@ -262,10 +279,10 @@ const ResultScreen = ({ navigation, route }) => {
                             <Text style={result_style.rank_descript}>{message}</Text>
                         </View>
                         <CustomButton
-                            title="카카오톡으로 공유하기"
+                            title="공유하기"
                             style={result_style.address_button}
                             textStyle={result_style.address_button_text}
-                            onPress={handleKakaoShare}
+                            onPress={handleShare}
                         />
                     </View>
                 </ScrollView>

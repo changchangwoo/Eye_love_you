@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
             Alert.alert('아이디 또는 비밀번호를 입력해주세요');
         } else {
             try {
-                const response = await fetch('http://192.168.25.33:8080/login', {
+                const response = await fetch('http://192.168.25.17:8080/login', {
                     // PC작업 http://192.168.25.33:8080/login
                     method: 'POST',
                     headers: {
@@ -40,6 +40,7 @@ const LoginScreen = ({ navigation }) => {
                     navigation.navigate('Main', { userdata: responseData })
                 }
             } catch (error) {
+                console.log(error);
                 Alert.alert('로그인 실패');
             }
         }
