@@ -8,7 +8,7 @@ import SplashScreen from './screens/SplashScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 import ResultScreen from './screens/ResultScreen';
-import TempScreen from './screens/Temp';
+import MapScreen from './screens/MapScreen';
 
 
 
@@ -26,8 +26,7 @@ export default function App() {
           <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Result" component={ResultScreen} />
-          <Stack.Screen name="Temp" component={TempScreen} options={{ headerShown: false }} />
-
+          <Stack.Screen name="Map" component={MapScreen} />
         </Stack.Navigator>
       </FontLoader>
     </NavigationContainer>

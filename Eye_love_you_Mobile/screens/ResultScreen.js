@@ -103,10 +103,10 @@ const ResultScreen = ({ navigation, route }) => {
     }, [percent]);
 
     const chartConfig = {
-        backgroundGradientFrom: 'white', // 배경색을 하얀색으로 설정
-        backgroundGradientTo: 'white',   // 배경색을 하얀색으로 설정
+        backgroundGradientFrom: 'white',
+        backgroundGradientTo: 'white',
         decimalPlaces: 0,
-        color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`, // 막대 색상 설정
+        color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
         style: {
             borderRadius: 16,
         },
@@ -193,8 +193,8 @@ const ResultScreen = ({ navigation, route }) => {
                         <View style={result_style.chart_data}>
                             <BarChart
                                 data={data}
-                                width={Dimensions.get('window').width - 50} // 그래프 너비
-                                height={250} // 부모 컴포넌트의 크기를 100%로 설정
+                                width={Dimensions.get('window').width - 50}
+                                height={250}
                                 chartConfig={chartConfig}
                             />
                         </View>

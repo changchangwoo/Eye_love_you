@@ -157,8 +157,7 @@ const BlinkScreen = ({ navigation, route }) => {
     setIsCameraActive(false);
     setIsEndActive(true);
     const update_timer = timer / 10
-    console.log(userdata.userId, warningCount, blinkCount, update_timer) // 추출 변수
-    // 눈 깜박임 데이터 서버로 전송
+    console.log(userdata.userId, warningCount, blinkCount, update_timer)
     try {
       const response = await fetch('http://192.168.25.17:8080/save', {
         // PC작업 http://192.168.25.33:8080/save

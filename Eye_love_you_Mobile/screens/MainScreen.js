@@ -5,7 +5,8 @@ import CustomButton from '../styles/CustomButton';
 
 const MainScreen = ({ navigation, route }) => {
     const userdata = route.params.userdata
-
+    const [userX, setUserX] = useState(0);
+    const [userY, setUserY] = useState(0);
     const [isImage1Clicked, setImage1Clicked] = useState(false);
     const [isImage2Clicked, setImage2Clicked] = useState(false);
     const [isImage3Clicked, setImage3Clicked] = useState(false);
@@ -15,8 +16,9 @@ const MainScreen = ({ navigation, route }) => {
     const [isOpacity2, setisOpacity2] = useState(1.0);
     const [isOpacity3, setisOpacity3] = useState(1.0);
     const [isOpacity4, setisOpacity4] = useState(1.0);
-    const [currentIndex, setCurrentIndex] = useState(0);
+
     const windowWidth = Dimensions.get('window').width;
+    const REST_API_KEY = 'API';
 
     useEffect(() => {
         navigation.setOptions({
@@ -31,10 +33,29 @@ const MainScreen = ({ navigation, route }) => {
 
     }, [navigation]);
 
+    useEffect(() => {
+        const useraddress = userdata.homeAddress
+        const getXY = async () => {
+            try {
+                const response = await fetch(`https://dapi.kakao.com/v2/local/search/address.json?analyze_type=similar&query=${useraddress}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `KakaoAK ${REST_API_KEY}`,
+                    },
+                });
+                const data = await response.json();
+                setUserX(data.documents[0].x);
+                setUserY(data.documents[0].y);
+            } catch (error) {
+                console.error('API 요청 중 오류 발생:', error);
+            }
+        };
+        getXY();
+    }, [])
+
     const handleScroll = (event) => {
         const contentOffset = event.nativeEvent.contentOffset.x;
         const index = Math.floor(contentOffset / windowWidth);
-        setCurrentIndex(index);
     };
 
     const NavBlink = () => {
@@ -45,6 +66,11 @@ const MainScreen = ({ navigation, route }) => {
     const NavResult = () => {
         console.log(userdata)
         navigation.navigate('Result', { userdata: userdata })
+    }
+
+    const NavMap = () => {
+        console.log(userdata, userX, userY)
+        navigation.navigate('Map', { userdata: userdata, X: userX, Y: userY })
     }
 
 
@@ -236,6 +262,7 @@ const MainScreen = ({ navigation, route }) => {
                                     title="시작하기"
                                     style={main_style.address_button}
                                     textStyle={main_style.address_button_text}
+                                    onPress={NavMap}
                                 />
                             </View>
                         </ScrollView>

@@ -640,5 +640,53 @@ export const result_style = StyleSheet.create({
         fontSize: 15,
 
     },
+});
 
+export const map_style = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: '#FBE3F0',
+    },
+    map: {
+        width: '100%',
+        height: '100%',
+
+    },
+    map_title: {
+        width: '100%',
+        height: '6%',
+        position: 'absolute',
+        zIndex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    map_title_font: {
+        fontSize: 15,
+        fontFamily: 'FONT_LIGHT',
+        height: '100%',
+        borderRadius: 10,
+        marginTop: 20,
+        width: '70%',
+        textAlign: 'center',
+        backgroundColor: 'rgba(251, 227, 240, 0.9)' // 마지막 숫자 0.6은 투명도를 나타냅니다.
+    },
+    description: {
+        width: '100%',
+        height: '45%',
+        backgroundColor: 'blue',
+        borderRadius: 10,
+        marginTop: '100%',
+        zIndex: 1,
+        position: 'absolute',
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(251, 227, 240, 0.8)', // 마지막 숫자 0.6은 투명도를 나타냅니다.
+
+    },
+    webview_style: {
+        flex: 1,
+    },
 });

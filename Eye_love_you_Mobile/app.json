@@ -18,6 +18,10 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.패키지명.패키지명",
+      "config": {
+        "googleMaps": { "apiKey": "API" }   
+    },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
