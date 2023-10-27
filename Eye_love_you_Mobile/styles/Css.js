@@ -670,7 +670,7 @@ export const map_style = StyleSheet.create({
         marginTop: 20,
         width: '70%',
         textAlign: 'center',
-        backgroundColor: 'rgba(251, 227, 240, 0.9)' // 마지막 숫자 0.6은 투명도를 나타냅니다.
+        backgroundColor: 'rgba(251, 227, 240, 0.9)'
     },
     description: {
         width: '100%',
@@ -683,10 +683,61 @@ export const map_style = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(251, 227, 240, 0.8)', // 마지막 숫자 0.6은 투명도를 나타냅니다.
+        backgroundColor: 'rgba(251, 227, 240, 0.8)',
 
     },
     webview_style: {
         flex: 1,
     },
+});
+
+export const share_style = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FBE3F0',
+        height: '100%'
+    },
+    share_box: {
+        marginTop: 20,
+        alignItems: 'center',
+        width: '90%',
+        height: '90%',
+        backgroundColor: 'white',
+        borderRadius: 20
+    },
+    share_title: {
+        height: 50,
+        width: '100%',
+        marginTop: 20,
+        textAlign: 'center',
+        fontSize: 20,
+        fontFamily: 'FONT_LIGHT',
+        textAlign: 'center',
+        lineHeight: 30,
+        marginTop: 40
+    },
+    share_main: {
+        height: '45%',
+        width: '100%',
+        padding: 20,
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    share_main_left_box: {
+        flex: 1,
+    },
+    share_main_right_box: {
+        flex: 1,
+    },
+    share_main_text: {
+        fontSize: 20,
+        fontFamily: 'FONT_LIGHT',
+        textAlign: 'center',
+    },
+    share_main_text_num: {
+        fontSize: 20,
+        fontFamily: 'FONT_MEDIUM',
+        textAlign: 'center'
+    }
 });

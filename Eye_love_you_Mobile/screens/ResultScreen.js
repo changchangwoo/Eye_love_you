@@ -112,17 +112,24 @@ const ResultScreen = ({ navigation, route }) => {
         },
     };
 
-    const handleShare = async () => {
-        const image = Asset.fromModule(imgSrc);
-        await image.downloadAsync();
-        const localImagePath = image.localUri;
+    // const handleShare = async () => {
+    //     const image = Asset.fromModule(imgSrc);
+    //     await image.downloadAsync();
+    //     const localImagePath = image.localUri;
 
-        try {
-            const result = await Sharing.shareAsync(localImagePath);
-        } catch (error) {
-            console.error('이미지 공유 중 오류 발생:', error);
-        }
-    };
+    //     try {
+    //         const result = await Sharing.shareAsync(localImagePath);
+    //     } catch (error) {
+    //         console.error('이미지 공유 중 오류 발생:', error);
+    //     }
+    // };
+
+    const NavShare = () => {
+        navigation.navigate('Share', {
+            userdata: userdata, percent: percent, user_count: user_count, user_rank: user_rank,
+            user_time: user_time, user_bc: user_bc, user_wc: user_wc, user_userTbts: user_userTbts
+        })
+    }
 
     const data = {
         labels: [userdata.name + '님', '전체 회원 평균'],
@@ -165,11 +172,6 @@ const ResultScreen = ({ navigation, route }) => {
         const index = Math.floor(contentOffset / windowWidth);
         setCurrentIndex(index);
     };
-
-    const handleKakaoShare = () => {
-        console.log(hello)
-
-    }
 
     return (
         <View style={result_style.container}>
@@ -282,7 +284,7 @@ const ResultScreen = ({ navigation, route }) => {
                             title="공유하기"
                             style={result_style.address_button}
                             textStyle={result_style.address_button_text}
-                            onPress={handleShare}
+                            onPress={NavShare}
                         />
                     </View>
                 </ScrollView>

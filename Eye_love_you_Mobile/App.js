@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 import ResultScreen from './screens/ResultScreen';
 import MapScreen from './screens/MapScreen';
+import ShareScreen from './screens/ShareScreen';
 
 
 
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Result" component={ResultScreen} />
           <Stack.Screen name="Map" component={MapScreen} />
+          <Stack.Screen name="Share" component={ShareScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </FontLoader>
     </NavigationContainer>

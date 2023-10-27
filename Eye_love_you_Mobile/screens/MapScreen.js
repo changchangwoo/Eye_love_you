@@ -7,7 +7,7 @@ import { WebView } from 'react-native-webview';
 
 
 
-const REST_API_KEY = 'API';
+const REST_API_KEY = '4bc198264e72696845764c4e1d79986c';
 
 
 const MapScreen = ({ navigation, route }) => {
