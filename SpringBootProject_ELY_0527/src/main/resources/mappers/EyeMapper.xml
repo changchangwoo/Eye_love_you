@@ -7,89 +7,129 @@
     	INSERT INTO usereyeinfo(user_id, total_operating_time, total_blink_times, warning_count, blink_cycle)
     	VALUES(#{userId}, #{totalOperatingTime}, #{totalBlinkTimes}, #{warningCount}, #{blinkCycle})
     </insert>
+    <!-- user_id의 데이터 유무 확인 -->
+    <select id="dataCheck" resultType="int">
+        SELECT COUNT(*)
+        FROM usereyeinfo
+        WHERE user_id = #{userId}
+    </select>
     <!-- user_id의 데이터 -->
     <select id="getUserEyeAllData" resultType="com.eyeloveyou.biz.user.UserEyeVO">
     	SELECT *
 		FROM usereyeinfo
 		WHERE user_id = #{userId}
     </select>
-    
+    <!-- user_id의 데이터 수정 -->
+    <update id="updateUserData">
+    	UPDATE usereyeinfo
+    	SET
+    		total_operating_time = #{totalOperatingTime},
+    		total_blink_times = #{totalBlinkTimes},
+    		warning_count = #{warningCount},
+    		blink_cycle = #{blinkCycle}
+		WHERE user_id = #{userId}
+    </update>
     <!-- 전체 사용자 데이터 수 -->
     <select id="getDataCount" resultType="int">
     	SELECT count(*)
     	FROM usereyeinfo
     </select>
-    
-    <!-- 전체 사용자 사용 시간 합 -->
-    <select id="getAllUserTimeSum" resultType="float">
-    	SELECT sum(total_operating_time)
-    	FROM usereyeinfo
+    <!-- 내 순위 보기 -->
+    <select id="getUserRank" resultType="int">
+    	SELECT ranking
+    	FROM (
+    		SELECT user_id,
+  				RANK() OVER (ORDER BY 
+        			CASE 
+         				WHEN warning_count = 0 THEN total_operating_time
+            			ELSE total_operating_time DIV warning_count
+        			END DESC,
+        			CASE 
+            			WHEN warning_count = 0 THEN warning_count
+        			END DESC
+    			) AS 'ranking'
+			FROM eyeloveyoudb.usereyeinfo
+		) ranked
+		WHERE user_id = #{userId}
     </select>
     
-    <!-- 전체 사용자 깜박임 수 합 -->
-    <select id="getAllUserBlinkSum" resultType="float">
-    	SELECT sum(total_blink_times)
-    	FROM usereyeinfo
-    </select>
-    
-    <!-- 전체 사용자 경고음 출력 수 합 -->
-    <select id="getAllUserWarningSum" resultType="int">
-    	SELECT sum(warning_count)
-    	FROM usereyeinfo
-    </select>
-    
-    <!-- 전체 사용자 깜박임 주기 합 -->
-    <select id="getAllUserCycleSum" resultType="float">
-    	SELECT sum(blink_cycle)
-    	FROM usereyeinfo
-    </select>
-    
+    <!-- 내 분당 눈 깜박임 횟수 -->
+    <select id="getUserBTpM" resultType="float">
+		SELECT ROUND(perminute, 2)
+		FROM (
+			SELECT
+				user_id,
+				total_operating_time,
+				total_blink_times,
+				(total_blink_times / total_operating_time) * 60 AS perminute
+			FROM eyeloveyoudb.usereyeinfo
+		) per
+		WHERE user_id = #{userId}
+	</select>
+	
+    <!-- 내 분당 경고음 출력 횟수 -->
+    <select id="getUserWCpM" resultType="float">
+		SELECT ROUND(perminute, 2)
+		FROM (
+			SELECT
+				user_id,
+				total_operating_time,
+				warning_count,
+				(warning_count / total_operating_time) * 60 AS perminute
+			FROM eyeloveyoudb.usereyeinfo
+		) per
+		WHERE user_id = #{userId}
+	</select>
+	
+    <!-- 내 분당 눈 깜박임 횟수 -->
+    <select id="getAllBTpM" resultType="float">
+		SELECT ROUND(AVG(perminute), 2)
+		FROM (
+			SELECT
+				user_id,
+				total_operating_time,
+				total_blink_times,
+				(total_blink_times / total_operating_time) * 60 AS perminute
+			FROM eyeloveyoudb.usereyeinfo
+		) per
+	</select>
+	
+    <!-- 내 분당 경고음 출력 횟수 -->
+    <select id="getAllWCpM" resultType="float">
+		SELECT ROUND(AVG(perminute), 2)
+		FROM (
+			SELECT
+				user_id,
+				total_operating_time,
+				warning_count,
+				(warning_count / total_operating_time) * 60 AS perminute
+			FROM eyeloveyoudb.usereyeinfo
+		) per
+	</select>
+  
     <!-- 전체 사용자 사용 시간 평균 -->
     <select id="getAllUserTimeAvg" resultType="float">
-    	SELECT avg(total_operating_time)
-    	FROM usereyeinfo
-    </select>
-    
-    <!-- 전체 사용자 깜박임 수 평균 -->
-    <select id="getAllUserBlinkAvg" resultType="float">
-    	SELECT avg(total_blink_times)
-    	FROM usereyeinfo
-    </select>
-    
-    <!-- 전체 사용자 경고음 출력 수 평균 -->
-    <select id="getAllUserWarningAvg" resultType="float">
-    	SELECT avg(warning_count)
+    	SELECT ROUND(AVG(total_operating_time), 2)
     	FROM usereyeinfo
     </select>
     
     <!-- 전체 사용자 깜박임 주기 평균 -->
     <select id="getAllUserCycleAvg" resultType="float">
-    	SELECT avg(blink_cycle)
+    	SELECT ROUND(AVG(blink_cycle), 2)
     	FROM usereyeinfo
     </select>
     
-    <!-- 내 순위 보기 -->
-    <select id="getUserRank" resultType="int">
-    	SELECT ranking
-    	FROM (
-    		SELECT
-    			user_id,
-    			total_operating_time,
-    			total_blink_times,
-    			warning_count,
-    			blink_cycle,
-				CASE 
-    			    WHEN warning_count = 0 THEN total_operating_time
-    			    ELSE total_operating_time DIV warning_count
-  				END AS 'modified_warning_count',
-  				RANK() OVER (ORDER BY 
-        			CASE 
-         				WHEN warning_count = 0 THEN total_operating_time
-            			ELSE total_operating_time DIV warning_count
-        			END DESC
-    			) AS 'ranking'
-			FROM eyeloveyoudb.usereyeinfo
-		) ranked
+    <!-- 내 눈 깜박임 비율 -->
+    <select id="getBlinkRatio" resultType="float">
+		SELECT ROUND(total_blink_times / (total_blink_times + warning_count), 2)
+		FROM usereyeinfo
+		WHERE user_id = #{userId}
+    </select>
+    
+    <!-- 내 경고음 출력 비율 -->
+    <select id="getWarningRatio" resultType="float">
+		SELECT ROUND(warning_count / (total_blink_times + warning_count), 2)
+		FROM usereyeinfo
 		WHERE user_id = #{userId}
     </select>
 </mapper>
