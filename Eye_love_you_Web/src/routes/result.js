@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
+import { BarChart, PieChart, Pie, Cell, ResponsiveContainer, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
+
 import low_result_smile from '../imgs/low_result_smile.png'
 import normal_result_smile from '../imgs/normal_result_smile.png'
 import high_result_smile from '../imgs/high_result_smile.png'
@@ -16,16 +17,25 @@ function Result() {
     const [message, setMessage] = useState('');
     const [message2, setMessage2] = useState('');
     const [altText, setAltText] = useState('');
+
+    // 유저 전체 평균
     const time = userdata.timeAvg;
-    const blink_count = userdata.count;
-    const warning_count = userdata.warningAvg;
+    const blink_count = userdata.allBTpM;
+    const warning_count = userdata.allWCpM;
     const blink_cycle = userdata.cycleAvg;
+
+    // 사용자 평균 데이터
     const user_time = userdata.userTot;
     const user_bc = userdata.userBc;
-    const user_wc = userdata.userWc;
-    const user_userTbts = userdata.userTbts;
+    const user_wc = userdata.userWCpM;
+    const user_userTbts = userdata.userBTpM;
+    const blink_ratio = userdata.blinkRatio;
+    const warning_ratio = userdata.warningRatio;
+
+    // 사용자 및 등수
     const user_count = userdata.count;
     const user_rank = userdata.userRank;
+
     const navigate = useNavigate();
     const { Kakao } = window;
 
@@ -115,19 +125,19 @@ function Result() {
 
     const data_count = [
         {
-            name: '내 데이터',
+            name: '내 분당 눈 깜박임',
             count: user_userTbts,
             fill: "#FBE3F0"
         },
         {
-            name: '평균 눈 깜박임 횟수 데이터',
+            name: '평균 분당 눈 깜박임 횟수 데이터',
             count: blink_count,
             fill: '#f4a3f7'
 
         },
         {
             name: '이상적인 눈 깜박임 횟수 데이터',
-            count: 3,
+            count: 12,
             fill: '#FAD6FB'
 
 
@@ -148,7 +158,7 @@ function Result() {
         },
         {
             name: '이상적인 경고음 출력 데이터',
-            count: 3,
+            count: 1,
             fill: '#FAD6FB'
 
 
@@ -169,12 +179,19 @@ function Result() {
         },
         {
             name: '이상적인 눈 깜박임 주기 데이터',
-            count: 3,
+            count: 5,
             fill: '#FAD6FB'
 
 
         },
     ];
+
+    const pieData = [
+        { name: '경고음 출력 횟수', value: warning_ratio },
+        { name: '눈 깜박임 횟수', value: blink_ratio },
+
+    ];
+    const colors = ['#FAD6FB', '#f4a3f7'];
 
 
     return (
@@ -312,6 +329,39 @@ function Result() {
                     </div>
                 </div>
                 {/* 차트4 */}
+                <div className='Chart_Box'>
+                    <div className='Chart_Graph'>
+                        <ResponsiveContainer width="100%" height={400}>
+                            <PieChart>
+                                <Pie
+                                    data={pieData}
+                                    cx="50%"
+                                    cy="50%"
+                                    innerRadius={40}
+                                    outerRadius={120}
+                                    fill="#8884d8"
+                                    dataKey="value"
+                                >
+                                    {pieData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={colors[index]} />
+                                    ))}
+                                </Pie>
+                                <Tooltip />
+                                <Legend />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    </div>
+                    <div className='Chart_Descript'>
+                        <div className='Logo_Text_main Text_Medium' style={{ marginTop: '150px' }}>
+                            총 작동 시간
+                        </div>
+                        <div className='Text_small'>
+                            아이 러브 유 프로그램을 총 {user_time}초 동작하셨어요
+                            <br /> 아이러브유의 다른 사용자는 평균적으로 {time}초만큼 동작하였어요
+                        </div>
+                    </div>
+                </div>
+                {/* 차트3 */}
                 <div className='Logo_Text_main Text_Medium'>
                     {username} 님은 아이 러브 유 회원
                 </div>

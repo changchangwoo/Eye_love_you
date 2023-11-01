@@ -29,17 +29,24 @@ const ResultScreen = ({ navigation, route }) => {
     const scrollViewRef = useRef(null);
     const windowWidth = Dimensions.get('window').width;
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    // 유저 전체 평균
     const time = infodata.timeAvg;
-    const blink_count = infodata.count;
-    const warning_count = infodata.warningAvg;
+    const blink_count = infodata.allBTpM;
+    const warning_count = infodata.allWCpM;
     const blink_cycle = infodata.cycleAvg;
+
+    // 사용자 평균 데이터
     const user_time = infodata.userTot;
-    const user_bc = infodata.userBc;
-    const user_wc = infodata.userWc;
-    const user_userTbts = infodata.userTbts;
+    const user_bc = infodata.userBTpM; // 주기
+    const user_wc = infodata.userWCpM;
+    const user_userTbts = infodata.userBTpM;
+    const blink_ratio = infodata.blinkRatio;
+    const warning_ratio = infodata.warningRatio;
+
+    // 사용자 및 등수
     const user_count = infodata.count;
     const user_rank = infodata.userRank;
-
 
     useEffect(() => {
         try {
@@ -62,6 +69,7 @@ const ResultScreen = ({ navigation, route }) => {
                 .catch(error => {
                     console.error(error);
                 });
+            console.log(infodata)
         } catch (error) {
             console.log(error)
         }
@@ -110,6 +118,12 @@ const ResultScreen = ({ navigation, route }) => {
         style: {
             borderRadius: 16,
         },
+        legend: {
+            enabled: true,
+            textSize: 12,
+            textColor: 'black',
+            position: 'bottom', // legend를 아래로 배치
+        },
     };
 
     // const handleShare = async () => {
@@ -144,7 +158,7 @@ const ResultScreen = ({ navigation, route }) => {
         labels: [userdata.name + '님', '전체 회원 평균', '이상적 데이터'],
         datasets: [
             {
-                data: [user_userTbts, blink_count, 3]
+                data: [user_userTbts, blink_count, 12]
             },
         ],
     };
@@ -153,7 +167,7 @@ const ResultScreen = ({ navigation, route }) => {
         labels: [userdata.name + '님', '전체 회원 평균', '이상적 데이터'],
         datasets: [
             {
-                data: [user_wc, warning_count, 3],
+                data: [user_wc, warning_count, 1],
             },
         ],
     };
@@ -162,10 +176,27 @@ const ResultScreen = ({ navigation, route }) => {
         labels: [userdata.name + '님', '전체 회원 평균', '이상적 데이터'],
         datasets: [
             {
-                data: [user_bc, blink_cycle, 3],
+                data: [user_bc, blink_cycle, 5],
             },
         ],
     };
+
+    const data_ratio = [
+        {
+            name: "눈 깜박임 횟수",
+            population: blink_ratio,
+            color: "#FBE3F0", // 사용자 데이터 색상 (예시: 빨간색)
+            legendFontColor: "black",
+            legendFontSize: 12
+        },
+        {
+            name: "경고음 횟수",
+            population: warning_ratio,
+            color: "#2F2E41", // 전체 회원 평균 데이터 색상 (예시: 초록색)
+            legendFontColor: "black",
+            legendFontSize: 12
+        }
+    ];
 
     const handleScroll = (event) => {
         const contentOffset = event.nativeEvent.contentOffset.x;
@@ -185,7 +216,7 @@ const ResultScreen = ({ navigation, route }) => {
                     showsHorizontalScrollIndicator={false}
                     onScroll={handleScroll}
                     scrollEventThrottle={16}
-                    contentContainerStyle={{ width: Dimensions.get('window').width * 5 }} // 400% 크기
+                    contentContainerStyle={{ width: Dimensions.get('window').width * 6 }} // 400% 크기
                 >
                     {/* 총 작동 시간 (차트1) */}
                     <View style={result_style.data_chart}>
@@ -210,7 +241,7 @@ const ResultScreen = ({ navigation, route }) => {
                     {/* 눈 깜박임 횟수 (차트2) */}
                     <View style={result_style.data_chart}>
                         <View style={result_style.chart_name}>
-                            <Text style={result_style.chart_name_text}> 눈 깜박임 횟수</Text>
+                            <Text style={result_style.chart_name_text}> 분당 눈 깜박임 횟수</Text>
                         </View>
                         <View style={result_style.chart_data}>
                             <BarChart
@@ -267,7 +298,28 @@ const ResultScreen = ({ navigation, route }) => {
                             </Text>
                         </View>
                     </View>
-                    {/* 결과 및 등수화면 (차트는 아니지만 5) */}
+                    {/* 눈 깜박임 대 경고음 출력 비율 (차트5) */}
+                    <View style={result_style.data_chart}>
+                        <View style={result_style.chart_name}>
+                            <Text style={result_style.chart_name_text}> 눈 깜박임/경고음 비율</Text>
+                        </View>
+                        <View style={result_style.chart_data}>
+                            <PieChart
+                                data={data_ratio}
+                                width={Dimensions.get('window').width - 70} // 그래프 너비
+                                height={170}
+                                chartConfig={chartConfig}
+                                accessor={"population"}
+                            />
+                        </View>
+                        <View style={result_style.chart_descript}>
+                            <Text style={result_style.chart_descript_text}>
+                                {userdata.name}님의 눈 깜박임 별 경고음 출력 비율은
+                                {'\n'}   {blink_ratio} 대 {warning_ratio} 이에요
+                            </Text>
+                        </View>
+                    </View>
+                    {/* 결과 및 등수화면 (차트는 아니지만 6) */}
                     <View style={result_style.rank_chart}>
                         <Text style={result_style.rank_Text_sub}>
                             {userdata.name} 님은 아이러브유 회원

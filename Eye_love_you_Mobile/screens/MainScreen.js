@@ -18,7 +18,7 @@ const MainScreen = ({ navigation, route }) => {
     const [isOpacity4, setisOpacity4] = useState(1.0);
 
     const windowWidth = Dimensions.get('window').width;
-    const REST_API_KEY = '4bc198264e72696845764c4e1d79986c';
+    const REST_API_KEY = 'API';
 
     useEffect(() => {
         navigation.setOptions({

@@ -7,7 +7,7 @@ import { WebView } from 'react-native-webview';
 
 
 
-const REST_API_KEY = '4bc198264e72696845764c4e1d79986c';
+const REST_API_KEY = 'API';
 
 
 const MapScreen = ({ navigation, route }) => {
@@ -44,7 +44,6 @@ const MapScreen = ({ navigation, route }) => {
 				},
 			});
 			const data = await response.json();
-			console.log(data)
 			const extractedData = data.documents.map(item => {
 				return {
 					latitude: parseFloat(item.y), // 위도

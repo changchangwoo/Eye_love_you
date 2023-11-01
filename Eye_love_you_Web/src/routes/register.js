@@ -88,7 +88,7 @@ function Register() {
         if (idcheck) {
             if (inputPw === inputPwcheck) {
                 try {
-                    const response = await axios.post('https://3d20-218-51-29-138.ngrok-free.app/signup', {
+                    const response = await axios.post('http://localhost:8080/signup', {
                         userId: inputId,
                         password: inputPw,
                         name: inputNName,
@@ -114,7 +114,7 @@ function Register() {
 
     const onClickCheckID = async () => {
         try {
-            const response = await axios.post('https://3d20-218-51-29-138.ngrok-free.app/signup/check', {
+            const response = await axios.post('http://localhost:8080/signup/check', {
                 userId: inputId,
             })
             console.log(response.data)
