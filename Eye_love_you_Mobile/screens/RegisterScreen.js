@@ -28,7 +28,7 @@ const RegisterScreen = ({ navigation }) => {
   const onClickRegistser = async () => {
     console.log(inputId, inputPw, inputNName, inputEmail, selectedAddress)
     try {
-      const response = await fetch('http://192.168.25.17:8080/signup', {
+      const response = await fetch('http://192.168.75.118:8080/signup', {
         // PC작업 http://192.168.25.33:8080/signup
         method: 'POST',
         headers: {

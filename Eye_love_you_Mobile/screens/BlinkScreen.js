@@ -159,7 +159,7 @@ const BlinkScreen = ({ navigation, route }) => {
     const update_timer = timer / 10
     console.log(userdata.userId, warningCount, blinkCount, update_timer)
     try {
-      const response = await fetch('http://192.168.25.17:8080/save', {
+      const response = await fetch('http://192.168.75.118:8080/save', {
         // PC작업 http://192.168.25.33:8080/save
         method: 'POST',
         headers: {
@@ -290,9 +290,9 @@ const BlinkScreen = ({ navigation, route }) => {
                   marginVertical: 50,
                 }}
               />
-              <Text style={[blink_style.end_text]}>  {userdata.name}  님의 눈 깜박임 감지 동작이
+              <Text style={[blink_style.end_text]}>  {userdata.name}  님의 눈 깜박임 감지 동작이{'\n'}
                 정상적으로 종료 됐어요{'\n'}{'\n'}
-                식별 데이터 시각화 항목에서 그래프와 함께 확인하세요
+                식별 데이터 시각화 항목에서{'\n'}그래프와 함께 확인하세요
               </Text>
               <CustomButton
                 title="메인화면으로"
@@ -314,10 +314,10 @@ const BlinkScreen = ({ navigation, route }) => {
                   카메라 권한의 허용을 확인하세요
                 </Text>
                 <Text style={blink_style.notify_text}>
-                  기능 동작시 카메라에 사용자의 얼굴이 전부 나오도록 확인하세요
+                  기능 동작시 카메라에 사용자의 얼굴이{'\n'}전부 나오도록 확인하세요
                 </Text>
                 <Text style={blink_style.notify_text}>
-                  정확한 눈 깜박임 데이터 측정을 위하여 미 측정시 정지버튼을 클릭하세요
+                  정확한 눈 깜박임 데이터 측정을 위하여{'\n'}미측정시 정지버튼을 클릭하세요
                 </Text>
               </View>
               <CustomButton

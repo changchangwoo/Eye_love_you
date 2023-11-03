@@ -111,12 +111,12 @@ function Result() {
 
     const data_time = [
         {
-            name: '내 데이터',
+            name: '내 작동 시간',
             count: user_time,
             fill: "#FBE3F0"
         },
         {
-            name: '전체 사용자 평균 데이터',
+            name: '사용자 평균 작동 시간',
             count: time,
             fill: '#f4a3f7'
 
@@ -125,18 +125,18 @@ function Result() {
 
     const data_count = [
         {
-            name: '내 분당 눈 깜박임',
+            name: '내 분당 눈 깜박임 횟수',
             count: user_userTbts,
             fill: "#FBE3F0"
         },
         {
-            name: '평균 분당 눈 깜박임 횟수 데이터',
+            name: '사용자 평균',
             count: blink_count,
             fill: '#f4a3f7'
 
         },
         {
-            name: '이상적인 눈 깜박임 횟수 데이터',
+            name: '이상적인 분당 깜박임 횟수',
             count: 12,
             fill: '#FAD6FB'
 
@@ -146,18 +146,18 @@ function Result() {
 
     const data_warning = [
         {
-            name: '내 데이터',
+            name: '내 분당 경고음 출력 횟수',
             count: user_wc,
             fill: "#FBE3F0"
         },
         {
-            name: '평균 경고음 출력 데이터',
+            name: '사용자 평균',
             count: warning_count,
             fill: '#f4a3f7'
 
         },
         {
-            name: '이상적인 경고음 출력 데이터',
+            name: '이상적인 경고음 출력 횟수',
             count: 1,
             fill: '#FAD6FB'
 
@@ -167,18 +167,18 @@ function Result() {
 
     const data_cycle = [
         {
-            name: '내 데이터',
+            name: '내 눈 깜박임 주기',
             count: user_bc,
             fill: "#FBE3F0"
         },
         {
-            name: '평균 눈 깜박임 주기 데이터',
+            name: '사용자 평균',
             count: blink_cycle,
             fill: '#f4a3f7'
 
         },
         {
-            name: '이상적인 눈 깜박임 주기 데이터',
+            name: '이상적인 눈 깜박임 주기',
             count: 5,
             fill: '#FAD6FB'
 
@@ -187,8 +187,8 @@ function Result() {
     ];
 
     const pieData = [
-        { name: '경고음 출력 횟수', value: warning_ratio },
-        { name: '눈 깜박임 횟수', value: blink_ratio },
+        { name: '경고음 출력 비율', value: warning_ratio },
+        { name: '눈 깜박임 비율', value: blink_ratio },
 
     ];
     const colors = ['#FAD6FB', '#f4a3f7'];
@@ -226,9 +226,9 @@ function Result() {
                     </div>
                     <div className='Chart_Descript'>
                         <div className='Logo_Text_main Text_Medium' style={{ marginTop: '150px' }}>
-                            총 작동 시간
+                            작동 시간
                         </div>
-                        <div className='Text_small'>아이 러브 유 프로그램을 총 {user_time}초 동작하셨어요
+                        <div className='Text_small'>최근에 아이 러브 유 프로그램을 {user_time}초 동안 동작하셨어요
                             <br /> 아이러브유의 다른 사용자는 평균적으로 {time}초만큼 동작하였어요
                         </div>
                     </div>
@@ -237,11 +237,11 @@ function Result() {
                 <div className='Chart_Box'>
                     <div className='Chart_Descript'>
                         <div className='Logo_Text_main Text_Medium' style={{ marginTop: '150px' }}>
-                            눈 깜박임 횟수
+                            분당 눈 깜박임 횟수
                         </div>
-                        <div className='Text_small'>프로그램을 실행하면서 총 {user_userTbts}번 눈을 깜박이셨어요
+                        <div className='Text_small'>{username}님은 1분에 {user_userTbts}번만큼 눈을 깜박이셨어요
                             <br /> 아이러브유의 다른 사용자는 평균적으로 {blink_count}번 깜박였네요
-                            <br /> 이상적인 눈 깜박임은 몇번이에요
+                            <br /> 이상적인 눈 깜박임은 분당 12번이에요
                         </div>
                     </div>
                     <div className='Chart_Graph'>
@@ -289,11 +289,11 @@ function Result() {
                     </div>
                     <div className='Chart_Descript'>
                         <div className='Logo_Text_main Text_Medium' style={{ marginTop: '150px' }}>
-                            경고음 출력 횟수
+                            분당 경고음 출력 횟수
                         </div>
-                        <div className='Text_small'>프로그램을 실행하면서 총 {user_wc}번 경고를 받으셨어요
+                        <div className='Text_small'>{username}님은 1분에 {user_wc}번만큼 경고를 받으셨어요
                             <br /> 아이러브유의 다른 사용자는 평균적으로 {warning_count}번 경고를 받으셨네요
-                            <br /> 아이 러브 유는</div>
+                        </div>
                     </div>
                 </div>
                 {/* 차트3 */}
@@ -302,9 +302,9 @@ function Result() {
                         <div className='Logo_Text_main Text_Medium' style={{ marginTop: '150px' }}>
                             눈 깜박임 주기
                         </div>
-                        <div className='Text_small'>프로그램을 실행하면서 보통 {user_bc}초 주기로 눈을 깜박이셨어요
-                            <br /> 아이러브유의 다른 사용자는 평균적으로 {blink_cycle} 주기로 눈을 깜박여요
-                            <br /> 이상적인 눈 깜박임은 몇번이에요
+                        <div className='Text_small'>{username}님은 {user_bc}초 주기로 눈을 깜박이셨어요
+                            <br /> 아이러브유의 다른 사용자는 평균적으로 {blink_cycle}초 주기로 눈을 깜박여요
+                            <br /> 이상적인 눈 깜박임 주기는 5초 정도에요
                         </div>
                     </div>
                     <div className='Chart_Graph'>
@@ -353,15 +353,15 @@ function Result() {
                     </div>
                     <div className='Chart_Descript'>
                         <div className='Logo_Text_main Text_Medium' style={{ marginTop: '150px' }}>
-                            총 작동 시간
+                            눈 깜박임/경고음 비율
                         </div>
                         <div className='Text_small'>
-                            아이 러브 유 프로그램을 총 {user_time}초 동작하셨어요
-                            <br /> 아이러브유의 다른 사용자는 평균적으로 {time}초만큼 동작하였어요
+                            {username}님의 눈 깜박임 횟수 대 경고음 출력 횟수 비율은 {blink_ratio * 100} : {warning_ratio * 100} 이에요
+                            <br /> 눈 깜박임 횟수 부분이 크면 눈 건강을 유지하는 데 노력하고 있다는 것을 의미해요
                         </div>
                     </div>
                 </div>
-                {/* 차트3 */}
+                {/* 차트5 */}
                 <div className='Logo_Text_main Text_Medium'>
                     {username} 님은 아이 러브 유 회원
                 </div>

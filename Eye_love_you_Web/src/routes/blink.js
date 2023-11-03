@@ -81,11 +81,12 @@ function Blink() {
                             <br />
                         </div>
                         <div className='descript_box_text Text_small'>
-                            아이러브유에서 제공하는 눈깜박임 감지 기능은
-                            사용자의 카메라 디바이스를 통해 실시간 눈 깜박임을 감지합니다 <br />
-                            눈 깜박임 감지 기능의 원활한 동작을 위해 <br />다음과 같은 디바이스를 요구합니다<br /><br />
+                            아이러브유에서 제공하는 눈깜박임 감지 기능은 <br />
+                            사용자의 카메라 디바이스를 통해 <br /> 실시간 눈 깜박임을 감지합니다. <br /><br />
+                            눈 깜박임 감지 기능의 원활한 동작을 위해 <br />다음과 같은 디바이스를 요구합니다. <br /><br />
                             <p style={{ fontWeight: 'bolder' }}>- 웹 카메라<br /></p>
-                            <p style={{ fontWeight: 'bolder' }}>- 사운드 출력장치<br /></p>                        </div>
+                            <p style={{ fontWeight: 'bolder' }}>- 사운드 출력장치<br /></p>
+                        </div>
                     </div>
                 </div>
                 {/* 슬라이드2 */}
@@ -99,9 +100,9 @@ function Blink() {
                     <div className='descript_box'>
                         <div className='descript_box_text Text_small'>
                             아이 러브 유에서 제공하는 눈깜박임 감지 기능은<br />
-                            아이러브유 자체 프로그램 설치를 요구합니다 <br /><br />
-                            하단 버튼의 클릭을 통해서 눈 깜박임 감지 프로그램의 <br />
-                            설치를 도움받을 수 있습니다<br /><br /><br />
+                            아이러브유 프로그램으로도 이용 가능합니다. <br /><br />
+                            하단 설치하기 버튼으로 눈 깜박임 감지 프로그램을 <br />
+                            다운로드할 수 있습니다.<br /><br /><br />
                             <Button variant="light" className='install_button' onClick={onClickInstaller}>설치하기</Button>
                         </div>
                         <div className='descript_box_img'>
@@ -122,19 +123,19 @@ function Blink() {
                     <div className='descript_box'>
                         <div className='descript_box_text2 Text_small'>
                             <div className='des_'>사용시간</div>
-                            프로그램의 총 동작시간을 확인할 수 있습니다
+                            최근 프로그램의 동작시간을 확인할 수 있습니다.
                             <div className='des_'>눈 깜박임 횟수 측정</div>
-                            사용자의 눈 깜박임을 감지하고 횟수를 제공합니다
+                            사용자의 눈 깜박임을 감지하여 <br /> 횟수로 제공합니다.
                             <div className='des_'>경고음 출력</div>
-                            사용자가 일정시간 이상 눈을 깜박이지 않음을 감지하면 경고음을 출력합니다
+                            사용자가 일정시간 이상 눈을 깜박이지 않으면 경고음을 출력합니다.
                         </div>
                         <div className='descript_box_text2 Text_small'>
                             <div className='des_'>눈 깜박임 주기 측정</div>
-                            사용자의 눈 깜박임 주기 횟수를 측정합니다
+                            사용자의 눈 깜박임 사이 시간을 측정합니다.
                             <div className='des_'>자동정지</div>
-                            사용자가 눈을 감고 있으면 자동으로 측정을 멈춥니다
+                            사용자가 눈을 감고 있거나 카메라에서 벗어나면 자동으로 측정을 멈춥니다.
                             <div className='des_'>경고음 횟수 출력</div>
-                            경고음 출력 시 출력 횟수를 저장하여 제공합니다
+                            경고음 출력 횟수를 저장하여 제공합니다.
                         </div>
                     </div>
                 </div>
@@ -153,14 +154,14 @@ function Blink() {
                             <br />
                         </div>
                         <div className='descript_box_text2 Text_small'
-                            style={{ marginTop: '100px' }}>
-                            측정한 데이터를 시각화 자료와 함께 한눈에 확인하세요<br />
+                            style={{ marginTop: '50px' }}>
+                            측정한 데이터를 시각화 자료와 함께<br /> 한눈에 확인하세요<br />
                             <br />
                             이상적인 수치 보다 얼마나 더 눈을 떴을까요?
                             <br />
                             경고음이 이전보다 몇 번 더 출력했을까요?
                             <br />
-                            아이 러브 유 회원 사이에서 내 안구 순위는 몇등 일까요?
+                            아이 러브 유 회원 사이에서 <br />내 안구 순위는 몇등 일까요?
                             <div className='des_'>내 눈은 어제보다 얼마나 더 나아졌을까요?</div>
                             <Button variant="light" className='install_button'
                                 style={{ marginTop: '50px' }} onClick={resultpage}>확인하기</Button>

@@ -18,7 +18,7 @@ const MainScreen = ({ navigation, route }) => {
     const [isOpacity4, setisOpacity4] = useState(1.0);
 
     const windowWidth = Dimensions.get('window').width;
-    const REST_API_KEY = 'API';
+    const REST_API_KEY = 'API_KEY';
 
     useEffect(() => {
         navigation.setOptions({
@@ -250,7 +250,7 @@ const MainScreen = ({ navigation, route }) => {
                                     {isImage3Clicked && (
                                         <>
                                             <Text style={main_style.text}>주변 안과 검색</Text>
-                                            <Text style={main_style.sub_text}>내 데이터를 기반으로 한{'\n'}
+                                            <Text style={main_style.sub_text}>내 데이터를 기반으로{'\n'}
                                                 주변의 안과를 한 눈에 확인해보세요{'\n'}</Text>
                                         </>
                                     )}

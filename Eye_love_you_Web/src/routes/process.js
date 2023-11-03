@@ -168,7 +168,7 @@ function Process() {
                                 <div className='modal_detail'>
                                     <div className='modal_left'>
                                         <br />
-                                        카메라 디바이스 및 <br />오디오 출력장치의 연결을 확인하세요
+                                        카메라 디바이스와 <br />오디오 출력장치의 연결을 확인하세요
                                         <br />
                                         <br />
                                         프로그램이 동작하면,
@@ -213,13 +213,9 @@ function Process() {
             </div>
             <div className='WebBlink_Logo'>
                 <div className='WebBlink_Text_main Text_Medium'>
-                    눈 깜박임 감지
+                    눈 깜박임 감지 <br /><br />
                 </div>
-                <div className='Logo_Text_sub Text_Large'>
-                    기능 테스트 페이지
-                    <br />
-                </div>
-                <div className='Status_text'> 상태값 입력 테스트</div>
+                <div className='Status_text'> 프로그램 현재 상태</div>
 
                 <div className='WebBlink_Box'>
                     <div className='WebBlink_Box_Left'>

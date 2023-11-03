@@ -53,7 +53,7 @@ const ResultScreen = ({ navigation, route }) => {
             const userdata = route.params.userdata
             setUserData(userdata)
             const userid = userdata.userId
-            fetch('http://192.168.25.17:8080/info', {
+            fetch('http://192.168.75.118:8080/info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -184,14 +184,14 @@ const ResultScreen = ({ navigation, route }) => {
     const data_ratio = [
         {
             name: "눈 깜박임 횟수",
-            population: blink_ratio,
+            population: 3000,
             color: "#FBE3F0", // 사용자 데이터 색상 (예시: 빨간색)
             legendFontColor: "black",
             legendFontSize: 12
         },
         {
             name: "경고음 횟수",
-            population: warning_ratio,
+            population: 4000,
             color: "#2F2E41", // 전체 회원 평균 데이터 색상 (예시: 초록색)
             legendFontColor: "black",
             legendFontSize: 12
@@ -221,7 +221,7 @@ const ResultScreen = ({ navigation, route }) => {
                     {/* 총 작동 시간 (차트1) */}
                     <View style={result_style.data_chart}>
                         <View style={result_style.chart_name}>
-                            <Text style={result_style.chart_name_text}> 총 작동 시간</Text>
+                            <Text style={result_style.chart_name_text}> 작동 시간</Text>
                         </View>
                         <View style={result_style.chart_data}>
                             <BarChart
@@ -233,7 +233,7 @@ const ResultScreen = ({ navigation, route }) => {
                         </View>
                         <View style={result_style.chart_descript}>
                             <Text style={result_style.chart_descript_text}>
-                                {userdata.name}님은 프로그램을 총 {user_time}초 동작하셨어요
+                                최근에 아이 러브 유 프로그램을 {user_time}초 동안 동작하셨어요
                                 {'\n'}아이러브유의 다른 사용자들은 평균적으로 {time}초만큼 동작하였어요
                             </Text>
                         </View>
@@ -253,15 +253,16 @@ const ResultScreen = ({ navigation, route }) => {
                         </View>
                         <View style={result_style.chart_descript}>
                             <Text style={result_style.chart_descript_text}>
-                                {userdata.name}님은 프로그램을 실행하면서 {user_userTbts}번 눈을 깜박이셨어요
-                                {'\n'}아이러브유의 다른 사용자들은 평균적으로 {blink_count}초만큼 깜박였네요
+                                {userdata.name}님은 1분에 {user_userTbts}번만큼 눈을 깜박이셨어요
+                                {'\n'}아이러브유의 다른 사용자는 평균적으로 {blink_count}번 깜박였네요
+                                {'\n'}이상적인 눈 깜박임은 분당 12번이에요
                             </Text>
                         </View>
                     </View>
                     {/* 경고음 출력 횟수 (차트3) */}
                     <View style={result_style.data_chart}>
                         <View style={result_style.chart_name}>
-                            <Text style={result_style.chart_name_text}> 경고음 출력 횟수</Text>
+                            <Text style={result_style.chart_name_text}> 분당 경고음 출력 횟수</Text>
                         </View>
                         <View style={result_style.chart_data}>
                             <BarChart
@@ -273,8 +274,8 @@ const ResultScreen = ({ navigation, route }) => {
                         </View>
                         <View style={result_style.chart_descript}>
                             <Text style={result_style.chart_descript_text}>
-                                {userdata.name}님은 프로그램을 실행하면서 {user_wc}번 경고를 받으셨어요
-                                {'\n'}아이러브유의 다른 사용자들은 평균적으로 {warning_count}번 경고를 받았어요
+                                {userdata.name}님은 1분에 {user_wc}번만큼 경고를 받으셨어요
+                                {'\n'}아이러브유의 다른 사용자는 평균적으로 {warning_count}번 경고를 받았어요
                             </Text>
                         </View>
                     </View>
@@ -293,8 +294,9 @@ const ResultScreen = ({ navigation, route }) => {
                         </View>
                         <View style={result_style.chart_descript}>
                             <Text style={result_style.chart_descript_text}>
-                                {userdata.name}님은 프로그램을 실행하면서 {user_bc}초 주기로 눈을 깜박이셨어요
-                                {'\n'}아이러브유의 다른 사용자들은 평균적으로 {blink_cycle} 주기로 눈을 깜박여요
+                                {userdata.name}님은 {user_bc}초 주기로 눈을 깜박이셨어요
+                                {'\n'}아이러브유의 다른 사용자는 평균적으로 {blink_cycle}초 주기로 눈을 깜박여요
+                                {'\n'}이상적인 눈 깜박임 주기는 5초 정도에요
                             </Text>
                         </View>
                     </View>

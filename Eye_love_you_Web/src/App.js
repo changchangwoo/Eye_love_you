@@ -153,7 +153,7 @@ function MAIN(props) {
             <img className='Content_1_content_icon' src={location_img} alt="" />
             <div className='Content_1_content_text Text_Title'>
               주변 안과/안경원 탐색
-              <div className='Text_small'>사용자의 위치를 기반으로한 안과 및 안경원의 위치를 제공합니다</div>
+              <div className='Text_small'>사용자의 위치를 기반으로 안과 및 안경원의 위치를 제공합니다</div>
             </div>
             <div className='Content_1_more'>  </div>
           </div>
