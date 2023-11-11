@@ -40,7 +40,7 @@ def db_process(timer, count, warning_check, cycle):
     timer = timer/10
     cycle_avg = cycle_avg/10
     # 21.139.5.188
-    conn = pymysql.connect(host='localhost', user='root', password='1234!', db='eyeloveyoudb', charset='utf8')
+    conn = pymysql.connect(host='175.124.176.138', user='root', password='1234!', db='eyeloveyoudb', charset='utf8')
     insert_query = "INSERT INTO usereyeinfo VALUES (%s, %s, %s, %s, %s)"
     update_query = "UPDATE usereyeinfo SET total_operating_time = %s, total_blink_times = %s, warning_count = %s, warning_count = %s WHERE user_id = %s"
     check_query = "SELECT * FROM usereyeinfo WHERE user_id=%s"

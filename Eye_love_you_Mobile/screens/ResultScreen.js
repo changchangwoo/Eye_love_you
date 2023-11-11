@@ -41,8 +41,8 @@ const ResultScreen = ({ navigation, route }) => {
     const user_bc = infodata.userBTpM; // 주기
     const user_wc = infodata.userWCpM;
     const user_userTbts = infodata.userBTpM;
-    const blink_ratio = infodata.blinkRatio;
-    const warning_ratio = infodata.warningRatio;
+    const [blink_ratio, setBlinkratio] = useState();
+    const [warning_ratio, setWarningratio] = useState();
 
     // 사용자 및 등수
     const user_count = infodata.count;
@@ -53,7 +53,7 @@ const ResultScreen = ({ navigation, route }) => {
             const userdata = route.params.userdata
             setUserData(userdata)
             const userid = userdata.userId
-            fetch('http://192.168.75.118:8080/info', {
+            fetch('https://port-0-eye-love-you-7lk2bloqwhkr1.sel5.cloudtype.app/info', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,12 +64,13 @@ const ResultScreen = ({ navigation, route }) => {
             })
                 .then(response => response.json())
                 .then(responseData => {
+                    setBlinkratio(responseData.blinkRatio);
+                    setWarningratio(responseData.warningRatio);
                     setInfodata(responseData)
                 })
                 .catch(error => {
                     console.error(error);
                 });
-            console.log(infodata)
         } catch (error) {
             console.log(error)
         }
@@ -126,18 +127,6 @@ const ResultScreen = ({ navigation, route }) => {
         },
     };
 
-    // const handleShare = async () => {
-    //     const image = Asset.fromModule(imgSrc);
-    //     await image.downloadAsync();
-    //     const localImagePath = image.localUri;
-
-    //     try {
-    //         const result = await Sharing.shareAsync(localImagePath);
-    //     } catch (error) {
-    //         console.error('이미지 공유 중 오류 발생:', error);
-    //     }
-    // };
-
     const NavShare = () => {
         navigation.navigate('Share', {
             userdata: userdata, percent: percent, user_count: user_count, user_rank: user_rank,
@@ -184,15 +173,15 @@ const ResultScreen = ({ navigation, route }) => {
     const data_ratio = [
         {
             name: "눈 깜박임 횟수",
-            population: 3000,
-            color: "#FBE3F0", // 사용자 데이터 색상 (예시: 빨간색)
+            population: blink_ratio,
+            color: "#FBE3F0",
             legendFontColor: "black",
             legendFontSize: 12
         },
         {
             name: "경고음 횟수",
-            population: 4000,
-            color: "#2F2E41", // 전체 회원 평균 데이터 색상 (예시: 초록색)
+            population: warning_ratio,
+            color: "#2F2E41",
             legendFontColor: "black",
             legendFontSize: 12
         }
@@ -305,15 +294,23 @@ const ResultScreen = ({ navigation, route }) => {
                         <View style={result_style.chart_name}>
                             <Text style={result_style.chart_name_text}> 눈 깜박임/경고음 비율</Text>
                         </View>
-                        <View style={result_style.chart_data}>
-                            <PieChart
-                                data={data_ratio}
-                                width={Dimensions.get('window').width - 70} // 그래프 너비
-                                height={170}
-                                chartConfig={chartConfig}
-                                accessor={"population"}
-                            />
-                        </View>
+                        {blink_ratio && warning_ratio ? (
+                            <View style={result_style.chart_data}>
+                                <PieChart
+                                    data={data_ratio}
+                                    width={Dimensions.get('window').width - 70} // 그래프 너비
+                                    height={170}
+                                    chartConfig={chartConfig}
+                                    accessor={"population"}
+                                />
+                            </View>
+                        ) : (
+                            <View style={result_style.chart_descript}>
+                                <Text style={result_style.chart_descript_text}>
+                                    눈 깜박임 및 경고음 출력 비율 데이터가 없습니다.
+                                </Text>
+                            </View>
+                        )}
                         <View style={result_style.chart_descript}>
                             <Text style={result_style.chart_descript_text}>
                                 {userdata.name}님의 눈 깜박임 별 경고음 출력 비율은
@@ -335,7 +332,7 @@ const ResultScreen = ({ navigation, route }) => {
                             <Text style={result_style.rank_descript}>{message}</Text>
                         </View>
                         <CustomButton
-                            title="공유하기"
+                            title="상세 정보"
                             style={result_style.address_button}
                             textStyle={result_style.address_button_text}
                             onPress={NavShare}

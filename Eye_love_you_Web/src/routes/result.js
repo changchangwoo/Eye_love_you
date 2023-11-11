@@ -42,6 +42,7 @@ function Result() {
     useEffect(() => {
         const userid = sessionStorage.getItem('userinfo');
         const username = sessionStorage.getItem('username');
+        console.log(user_userTbts)
         const infoData = async () => {
             const update_userid = userid.replace(/"/g, '');
             const update_username = username.replace(/"/g, '');
@@ -356,7 +357,7 @@ function Result() {
                             눈 깜박임/경고음 비율
                         </div>
                         <div className='Text_small'>
-                            {username}님의 눈 깜박임 횟수 대 경고음 출력 횟수 비율은 {blink_ratio * 100} : {warning_ratio * 100} 이에요
+                            {username}님의 눈 깜박임 횟수 대 경고음 출력 횟수 비율은 {blink_ratio} : {warning_ratio} 이에요
                             <br /> 눈 깜박임 횟수 부분이 크면 눈 건강을 유지하는 데 노력하고 있다는 것을 의미해요
                         </div>
                     </div>

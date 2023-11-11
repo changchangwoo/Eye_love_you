@@ -74,8 +74,7 @@ function App() {
         <ul className='NavContents'>
           <li><Link to="/blink" style={{ textDecoration: "none", color: "black" }}>눈 깜박임 감지</Link></li>
           <li><Link to="/map" style={{ textDecoration: "none", color: "black" }}>주변 안과 찾기</Link></li>
-          <li>간편진단</li>
-          <li>커뮤니티</li>
+          <li><Link to="/result" style={{ textDecoration: "none", color: "black" }}>감지 결과 확인</Link></li>
         </ul>
         {
           loginCheck ? (

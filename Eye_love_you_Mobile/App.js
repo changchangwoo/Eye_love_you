@@ -11,9 +11,6 @@ import ResultScreen from './screens/ResultScreen';
 import MapScreen from './screens/MapScreen';
 import ShareScreen from './screens/ShareScreen';
 
-
-
-
 const Stack = createStackNavigator();
 
 export default function App() {

@@ -17,7 +17,7 @@ user_id, password = StringVar(), StringVar()
 def check_data():
     input_id = user_id.get()
     input_password = password.get()
-    connection = pymysql.connect(host='localhost', user='root', password='1234!', db='eyeloveyoudb', charset='utf8')
+    connection = pymysql.connect(host='175.124.176.138', user='root', password='1234!', db='eyeloveyoudb', charset='utf8')
     try:
         with connection.cursor() as cursor:
             sql = "SELECT * FROM userprofile WHERE user_id=%s AND password=%s"

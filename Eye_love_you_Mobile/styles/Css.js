@@ -56,7 +56,6 @@ export const login_style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
-        paddingTop: StatusBar.currentHeight,
     },
     top_content: {
         width: '100%',
@@ -123,7 +122,6 @@ export const login_style = StyleSheet.create({
 
 export const register_style = StyleSheet.create({
     container: {
-        paddingTop: StatusBar.currentHeight,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="63a6f3fe-dec3-4746-88c6-612e08e47623" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Blink/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Blink/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/assets/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/assets/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-plugin-utils/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-plugin-utils/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-plugin-utils/lib/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-plugin-utils/lib/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-plugin-utils/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-plugin-utils/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/find-suggestion.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/find-suggestion.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/validator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/validator.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/lib/validator.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/helper-validator-option/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-syntax-flow/lib/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-syntax-flow/lib/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-syntax-flow/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-syntax-flow/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-transform-flow-strip-types/lib/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-transform-flow-strip-types/lib/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-transform-flow-strip-types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@babel/plugin-transform-flow-strip-types/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@jridgewell/source-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/@jridgewell/source-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/dist/acorn.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/dist/acorn.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/dist/acorn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/dist/acorn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/dist/acorn.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/dist/acorn.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/acorn/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/async/dist/async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/async/dist/async.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/async/dist/async.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/async/dist/async.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/async/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/async/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/dist/joi-browser.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/dist/joi-browser.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/state.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/state.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/template.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/alternatives.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/alternatives.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/array.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/binary.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/binary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/string.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/types/string.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/lib/validator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/joi/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/bin/terser.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/dist/bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/dist/bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/ast.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/ast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/drop-side-effect-free.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/drop-side-effect-free.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/drop-unused.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/drop-unused.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/evaluate.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/evaluate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/inference.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/inference.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/inline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/inline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/reduce-vars.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/reduce-vars.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/tighten-body.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/compress/tighten-body.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/minify.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/minify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/mozilla-ast.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/mozilla-ast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/output.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/output.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/parse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/propmangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/propmangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/scope.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/scope.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/size.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/size.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/lib/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/tools/domprops.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/tools/domprops.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/tools/terser.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/node_modules/terser/tools/terser.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/BlinkScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/BlinkScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/MainScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/MainScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/MapScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/MapScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/RegisterScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/RegisterScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/ResultScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/ResultScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/ShareScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/ShareScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/SplashScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/screens/SplashScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Mobile/styles/Css.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Mobile/styles/Css.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Program/.idea/eye_blink_detector-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Program/.idea/eye_blink_detector-master.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Program/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Program/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Program/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Program/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Program/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Program/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Web/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Web/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Web/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Web/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Eye_love_you_Web/src/routes/result.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Eye_love_you_Web/src/routes/result.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2XyYd9cZp4putgKJXB0EnOWpFhy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/changwoo/Desktop/Eye_Love_you/Eye_love_you/Eye_love_you_Blink"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="63a6f3fe-dec3-4746-88c6-612e08e47623" name="변경" comment="" />
+      <created>1699602871021</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699602871021</updated>
+    </task>
+    <servers />
+  </component>
+</project>

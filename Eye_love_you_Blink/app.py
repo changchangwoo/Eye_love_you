@@ -182,23 +182,22 @@ def handle_message(image_data):
 
                 if delay_flag == 1:
                     delay_timer = delay_timer + 1
-                    if delay_timer == 10:
+                    if delay_timer == 7:
                         delay_flag = 0
                         delay_timer = 0
 
                 # timer, check = 10 == 1sec // 의미가 없는 것 같다
-                timer = timer + 1.2
+                timer = timer + 2
                 check = check + 1.2
                 cycle_timer = cycle_timer + 1.2
 
-                if close_check >= 25:
-                    print('눈을 감았다고 식별')
+                if close_check >= 15:
                     status = 3
                     emit('status', {
                         'status': status
                     })
 
-                if check >= 25:
+                if check >= 15:
                     emit('warningSound', True)
                     check = 0
                     warning_check = warning_check + 1
@@ -211,7 +210,7 @@ def handle_message(image_data):
             emit('data', {'time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                           'count': count,
                           'cycle': cycle,
-                          'timer': timer,
+                          'timer': int(timer),
                           'warning_check': warning_check
                           })
 
@@ -219,14 +218,10 @@ def handle_message(image_data):
                 'status': status
             })
 
-            print(pause_check)
-
         except UnboundLocalError as e: # 얼굴이 아예 인식이 안되는 경우
             face_count = face_count + 1.2
-            print(face_count)
             if face_count >= 25:
                 status = 2
-                print('얼굴이 인식되어지 않았다고 식별')
                 emit('status', {
                     'status': status
                 })

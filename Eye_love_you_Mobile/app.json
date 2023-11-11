@@ -4,12 +4,11 @@
     "slug": "Eye_love_you_Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/imgs/smile.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FBE3F0"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -18,17 +17,24 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.패키지명.패키지명",
+      "package": "com.changchangwoo.Eye_love_you_Mobile",
       "config": {
-        "googleMaps": { "apiKey": "API_KEY" }
-    },
+        "googleMaps": {
+          "apiKey": "api"
+        }
+      },
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/imgs/smile.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3ba753e9-dc1a-4099-98f4-6334c2a8d8a5"
+      }
     }
   }
 }

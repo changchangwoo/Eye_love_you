@@ -4,7 +4,6 @@ import { splash_style } from '../styles/Css.js';
 
 
 const SplashScreen = ({ navigation }) => {
-
     useEffect(() => {
         const timer = setTimeout(() => {
             navigation.replace('Login');

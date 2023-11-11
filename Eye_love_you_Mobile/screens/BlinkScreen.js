@@ -159,7 +159,7 @@ const BlinkScreen = ({ navigation, route }) => {
     const update_timer = timer / 10
     console.log(userdata.userId, warningCount, blinkCount, update_timer)
     try {
-      const response = await fetch('http://192.168.75.118:8080/save', {
+      const response = await fetch('https://port-0-eye-love-you-7lk2bloqwhkr1.sel5.cloudtype.app/save', {
         // PC작업 http://192.168.25.33:8080/save
         method: 'POST',
         headers: {
